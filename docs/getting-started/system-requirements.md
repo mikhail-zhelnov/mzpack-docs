@@ -26,7 +26,7 @@ MZpack processes real-time market data and renders order flow visualizations usi
 | **RAM** | 4 GB | 8 GB+ |
 | **GPU** | DirectX 11 compatible | Dedicated GPU with 1 GB+ VRAM |
 | **Display** | 1280x720 | 1920x1080 or higher |
-| **Storage** | 500 MB free | SSD recommended |
+| **Storage** | 500 MB free | SSD w NVMe recommended |
 
 Higher-resolution charts, multiple indicators, and tick-level data feeds increase CPU and memory usage.
 
@@ -56,8 +56,8 @@ If you plan to build custom indicators or strategies using the MZpack API, you w
 
 | Requirement | Specification |
 |---|---|
-| **IDE** | Visual Studio 2022 |
+| **IDE** | NinjaTrader 8 or Visual Studio 2022 |
 | **SDK** | .NET Framework 4.8 SDK |
-| **Language** | C# 7.3 (maximum version supported) |
+| **Language** | C# 13 (NinjaTrader v8.1.6 required) |
 
 See the [API Reference — Project Setup](/api/getting-started/project-setup) for development environment configuration.
