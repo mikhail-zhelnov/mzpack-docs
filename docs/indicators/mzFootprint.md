@@ -165,6 +165,27 @@ Imbalance detection highlights clusters where the bid/ask volume ratio is dispro
 | **Buy/Support zone** | MediumSeaGreen | Color for buy-side (ask) imbalance |
 | **Highlight values** | true | Color the text values of imbalanced cells |
 
+### How Imbalance Works
+
+mzFootprint calculates **diagonal imbalance**. A diagonal imbalance at the Ask side means the volume of filled Buy orders is greater by a given percentage than the volume of filled Sell orders at the price level just below:
+
+**Formula:** `(AskVolume / BidVolume_below - 1) × 100`
+
+**Example:** 71-lot Ask at 2384.50 vs 19-lot Bid at 2384.25:
+
+`(71 / 19 - 1) × 100 = 274%`
+
+With the default 200% threshold, this cluster is flagged as an imbalance.
+
+**Absorption** is a diagonal imbalance combined with level rejection. The **Depth** parameter (in ticks) defines how far the price must bounce from the absorption level to qualify.
+
+**S/R zone logic:**
+- Imbalance levels on the **Ask side** create a **support zone**
+- Imbalance levels on the **Bid side** create a **resistance zone**
+- For **absorption**, the logic is reversed: Ask-side absorption creates resistance, Bid-side absorption creates support
+- The more volume traded and the more consecutive levels in a zone, the stronger that zone is
+- Zones can be canceled at session end (Break on session) or when price crosses and stays beyond the zone
+
 ### Imbalance Markers
 
 When footprint values are not visible (zoomed out), markers indicate where imbalances occur:
@@ -249,6 +270,15 @@ Summary statistics displayed below or beside each footprint bar.
 | **Positive Delta** | Green | Color for positive delta |
 | **Font** | Montserrat, 12pt | Statistics font |
 
+### COT (Commitment Of Traders)
+
+COT High and COT Low measure the cumulative delta from key price events:
+
+- **COT High** — cumulative bid/ask delta starting from the moment the price makes a new high (or repeats the previous one). It reveals the buy/sell balance after a new high is reached.
+- **COT Low** — the same logic applied at new lows.
+
+**Trading interpretation:** A new high acts as a market test, and COT High is the reaction. If the price stays at highs while COT High is negative and growing in absolute value, this indicates strong support by buy limit orders.
+
 ### Ratio Numbers
 
 Ratio Numbers classify bar activity into three states based on configurable bounds:
@@ -259,6 +289,16 @@ Ratio Numbers classify bar activity into three states based on configurable boun
 | **Ratio Numbers: bounds high** | 29.0 | Upper boundary for NEUTRAL |
 | **NEUTRAL** | Gray | Color when ratio is within bounds |
 | **REJECTED/DEFENDED** | RoyalBlue | Color when ratio is outside bounds |
+
+**Calculation:** For an up-bar, the ratio is bid volume above bar low divided by the bid volume at the bar low. For a down-bar, the ratio is ask volume below bar high divided by the ask volume at the bar high.
+
+**Interpretation:**
+
+| Ratio | State | Meaning |
+|---|---|---|
+| 0.71–29.0 | **NEUTRAL** | Market is facilitating trade at this level |
+| > 29.0 | **REJECTED** | Price is being rejected — below an up-bar means lower prices rejected; above a down-bar means higher prices rejected |
+| < 0.71 | **DEFENDED** | Price level is being defended by limit orders — below an up-bar means buyers supporting; above a down-bar means sellers defending |
 
 ## Statistics Grid
 
@@ -301,6 +341,27 @@ Each metric can be individually shown/hidden and has a configurable highlight th
 | **Auto-scale bars** | true | Scale bars to fit cell |
 | **Font** | Montserrat, 12pt | Grid font |
 
+### Delta Rate
+
+Delta Rate measures the rate of delta change over a chosen time interval (milliseconds) or tick interval. When delta changes, the price also changes — the indicator shows the price range at which the delta rate occurred.
+
+Only the **maximal** (by absolute value) Delta Rate is recorded and displayed per bar in the Statistics Grid and optionally on the chart as a vertical line.
+
+**High Delta Rate indicates:**
+- Stop-loss triggers cascading
+- Price reversals
+- Breakouts
+
+### Predicted Values
+
+Statistics values are **extrapolated proportionally to bar time**. A gauge shows the progress of the bar with a countdown to bar close. This feature is available for **time-based intraday bar types only**.
+
+### Projecting Values on Chart
+
+Each Statistics Grid metric has a `project` toggle and a `project threshold` setting. When enabled, cells exceeding the threshold are projected directly onto the chart, highlighting bars where that metric is significant.
+
+**Example:** Enable `Volume: project` and set `Volume: project threshold` to highlight bars with notable volume directly on the price chart.
+
 ## Cluster Zones
 
 Cluster zones project horizontal zones from significant volume clusters into the future, acting as potential support/resistance levels.
@@ -319,6 +380,15 @@ Each footprint column (Left/Right) has independent cluster zone settings:
 | **Cluster Zones: style** | Zone | Display: Zone, Line, or None |
 | **Cluster Zones: box** | false | Draw a box around the zone |
 
+### Use Cases
+
+Cluster Zones can identify different types of significant price levels depending on filter settings:
+
+- **Low Volume Nodes (LVN):** Set a small `filter min` and `filter max` range to isolate low-volume clusters — areas where price moved quickly and may act as future breakout/breakdown levels
+- **High Volume Nodes (HVN):** Set a large `filter min` threshold to capture high-volume clusters — areas of price acceptance that often act as magnets or support/resistance
+- **Delta/Delta Percentage ranges:** Filter by delta values to find clusters with strong directional bias
+- **Trades ranges:** Filter by number of trades to spot institutional or retail activity clusters
+
 ## Signals
 
 Built-in delta divergence signal detection (licensed builds only).
@@ -330,7 +400,39 @@ Built-in delta divergence signal detection (licensed builds only).
 | **Delta Divergence: delta threshold** | 100 | Minimum delta for signal |
 | **Delta Divergence: alert** | false | Play sound on signal |
 
+**Delta Divergence** is a trend reversal signal triggered on bar close:
+
+- **LONG signal:** Price makes a new low with a bullish candle and positive delta
+- **SHORT signal:** Price makes a new high with a bearish candle and negative delta
+
+**Example:** A bearish bar making a new high with -135 delta. When the next bullish bar closes, the signal fires for a short trade.
+
 For full divergence analysis, see the dedicated [mzDeltaDivergence](mzDeltaDivergence.md) indicator.
+
+## Performance Tips
+
+mzFootprint is a tick-level indicator processing market data on every tick. To keep charts responsive:
+
+**Reduce loading time:**
+- Use **Tick Replay** for maximum historical precision (requires additional PC resources)
+- Set **Days to load** to the minimum value you need
+- Remove unused indicators from the chart — use the visibility toggle (eye button) to temporarily hide indicators you need only periodically
+- Close unused shadow workspaces
+
+**Optimize live rendering:**
+- Set `MaximalRenderMs` to **20–50 ms** (under General > Optimize render performance). The chart may flash briefly but will remain responsive
+- Set **Ticks per level** to 2 or more for instruments with many price levels
+- This indicator supports **OnBarClose mode** for further optimization of system resources
+
+## Non-Bid/Ask Data Support
+
+Some markets (Forex, cryptocurrencies, NSE/Indian stock market) do not provide historical bid/ask data. Without it, all historical trades appear on the Bid side only.
+
+**Solution:** Set `Orderflow > Calculation mode` to **UpDownTick** for these instruments.
+
+**Hybrid mode (NSE):** NSE market data providers do not transmit historical bid/ask data. Use **Hybrid** mode, which applies UpDownTick calculation for historical data and BidAsk calculation for real-time data (100% accurate attribution for live trades).
+
+**Recommendation:** For Forex pairs, use the relevant futures contract (e.g., 6E for EURUSD) to enable all order flow features including DOM analysis.
 
 ## Notifications
 
