@@ -1,9 +1,345 @@
 ---
 sidebar_position: 2
 title: "mzFootprint"
-description: "Order flow footprint chart indicator for NinjaTrader 8"
+description: "Order flow footprint chart indicator with bid/ask clusters, imbalance, absorption, and S/R zones for NinjaTrader 8"
 ---
 
 # mzFootprint
 
-Content coming soon.
+The mzFootprint indicator displays order flow data as a footprint (cluster) chart overlaid on NinjaTrader price bars. Each bar is broken down by price level, showing bid and ask volumes, delta, imbalances, absorption patterns, and more.
+
+**Data required:** Level 1 (tick data)
+
+## Key Features
+
+- **Footprint ladder** with bid/ask volumes at every price level
+- **8 footprint styles** — BidAsk, Volume, Delta, DeltaPercentage, TradesNumber, Bid, Ask, None
+- **Imbalance detection** with configurable ratio threshold and S/R zones
+- **Absorption patterns** with 5 concurrent detection levels
+- **Unfinished Auction** highlighting
+- **Bar Volume Profile** with POC and Value Area per bar
+- **Session/Daily Volume Profile Levels** — developing POC and VA lines
+- **Statistics Grid** — 16 real-time metrics per bar
+- **Bar Statistics** — summary row with volume, delta, COT, ratio numbers
+- **Cluster Zones** — horizontal zones projected from significant clusters
+- **Delta Divergence signals** — built-in divergence detection
+- **Alerts and notifications** — sound, email, per-metric thresholds
+
+## Footprint Styles
+
+The indicator supports two independent footprint columns (Left and Right), each with its own style and settings.
+
+| Style | Description |
+|---|---|
+| **BidAsk** | Classical bid x ask footprint — shows volume on bid and ask sides |
+| **Volume** | Total traded volume per cluster |
+| **Delta** | Bid-Ask volume difference (positive = buying pressure) |
+| **DeltaPercentage** | Delta as a percentage of total volume |
+| **TradesNumber** | Number of individual trades per cluster |
+| **Bid** | Only bid-side volume |
+| **Ask** | Only ask-side volume |
+| **None** | Column hidden |
+
+## Cluster Visualization
+
+Each footprint column supports three cluster rendering styles:
+
+| Style | Description |
+|---|---|
+| **Brick** | Solid color fill of the entire cluster cell |
+| **Histogram** | Partial fill proportional to the cell's value relative to the bar/chart maximum |
+| **None** | No color fill — text values only |
+
+### Cluster Scaling
+
+Controls how the histogram fill is calculated:
+
+| Scale | Description |
+|---|---|
+| **Bar** | Scaled relative to the current bar's maximum value |
+| **Chart** | Scaled across all visible bars on the chart |
+| **All** | Scaled across all loaded bars |
+
+### Data Sources
+
+Each column has three independent data source settings:
+
+- **Scale source** — which data determines histogram fill size (Volume, Delta, or TradesNumber)
+- **Color source** — which data determines cell coloring
+- **Gradient source** — which data drives the gradient/heatmap intensity
+
+Enable **Auto sources** to have these set automatically based on the selected footprint style.
+
+### Color Modes
+
+| Mode | Description |
+|---|---|
+| **Solid** | Uniform color for all clusters |
+| **Saturation** | Color intensity scales with value — higher values are more saturated |
+| **Heatmap** | Multi-color gradient from cool to hot |
+| **GrayScale Heatmap** | Monochrome intensity gradient |
+| **Custom** | 4-level color thresholds — define volume breakpoints and assign a color to each level |
+
+#### Custom Color Thresholds
+
+When using Custom mode, you define up to 4 color levels:
+
+| Setting | Description |
+|---|---|
+| **Custom 'less' filter** | Values below this get the "less" color |
+| **Custom '>=' filter #1** | First threshold |
+| **Custom '>=' filter #2** | Second threshold |
+| **Custom '>=' filter #3** | Third threshold (highest) |
+
+Each threshold has a corresponding color brush.
+
+## Settings Reference
+
+### Filters
+
+| Setting | Default | Description |
+|---|---|---|
+| **Ticks per level** | 1 | Price level aggregation — set to 2+ to merge adjacent levels |
+| **Trade min** | 0 | Minimum trade size to include |
+| **Trade max** | -1 | Maximum trade size (-1 = unlimited) |
+
+### Presentation
+
+| Setting | Default | Description |
+|---|---|---|
+| **Display volume filter** | 0 | Hide clusters below this value |
+| **Bid** | — | Color for bid-side background |
+| **Ask** | — | Color for ask-side background |
+| **Bid/Ask relative scaling** | true | Scale bid and ask sides relative to each other |
+| **Auto-scale values** | true | Automatically adjust font size to fit cells |
+| **Bar border** | false | Show border around each footprint bar |
+| **Bar marker** | false | Show bar markers instead of candles |
+| **Bar space, px** | 100 | Vertical space between bars |
+| **Bar width, px** | 3 | Width of the bar marker |
+| **Bar outer margin, px** | 8 | Horizontal space between bars |
+| **Control right margin** | false | Let the indicator control chart right margin |
+| **Chart right margin, px** | 40 | Custom right margin value |
+
+### Bar Volume Profile
+
+Per-bar volume distribution analysis.
+
+| Setting | Default | Description |
+|---|---|---|
+| **POCs** | true | Show Point of Control |
+| **POCs count** | 1 | Number of POC levels to display (1–10) |
+| **Primary POC border** | Yellow, 2px | Style of the primary POC marker |
+| **Other POCs border** | DarkOrange, 2px | Style of secondary POC markers |
+| **Min width, px** | 0 | Minimum pixel width for POC marker |
+| **VA** | true | Show Value Area |
+| **VA, %** | 68 | Value Area percentage |
+| **VA color** | White | Value Area fill color |
+| **VA opacity, %** | 70 | Value Area transparency |
+
+### Volume Profile Levels
+
+Session or daily developing POC and Value Area lines.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Mode** | Session | Session or Daily profile calculation |
+| **POC: enable** | false | Show session/daily POC line |
+| **POC: developing** | true | Show developing POC (updates on each bar) |
+| **POC: line** | Orange, 8px | POC line style |
+| **VA: enable** | false | Show session/daily Value Area lines |
+| **VA: developing** | true | Show developing VA |
+| **VA: %** | 68 | Value Area percentage |
+| **VA: line** | RoyalBlue, dotted, 6px | VA line style |
+
+## Imbalance
+
+Imbalance detection highlights clusters where the bid/ask volume ratio is disproportionate, indicating aggressive buying or selling.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Show** | true | Enable imbalance detection |
+| **Only Imbalance** | false | Show only imbalanced cells (hide everything else) |
+| **Imbalance, %** | 200 | Ratio threshold — e.g., 200% means one side must be 2x the other |
+| **Filter** | 0 | Minimum volume on the imbalance side |
+| **Sell/Resistance zone** | Red | Color for sell-side (bid) imbalance |
+| **Buy/Support zone** | MediumSeaGreen | Color for buy-side (ask) imbalance |
+| **Highlight values** | true | Color the text values of imbalanced cells |
+
+### Imbalance Markers
+
+When footprint values are not visible (zoomed out), markers indicate where imbalances occur:
+
+| Setting | Default | Description |
+|---|---|---|
+| **Marker: visibility** | NoValues | When to show: None, NoValues, or Always |
+| **Marker: type** | Dot | Shape: Dot or Cluster |
+| **Marker: position** | Outer | Placement: Inner, Center, or Outer |
+
+### Imbalance S/R Zones
+
+Project horizontal support/resistance zones from consecutive imbalance levels:
+
+| Setting | Default | Description |
+|---|---|---|
+| **S/R zones: enable** | false | Enable S/R zone projection |
+| **S/R zones: consecutive levels** | 2 | Minimum stacked imbalance levels to form a zone |
+| **S/R zones: volume filter** | 0 | Minimum volume for qualifying levels |
+| **S/R zones: ended by** | ByBarHighLow | Zone termination rule: ByBarHighLow, ByBarClose, ByBarPOC, or ByBarTouch |
+| **S/R zones: break on session** | true | End zones at session boundaries |
+| **S/R zones: opacity, %** | 25 | Zone fill transparency |
+| **S/R zones: alert** | false | Sound alert when price approaches a zone |
+
+## Absorption
+
+Absorption detects levels where aggressive orders are being absorbed by passive limit orders. The indicator supports **5 independent absorption levels**, each with its own threshold, depth, and colors.
+
+Per-level settings (repeated for #1 through #5):
+
+| Setting | Default (#1) | Description |
+|---|---|---|
+| **Show** | false | Enable this absorption level |
+| **Absorption, %** | 68 | Ratio threshold for absorption detection |
+| **Depth** | 1 | Number of adjacent price levels to consider |
+| **Filter** | 0 | Minimum volume filter |
+| **S/R zones: consecutive levels** | 2 | Stacked levels required for a zone |
+| **S/R zones: volume filter** | 0 | Volume filter for zone qualification |
+| **Sell/Support zone** | Cyan, 3px | Sell-side absorption zone color |
+| **Buy/Resistance zone** | Orange, 3px | Buy-side absorption zone color |
+
+Global absorption settings:
+
+| Setting | Default | Description |
+|---|---|---|
+| **Only Absorption** | false | Show only absorption cells |
+| **S/R zones: enable** | false | Enable absorption S/R zones |
+| **S/R zones: ended by** | ByBarHighLow | Zone termination rule |
+| **S/R zones: break on session** | true | End zones at session boundaries |
+| **S/R zones: opacity, %** | 25 | Zone fill transparency |
+
+## Unfinished Auction
+
+An unfinished auction occurs when a bar closes with non-zero volume at the high or low — indicating the market did not fully auction that price level.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Show** | false | Enable unfinished auction highlighting |
+| **Color** | Indigo | Cell background color |
+| **Opacity, %** | 30 | Background transparency |
+| **Border** | Indigo | Cell border style |
+
+## Bar Statistics
+
+Summary statistics displayed below or beside each footprint bar.
+
+| Metric | Description |
+|---|---|
+| **Volume** | Total bar volume |
+| **Delta** | Net delta (ask volume minus bid volume) |
+| **Absolute Delta Average** | Average absolute delta across clusters |
+| **Min/Max Delta** | Minimum and maximum delta within the bar |
+| **Delta %** | Delta as a percentage of total volume |
+| **COT** | COT High and Low values |
+| **Ratio Numbers** | NEUTRAL / REJECTED / DEFENDED classification based on configurable bounds |
+
+| Setting | Default | Description |
+|---|---|---|
+| **Values are x1000** | true | Divide displayed values by 1000 |
+| **Values divider** | 1 | Additional custom divider for values |
+| **Negative Delta** | Red | Color for negative delta |
+| **Positive Delta** | Green | Color for positive delta |
+| **Font** | Montserrat, 12pt | Statistics font |
+
+### Ratio Numbers
+
+Ratio Numbers classify bar activity into three states based on configurable bounds:
+
+| Setting | Default | Description |
+|---|---|---|
+| **Ratio Numbers: bounds low** | 0.71 | Lower boundary for NEUTRAL |
+| **Ratio Numbers: bounds high** | 29.0 | Upper boundary for NEUTRAL |
+| **NEUTRAL** | Gray | Color when ratio is within bounds |
+| **REJECTED/DEFENDED** | RoyalBlue | Color when ratio is outside bounds |
+
+## Statistics Grid
+
+A detailed grid displaying up to 16 real-time metrics per bar, rendered alongside the footprint.
+
+### Available Metrics
+
+| Metric | Description |
+|---|---|
+| Trades | Number of trades |
+| Volume | Total volume |
+| Buy Volume | Buy-side volume |
+| Sell Volume | Sell-side volume |
+| Delta | Net delta |
+| Delta % | Delta percentage |
+| Absolute Delta Average | Average absolute delta |
+| Delta Cumulative | Running cumulative delta |
+| Min Delta | Minimum delta in bar |
+| Max Delta | Maximum delta in bar |
+| Delta Change | Delta change from previous bar |
+| COT High | COT high value |
+| COT Low | COT low value |
+| Delta Rate | Rate of delta change (per tick or per millisecond) |
+| Volume per Second | Volume arrival rate |
+| Bar Duration | Time duration of the bar |
+
+Each metric can be individually shown/hidden and has a configurable highlight threshold for visual emphasis.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Show** | false | Enable the statistics grid |
+| **Show legend** | true | Display row labels |
+| **Legend position** | Left | Label placement: Left or Right |
+| **Grid in front of Footprint** | true | Render grid above the footprint |
+| **Predicted values: show** | false | Show predicted values for incomplete bars |
+| **Values are x1000** | true | Divide values by 1000 |
+| **Cell height, px** | 24 | Height of each grid row |
+| **Cell color scale** | Chart | Scale color intensity: Chart or All |
+| **Auto-scale values** | true | Auto-fit text to cell size |
+| **Auto-scale bars** | true | Scale bars to fit cell |
+| **Font** | Montserrat, 12pt | Grid font |
+
+## Cluster Zones
+
+Cluster zones project horizontal zones from significant volume clusters into the future, acting as potential support/resistance levels.
+
+Each footprint column (Left/Right) has independent cluster zone settings:
+
+| Setting | Default | Description |
+|---|---|---|
+| **Cluster Zones: enable** | false | Enable zone projection |
+| **Cluster Zones: on bar close** | false | Only create zones after bar closes |
+| **Cluster Zones: filter min** | 0 | Minimum cluster value to qualify |
+| **Cluster Zones: filter max** | -1 | Maximum cluster value (-1 = unlimited) |
+| **Cluster Zones: ignore bar high/low** | false | Exclude clusters at bar extremes |
+| **Cluster Zones: ended by** | ByBarHighLow | Termination rule: ByBarHighLow or ByBarTouch |
+| **Cluster Zones: break on session** | false | End zones at session boundaries |
+| **Cluster Zones: style** | Zone | Display: Zone, Line, or None |
+| **Cluster Zones: box** | false | Draw a box around the zone |
+
+## Signals
+
+Built-in delta divergence signal detection (licensed builds only).
+
+| Setting | Default | Description |
+|---|---|---|
+| **Delta Divergence: enable** | false | Enable divergence signals |
+| **Delta Divergence: volume threshold** | -1 | Minimum volume (-1 = any) |
+| **Delta Divergence: delta threshold** | 100 | Minimum delta for signal |
+| **Delta Divergence: alert** | false | Play sound on signal |
+
+For full divergence analysis, see the dedicated [mzDeltaDivergence](mzDeltaDivergence.md) indicator.
+
+## Notifications
+
+Configurable alerts for any metric crossing a threshold. Each alert supports:
+
+- **Enable** — turn the alert on/off
+- **Threshold** — trigger value
+- **Sound** — custom WAV file
+- **On bar close** — fire alerts only on completed bars
+- **Email** — send email notifications (for imbalance/absorption alerts)
+
+Available alert metrics: Trades, Volume, Buy Volume, Sell Volume, Delta, Delta %, Absolute Delta Average, Cumulative Delta, Delta Change, Delta Rate, COT High, COT Low, Left/Right Cluster, Imbalance, Absorption.
