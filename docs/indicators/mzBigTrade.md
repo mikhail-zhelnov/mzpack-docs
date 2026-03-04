@@ -8,7 +8,7 @@ description: "Big trade detection indicator with iceberg orders, DOM pressure/su
 
 The mzBigTrade indicator detects and visualizes significant trades in the order flow. It aggregates tick data into trades, applies configurable volume and order flow filters, and renders the results as markers on the price chart. The indicator includes iceberg order detection, DOM pressure/support analysis, aggression (sweep) detection, and smart/predatory trade identification.
 
-**Data required:** Level 1 + Level 2
+**Data required:** Level 1 (tick data)
 
 ## Key Features
 
