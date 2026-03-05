@@ -409,6 +409,169 @@ Built-in delta divergence signal detection (licensed builds only).
 
 For full divergence analysis, see the dedicated [mzDeltaDivergence](mzDeltaDivergence.md) indicator.
 
+## Use Cases for ES
+
+The following presets demonstrate common mzFootprint configurations for E-mini S&P 500 (ES). Each use case lists only settings that differ from defaults.
+
+### Classic Bid/Ask Footprint
+
+Standard order flow reading — see bid/ask volumes at every price level with visual emphasis on delta.
+
+| Setting | Value |
+|---|---|
+| **Left: Footprint style** | BidAsk |
+| **Left: Cluster style** | Brick |
+| **Left: Color mode** | Saturation |
+| **Left: Color source** | Delta |
+| **POCs** | true |
+| **POCs count** | 1 |
+| **VA** | true |
+| **VA, %** | 68 |
+
+The default starting point for footprint analysis. Saturation mode highlights clusters where delta is strongest. POC and Value Area show where the most volume traded within each bar. Look for price rejection at Value Area boundaries.
+
+### Delta Heatmap
+
+Instantly spot aggressive buying and selling clusters across the chart.
+
+| Setting | Value |
+|---|---|
+| **Left: Footprint style** | Delta |
+| **Left: Cluster style** | Brick |
+| **Left: Color mode** | Heatmap |
+| **Left: Scale source** | Delta |
+| **Left: Color source** | Delta |
+| **Left: Gradient source** | Delta |
+| **Display volume filter** | 50 |
+
+Delta-only view with heatmap coloring turns each cell into a heat signature. Hot cells = aggressive activity. Filter out noise below 50 contracts. Useful on 5–15 min charts to find bars with hidden aggression that candlesticks don't reveal.
+
+### Volume Clusters with Custom Thresholds
+
+Highlight institutional volume levels on ES using fixed thresholds.
+
+| Setting | Value |
+|---|---|
+| **Left: Footprint style** | Volume |
+| **Left: Cluster style** | Brick |
+| **Left: Color mode** | Custom |
+| **Custom 'less' filter** | 500 |
+| **Custom '>=' filter #1** | 500 |
+| **Custom '>=' filter #2** | 1000 |
+| **Custom '>=' filter #3** | 2000 |
+
+Four color tiers make institutional activity stand out: cells under 500 get a muted color, 500+ first highlight, 1000+ second, 2000+ brightest. Adjust thresholds based on current ES average volume — these values work for regular trading hours.
+
+### Imbalance Detection
+
+Find price levels with aggressive one-sided order flow.
+
+| Setting | Value |
+|---|---|
+| **Imbalance: Show** | true |
+| **Imbalance, %** | 300 |
+| **Imbalance: Filter** | 10 |
+| **Imbalance: Highlight values** | true |
+| **Imbalance: Marker: visibility** | Always |
+| **Imbalance: Marker: type** | Dot |
+
+A 300% threshold (3:1 ratio) ensures only strong imbalances are flagged. Filter of 10 removes noise from thin price levels. Dot markers visible at any zoom level. Stacked buy imbalances at bar lows indicate support; stacked sell imbalances at bar highs indicate resistance.
+
+### Imbalance S/R Zones
+
+Project support and resistance zones from consecutive imbalance levels.
+
+| Setting | Value |
+|---|---|
+| **Imbalance: Show** | true |
+| **Imbalance, %** | 200 |
+| **Imbalance: Filter** | 10 |
+| **S/R zones: enable** | true |
+| **S/R zones: consecutive levels** | 3 |
+| **S/R zones: volume filter** | 10 |
+| **S/R zones: ended by** | ByBarClose |
+
+Three consecutive imbalance levels required — produces fewer but higher-quality zones. ByBarClose termination is more conservative than ByBarHighLow: a zone survives wicks and only ends on a decisive close through it. Green zones = support, red zones = resistance.
+
+### Absorption Pattern Detection
+
+Detect where passive limit orders absorb aggressive market orders — exhaustion and reversal points.
+
+| Setting | Value |
+|---|---|
+| **Absorption #1: Show** | true |
+| **Absorption #1: Absorption, %** | 100 |
+| **Absorption #1: Depth** | 2 |
+| **Absorption #1: Filter** | 20 |
+| **Absorption #2: Show** | true |
+| **Absorption #2: Absorption, %** | 200 |
+| **Absorption #2: Depth** | 1 |
+| **Absorption #2: Filter** | 50 |
+| **Absorption: S/R zones: enable** | true |
+| **Absorption: S/R zones: ended by** | ByBarHighLow |
+
+Two absorption levels work together: Level #1 (100%, depth 2) casts a wider net for moderate absorption, Level #2 (200%, depth 1) catches only strong absorption events with 50+ contracts. Absorption at bar extremes often precedes reversals. S/R zones project these levels forward.
+
+### Unfinished Auction
+
+Find bars with incomplete price auction — potential continuation or revisit levels.
+
+| Setting | Value |
+|---|---|
+| **Unfinished Auction: Show** | true |
+| **POCs** | true |
+| **POCs count** | 1 |
+| **POC: enable** | true |
+| **POC: developing** | true |
+
+An unfinished auction means the bar closed with volume still at the high or low — the market did not fully reject that price. These levels often get revisited. Combine with developing session POC to see whether unfinished levels align with the session's value center.
+
+### Cluster Zones — High Volume Nodes
+
+Project horizontal S/R zones from high-volume clusters.
+
+| Setting | Value |
+|---|---|
+| **Left: Footprint style** | Volume |
+| **Left: Cluster style** | Histogram |
+| **Cluster Zones: enable** | true |
+| **Cluster Zones: filter min** | 500 |
+| **Cluster Zones: ignore bar high/low** | true |
+| **Cluster Zones: on bar close** | true |
+| **Cluster Zones: ended by** | ByBarHighLow |
+| **Cluster Zones: style** | Zone |
+
+Zones project from clusters with 500+ contracts, excluding bar highs/lows (which are often just wicks, not genuine support/resistance). "On bar close" prevents false zones from forming mid-bar. High-volume clusters act as magnets — price tends to revisit them.
+
+### Delta Divergence Signals
+
+Detect potential trend reversals using delta divergence.
+
+| Setting | Value |
+|---|---|
+| **Delta Divergence: enable** | true |
+| **Delta Divergence: volume threshold** | 5000 |
+| **Delta Divergence: delta threshold** | 200 |
+| **Delta Divergence: alert** | true |
+
+A LONG signal fires when price makes a new low but the bar closes bullish with positive delta above 200 contracts — sellers failed to drive the close lower. Volume threshold of 5000 ensures the signal occurs on bars with enough participation to be meaningful. Works best on 5–15 min timeframes.
+
+### Statistics Grid for Scalping
+
+Real-time metrics dashboard for ES scalping — monitor volume, delta, and pace at a glance.
+
+| Setting | Value |
+|---|---|
+| **Show** | true |
+| **Show legend** | true |
+| **Grid in front of Footprint** | false |
+| **Cell color scale** | Chart |
+| **Values are x1000** | true |
+
+Enable these metrics: **Volume**, **Delta**, **Delta %**, **Delta Cumulative**, **Delta Rate**, **Volume per Second**.
+
+Six key metrics per bar: Volume and Delta for size, Delta % for context, Cumulative Delta for session trend, Delta Rate for speed of flow, Volume per Second for tempo. Grid behind footprint keeps clusters readable. Color scale per chart view — hot cells show where the action is relative to visible bars.
+
 ## Performance Tips
 
 mzFootprint is a tick-level indicator processing market data on every tick. To keep charts responsive:
