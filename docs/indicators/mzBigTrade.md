@@ -202,6 +202,91 @@ A floating window that shows all parameters of a trade when hovering over its ma
 
 Enable **Order ticks** to sort tick data by volume within the pop-up. When disabled, ticks are ordered by time as they arrive in the order flow.
 
+## Use Cases for ES
+
+The following presets demonstrate common mzBigTrade configurations for E-mini S&P 500 (ES). Each use case lists only settings that differ from defaults.
+
+### Institutional Block Trades
+
+Spot large round-lot institutional orders.
+
+| Setting | Value |
+|---|---|
+| **Type** | Manual |
+| **Trade: min volume** | 200 |
+| **Trade: volume is multiple of** | true |
+| **Trade: volume is multiple of, value** | 100 |
+| **Trade marker** | Bubble |
+| **Color mode** | Saturation |
+
+Large round-lot trades (200, 300, 500+ contracts) often originate from institutional algorithms. Saturation mode makes the biggest fills stand out visually. Hover over markers to inspect individual trade details.
+
+### Iceberg Order Detection
+
+Reveal hidden liquidity at key price levels. Requires real-time or Market Replay data.
+
+| Setting | Value |
+|---|---|
+| **Type** | Manual |
+| **Trade: min volume** | 50 |
+| **Iceberg: enable** | true |
+| **Iceberg: algorithm** | Hard |
+| **Iceberg: min volume** | 50 |
+| **Marker size relative to** | Iceberg |
+| **Color mode** | Heatmap |
+| **Trades Volume Profile: Show** | true |
+
+Markers sized by iceberg volume reveal where hidden orders absorb price movement. Enable Trades Volume Profile to build an Iceberg VP — a volume profile based on detected iceberg sizes. Clusters of icebergs at a price level indicate strong hidden support/resistance.
+
+### Aggressive Sweeps / Stop Runs
+
+Identify trades sweeping multiple price levels — initiative orders or stop cascades.
+
+| Setting | Value |
+|---|---|
+| **Type** | Manual |
+| **Trade: min volume** | 100 |
+| **Aggression: enable** | true |
+| **Aggression: min ticks** | 3 |
+| **Trade marker** | Bar |
+| **Color mode** | Solid |
+
+Bar marker shows the full price range swept. Dotted contour indicates aggression. Sweeps of 3+ ticks (0.75 pts on ES) often signal initiative activity or triggered stop-loss clusters. Combine with mzFootprint to see the footprint of the sweep.
+
+### Smart Money / Market-Limit Orders
+
+Detect institutional Market-Limit orders that leave a limit order residual in the book. Requires real-time or Market Replay data.
+
+| Setting | Value |
+|---|---|
+| **Type** | Manual |
+| **Logic** | ALL |
+| **Trade: min volume** | 50 |
+| **DOM support: enable** | true |
+| **DOM support: min volume** | 20 |
+| **Aggression: enable** | true |
+| **Aggression: min ticks** | 1 |
+| **Smart/Predatory: enable** | true |
+| **Show DOM support** | true |
+| **Trade marker** | Box |
+
+Logic = ALL requires all conditions simultaneously — the trade must be smart/predatory (sweeps all top-of-book liquidity), have at least 1-tick aggression, and leave 20+ contracts of DOM support. Triangles in the marker color show the limit-order residual. Buy-side DOM support acts as price support; sell-side acts as resistance.
+
+### Quick Overview (Auto Filter)
+
+Fast setup with no manual tuning — see the most significant trades at any zoom level.
+
+| Setting | Value |
+|---|---|
+| **Type** | Auto |
+| **Days** | 5 |
+| **Trades per day** | 15 |
+| **Trade marker** | Bubble |
+| **Color mode** | Heatmap |
+| **Max number of trades in chart frame** | 150 |
+
+Auto mode statistically selects the 75 largest trades (5 days × 15/day). Zoom in to see progressively smaller trades become visible. Heatmap coloring gives instant visual weight. Good starting point before switching to Manual for fine-tuning.
+
 ## Settings Reference
 
 ### Filters
