@@ -16,7 +16,7 @@ Yes. MZpack works with every NinjaTrader 8 license type — demo, free, subscrip
 
 ### What is the difference between Trial and FREE versions?
 
-**Trial** gives you access to all MZpack features for 30 days. It can only be started once per machine.
+**Trial** gives you access to all MZpack features for 14 days. It can only be started once per machine.
 
 **FREE** includes mzFootprint, mzVolumeProfile, and mzBigTrade with limited features. It has no expiration and does not require a license key.
 

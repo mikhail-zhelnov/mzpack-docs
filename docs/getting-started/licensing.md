@@ -14,7 +14,7 @@ MZpack uses machine-locked licenses that are tied to your hardware. An internet 
 |---|---|---|---|
 | **MZpack Indicators** | All 6 indicators | No | Subscription or perpetual |
 | **MZpack Strategies** | No | Full strategy framework | Perpetual |
-| **MZpack TRIAL** | All 6 indicators | Full strategy framework | 30 days |
+| **MZpack Indicators TRIAL** | All 6 indicators | Full strategy framework | 14 days |
 | **MZpack FREE** | Limited features | No | Unlimited |
 
 ## Activation
@@ -36,7 +36,7 @@ If you don't have a license key:
 
 1. Add any MZpack indicator to a chart
 2. In the Activation Window, click **START TRIAL**
-3. A 30-day full-featured trial will be activated
+3. A 14-day full-featured trial will be activated
 4. **Restart NinjaTrader 8** to apply
 
 :::note

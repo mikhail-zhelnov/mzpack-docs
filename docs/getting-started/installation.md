@@ -19,7 +19,7 @@ Available editions:
 | **MZpack Indicators** | All 6 order flow indicators (requires license) |
 | **MZpack Strategies** | Strategy framework and API for algorithmic trading (requires license) |
 | **MZpack FREE** | Free edition with limited indicator features |
-| **MZpack TRIAL** | Full-featured 30-day trial |
+| **MZpack Indicators TRIAL** | Full-featured 14-day trial |
 
 ## Install
 
