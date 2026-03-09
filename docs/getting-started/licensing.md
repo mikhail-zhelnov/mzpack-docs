@@ -60,11 +60,7 @@ Each MZpack indicator is individually licensed. Depending on your license packag
 
 ### Check License Status
 
-Your current license status is displayed in the NinjaTrader **Output Window** when MZpack loads. Look for a message like:
-
-```
-MZpack Indicators: License is valid. Subscription expires on 2026-12-31.
-```
+Open any MZpack indicator's settings and look under **General → Version**. The version overlay in the bottom-right corner of the chart shows your license type and expiration date.
 
 ### Transfer to Another Machine
 
