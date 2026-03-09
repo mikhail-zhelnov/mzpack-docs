@@ -49,12 +49,13 @@ For a detailed walkthrough, see the [Strategy Framework](strategy-framework.md) 
 
 ## Built-in Strategies
 
-MZpack ships with two ready-to-use strategies:
+MZpack ships with three ready-to-use strategies:
 
 | Strategy | Description |
 |---|---|
-| **Footprint Action Strategy** | An order flow strategy that combines footprint signals (delta divergence, delta trap, stacked imbalances, absorption zones, etc.) with configurable bar filters |
-| **Data Export Strategy** | A utility strategy that exports indicator data (footprint, volume profile, big trades, volume delta) to CSV files for external analysis and machine learning |
+| **Footprint Action** | An order flow strategy with 10 delta and footprint signals (delta divergence, delta trap, stacked imbalances, etc.) combined using AND/OR logic |
+| **GhostResistance** | A reversal strategy targeting liquidity traps — detects absorption, big trades, and price action near volume profile levels to trade reversals |
+| **Data Export** | A utility strategy that exports indicator data (footprint, volume profile, big trades, market depth) to CSV files for external analysis and machine learning |
 
 For configuration details, see [Built-in Strategies](built-in-strategies.md).
 
