@@ -93,9 +93,9 @@ When your subscription expires, MZpack indicators will stop loading. Renew your 
 | Error Message | Cause | Solution |
 |---|---|---|
 | **License key is not valid** | Incorrect key format | Double-check the key and re-enter it |
-| **Invalid Hardware Id** | License is bound to a different machine | Contact support for license transfer |
+| **Invalid Hardware Id** | License is bound to a different machine | [Transfer your license](#transfer-to-another-machine) to the new machine |
 | **Subscription expired** | License period has ended | Renew your subscription |
-| **License cannot be verified for this machine** | Machine limit exceeded | Deactivate on another machine first |
+| **License cannot be verified for this machine** | Machine limit exceeded | [Transfer your license](#transfer-to-another-machine) to free up an activation slot |
 | **License server temporarily unavailable** | Server or network issue | Check your internet connection and try again later |
 | **License verification requires internet connection** | No network access | Connect to the internet for verification |
 | **License module not found** | Missing DLL dependency | Reinstall MZpack |
