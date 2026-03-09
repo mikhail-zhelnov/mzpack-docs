@@ -60,10 +60,6 @@ Your license and settings are preserved across updates.
 ## Uninstall
 
 1. Close NinjaTrader 8
-2. Delete `MZpack.NT8.dll` from:
-
-```
-C:\Users\<YourUsername>\Documents\NinjaTrader 8\bin\Custom\
-```
-
-3. Restart NinjaTrader 8
+2. Open **Settings → Apps → Installed apps** (Windows 11) or **Control Panel → Programs and Features** (Windows 10)
+3. Find **MZpack** in the list, click **Uninstall**, and follow the prompts
+4. Restart NinjaTrader 8
