@@ -13,7 +13,7 @@ MZpack uses machine-locked licenses that are tied to your hardware. An internet 
 | License | Indicators | API/Strategies | Duration |
 |---|---|---|---|
 | **MZpack Indicators** | All 6 indicators | No | Subscription or perpetual |
-| **MZpack API** | No | Full strategy framework | Subscription or perpetual |
+| **MZpack Strategies** | No | Full strategy framework | Perpetual |
 | **MZpack TRIAL** | All 6 indicators | Full strategy framework | 30 days |
 | **MZpack FREE** | Limited features | No | Unlimited |
 
