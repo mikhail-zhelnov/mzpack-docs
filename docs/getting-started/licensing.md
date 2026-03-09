@@ -68,11 +68,19 @@ MZpack Indicators: License is valid. Subscription expires on 2026-12-31.
 
 ### Transfer to Another Machine
 
-MZpack licenses are locked to the hardware they are activated on. To transfer your license to a new machine:
+MZpack licenses are locked to the hardware they are activated on. The same process applies when you replace critical hardware parts (motherboard, CPU) on the same machine — the hardware ID changes, so a transfer is required.
 
-1. Contact MZpack support to deactivate the license on the old machine
-2. Install MZpack on the new machine
-3. Activate with the same license key
+To move your license:
+
+1. Uninstall MZpack from the old machine (if it is still accessible)
+2. Purchase the **Transfer Service** at [mzpack.pro](https://mzpack.pro)
+3. Wait for the order to be processed (within 24 business hours)
+4. Install MZpack on the new machine
+5. Activate with your existing license key
+
+:::note
+The Transfer Service releases all activations tied to your license key. If you have multiple activation slots, you can reassign any or all of them to different machines after the transfer.
+:::
 
 ### Subscription Renewal
 

@@ -71,4 +71,4 @@ License keys are sent within the next business day after purchase, usually withi
 
 ### Can I transfer my license to another machine?
 
-Yes. MZpack licenses are machine-locked, so you need to contact support to deactivate the license on the old machine before activating on a new one. See [Licensing — Transfer](getting-started/licensing.md#transfer-to-another-machine) for the full steps.
+Yes. MZpack licenses are machine-locked, so a transfer is required when you move to a new machine or replace critical hardware (motherboard, CPU). You'll need to purchase the Transfer Service at mzpack.pro. See [Licensing — Transfer](getting-started/licensing.md#transfer-to-another-machine) for the full steps.
