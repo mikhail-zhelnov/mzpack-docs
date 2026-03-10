@@ -98,8 +98,17 @@ See [Prerequisites](prerequisites.md) for the full development environment setup
 
 ## Samples
 
+All samples are included in the MZpack source code wrapped in `#if APISAMPLE` blocks with XML summary comments.
+
 | Sample | What It Demonstrates |
 |---|---|
 | [Basic Strategy](../samples/basic-strategy.md) | Building an automated strategy using the pipeline with signals, entry, and risk management |
 | [Custom Indicators](../samples/custom-indicators.md) | Creating a custom indicator with SharpDX rendering on NinjaTrader charts |
 | [Data Export](../samples/data-export.md) | Exporting order flow and volume profile data to CSV for external analysis |
+| [Footprint Data Access](../samples/footprint-data-access.md) | Reading footprint clusters, delta, imbalances, and absorption levels via IFootprintIndicator |
+| [Volume Profile Levels](../samples/volume-profile-levels.md) | Reading POC, Value Area, VWAP, and naked levels from IVolumeProfileIndicator |
+| [Big Trade Filter](../samples/big-trade-filter.md) | Filtering trades by volume, iceberg size, and DOM pressure via IBigTradeIndicator |
+| [DOM Liquidity Analysis](../samples/dom-liquidity.md) | Reading order book snapshots, liquidity migration, and imbalance data via IMarketDepthIndicator |
+| [Custom Signal](../samples/custom-signal.md) | Creating a custom Signal subclass for the strategy decision tree |
+| [Multi-Timeframe Strategy](../samples/multi-timeframe-strategy.md) | Strategy using multiple data series to combine signals from different timeframes |
+| [Delta Divergence Strategy](../samples/delta-divergence-strategy.md) | Trading delta-price divergences using IDeltaDivergenceIndicator and the decision tree |
