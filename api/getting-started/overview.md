@@ -100,14 +100,28 @@ See [Prerequisites](prerequisites.md) for the full development environment setup
 
 All samples are included in the MZpack source code wrapped in `#if APISAMPLE` blocks with XML summary comments.
 
-| Sample | What It Demonstrates |
-|---|---|
-| [Custom Indicators](../samples/custom-indicators.md) | Creating a custom indicator with SharpDX rendering on NinjaTrader charts |
-| [Data Export](../samples/data-export.md) | Exporting order flow and volume profile data to CSV for external analysis |
-| [Footprint Data Access](../samples/footprint-data-access.md) | Reading footprint clusters, delta, imbalances, and absorption levels via IFootprintIndicator |
-| [Volume Profile Levels](../samples/volume-profile-levels.md) | Reading POC, Value Area, VWAP, and naked levels from IVolumeProfileIndicator |
-| [Big Trade Filter](../samples/big-trade-filter.md) | Filtering trades by volume, iceberg size, and DOM pressure via IBigTradeIndicator |
-| [DOM Liquidity Analysis](../samples/dom-liquidity.md) | Reading order book snapshots, liquidity migration, and imbalance data via IMarketDepthIndicator |
-| [Custom Signal](../samples/custom-signal.md) | Creating a custom Signal subclass for the strategy decision tree |
-| [Multi-Timeframe Strategy](../samples/multi-timeframe-strategy.md) | Strategy using multiple data series to combine signals from different timeframes |
-| [Delta Divergence Strategy](../samples/delta-divergence-strategy.md) | Trading delta-price divergences using IDeltaDivergenceIndicator and the decision tree |
+| Sample | Class | What It Demonstrates |
+|---|---|---|
+| [Advanced Template](../samples/advanced-template.md) | AdvancedTemplate | Advanced MZpack strategy template with full indicator setup |
+| [Algo.Strategy Abstract Class](../samples/algo-strategy-abstract.md) | AlgoStrategy1 | Algo.Strategy abstract class with custom "no entries on stop loss bar" filter |
+| [Biggest Trade Indicator](../samples/biggest-trade-indicator.md) | BiggestTradeIndicator | Custom indicator marking the biggest trade with a rectangle |
+| [Control Panel](../samples/control-panel.md) | ControlPanel | Control Panel with [ControlPanel] attribute and CreateControlPanelElements() |
+| [Custom Plots](../samples/custom-plots.md) | CustomPlots | Access mzFootprint data, custom plots via StrategyPlotIndicator |
+| [Data Access — mzFootprint](../samples/data-access-footprint.md) | DataAccess_mzFootprint | Access StrategyFootprintIndicator data |
+| [Data Access — mzVolumeDelta](../samples/data-access-volume-delta.md) | DataAccess_mzVolumeDelta | Access StrategyVolumeDeltaIndicator data |
+| [Data Access — mzVolumeProfile](../samples/data-access-volume-profile.md) | DataAccess_mzVolumeProfile_MinuteAccuracy | Access StrategyVolumeProfileIndicator with Minute accuracy |
+| [Export Indicator Values](../samples/export-indicators-values.md) | ExportIndicatorsValues | Export indicator values with Historical/Realtime temporality |
+| [Fibonacci Retracement Entry](../samples/fibonacci-retracement-entry.md) | FiboRetracementEntryStrategy | Fibonacci retracement entry strategy |
+| [Multi-DataSeries Advanced](../samples/multi-dataseries-advanced.md) | MultiDataSeriesAdvancedStrategy | Trading on a second data series |
+| [Multi-DataSeries Strategy](../samples/multi-dataseries-strategy.md) | MultiDataSeriesStrategy | Using indicators on different data series |
+| [Algo Strategy — ATM + TradesCluster](../samples/algo-strategy-atm.md) | MZpackAlgoStrategy0 | Algo.Strategy with proprietary ATM and TradesClusterSignal |
+| [Algo Strategy — Patterns + ATM](../samples/algo-strategy-patterns.md) | MZpackAlgoStrategy1 | Patterns with ATM, BigTradeSignal, EMASignal, and DOMImbalanceFilter (Level 2, live/replay) |
+| [Algo Strategy — Partially Visible](../samples/algo-strategy-partially-visible.md) | MZpackAlgoStrategy2 | Algo.Strategy with TradesClusterSignal, DOMImbalanceSignal, and Partially Visible mode |
+| [Algo Strategy — Footprint Imbalance](../samples/algo-strategy-imbalance.md) | MZpackAlgoStrategy_Imbalance | Algo.Strategy with FootprintImbalanceSignal |
+| [Custom Strategy — VWAP/POC](../samples/custom-strategy-vwap-poc.md) | MZpackCustomStrategy0 | StrategyVolumeProfileIndicator with VWAP/POC rules for backtesting (OnBarClose) |
+| [Custom Strategy — BigTrade + VolumeProfile](../samples/custom-strategy-bigtrade-profile.md) | MZpackCustomStrategy1 | StrategyBigTradeIndicator with StrategyVolumeProfileIndicator in Custom mode for backtesting |
+| [Custom Strategy — DOM + Footprint](../samples/custom-strategy-dom-footprint.md) | MZpackCustomStrategy4 | StrategyMarketDepthIndicator with StrategyFootprintIndicator, DOM imbalance/block/pace rules (Level 2, live/replay) |
+| [Custom Strategy — Liquidity Migration](../samples/custom-strategy-liquidity-migration.md) | MZpackCustomStrategy6 | Liquidity migration from StrategyMarketDepthIndicator (1 Tick, live/replay) |
+| [Technical Indicators](../samples/technical-indicators.md) | MZpackTechnicalSample0 | Using well-known technical indicators in MZpack strategies |
+| [Risk Management](../samples/risk-management.md) | RiskManagement | RiskManagement class demo (OnBarClose) |
+| [Trading Times](../samples/trading-times.md) | TradingTimes | TradingTimes feature (OnBarClose) |
