@@ -92,7 +92,7 @@ Custom signals are created by extending the `Signal` base class. See [Built-in S
 | **Runtime** | .NET Framework 4.8 |
 | **Language** | C# 13 (NinjaTrader v8.1.6 required) |
 | **IDE** | Visual Studio 2022 or NinjaTrader 8 built-in editor |
-| **License** | MZpack Strategies (perpetual) or MZpack Indicators TRIAL |
+| **License** | MZpack Strategies or MZpack Indicators w/ Divergence |
 
 See [Prerequisites](prerequisites.md) for the full development environment setup, and [Project Setup](project-setup.md) for creating your first project.
 
