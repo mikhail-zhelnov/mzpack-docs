@@ -102,7 +102,6 @@ All samples are included in the MZpack source code wrapped in `#if APISAMPLE` bl
 
 | Sample | What It Demonstrates |
 |---|---|
-| [Basic Strategy](../samples/basic-strategy.md) | Building an automated strategy using the pipeline with signals, entry, and risk management |
 | [Custom Indicators](../samples/custom-indicators.md) | Creating a custom indicator with SharpDX rendering on NinjaTrader charts |
 | [Data Export](../samples/data-export.md) | Exporting order flow and volume profile data to CSV for external analysis |
 | [Footprint Data Access](../samples/footprint-data-access.md) | Reading footprint clusters, delta, imbalances, and absorption levels via IFootprintIndicator |
