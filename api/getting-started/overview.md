@@ -6,7 +6,7 @@ description: "Overview of the MZpack API for building custom indicators and auto
 
 # API Overview
 
-The MZpack API is a C# framework for building custom indicators and automated trading strategies on NinjaTrader 8. It provides programmatic access to the same order flow data, volume profiling, and trade detection that power the MZpack chart indicators — letting you create your own analysis tools and trading algorithms.
+The MZpack API is a C# framework for building custom indicators and automated trading strategies on NinjaTrader 8. It exposes all public classes of the MZpack library, including data types guarded by the `#if DATA` compilation symbol. This gives you programmatic access to the same order flow data, volume profiling, and trade detection that power the MZpack chart indicators — letting you create your own analysis tools and trading algorithms.
 
 ## What You Can Build
 
@@ -29,13 +29,16 @@ The API is organized into three layers:
 | [OrderFlowColumn / OrderFlowRow](../core-types/orderflow-column-row.md) | Footprint bar structure — columns of price levels with bid/ask volumes, delta, and trade counts |
 | [VolumeProfile](../core-types/volume-profile.md) | Horizontal volume distribution with POC, Value Area, VWAP, and TPO data |
 
-**Indicators API** — interfaces for accessing indicator data programmatically:
+**Indicators API** — each chart indicator is accessible through a typed interface:
 
-| Interface | Purpose |
-|---|---|
-| [IIndicator](../indicators-api/iindicator.md) | Base contract for all MZpack indicators |
-| [ILevelsIndicator](../indicators-api/ilevelsindicator.md) | Indicators that expose price level data (POC, VAH/VAL, naked levels) |
-| [IOrderFlowIndicator](../indicators-api/iorderflow-indicator.md) | Indicators that provide order flow and footprint data access |
+| Interface | Chart Indicator | Key Data |
+|---|---|---|
+| IFootprintIndicator | [mzFootprint](/docs/indicators/mzFootprint) | Footprint bars, clusters, imbalance, absorption, S/R zones |
+| IVolumeProfileIndicator | [mzVolumeProfile](/docs/indicators/mzVolumeProfile) | Volume profiles, POC, Value Area, VWAP, TPO |
+| IVolumeDeltaIndicator | [mzVolumeDelta](/docs/indicators/mzVolumeDelta) | Volume/delta histograms, cumulative delta, icebergs |
+| IBigTradeIndicator | [mzBigTrade](/docs/indicators/mzBigTrade) | Filtered trades, iceberg detection, DOM pressure |
+| IMarketDepthIndicator | [mzMarketDepth](/docs/indicators/mzMarketDepth) | DOM snapshots, liquidity, migration, imbalance |
+| IDeltaDivergenceIndicator | [mzDeltaDivergence](/docs/indicators/mzDeltaDivergence) | ZigZag breakpoints, divergence signals |
 
 **Strategy Pipeline** — components for building trading algorithms:
 
