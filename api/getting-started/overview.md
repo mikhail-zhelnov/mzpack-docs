@@ -26,7 +26,6 @@ The API is organized into three layers:
 |---|---|
 | [Candle / ICandle](../core-types/candle.md) | OHLCV bar data |
 | [Tick, Trade, AggregatedTrade](../core-types/tick-and-trade.md) | Individual ticks, reconstructed trades, and aggregated trade records |
-| [OrderFlowColumn / OrderFlowRow](../core-types/orderflow-column-row.md) | Footprint bar structure — columns of price levels with bid/ask volumes, delta, and trade counts |
 | [VolumeProfile](../core-types/volume-profile.md) | Horizontal volume distribution with POC, Value Area, VWAP, and TPO data |
 
 **Indicators API** — each chart indicator is accessible through a typed interface:
