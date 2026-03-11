@@ -10,16 +10,18 @@ This page explains the runtime execution order of components inside a `Pattern`.
 
 ## Execution Flow
 
-On every bar update (or tick, depending on `SignalCalculate`), the pattern evaluates its components in a fixed order:
+On every bar update (or tick, depending on `SignalCalculate`), the pattern evaluates its components in this order:
 
 ```
 OnBarUpdate()
  └── Pattern.Evaluate()
-       ├── [1] Signals / Decision Tree  → Long | Short | None
-       ├── [2] Filter                   → pass | block
-       ├── [3] Action                   → side effect (pre-entry)
-       ├── [4] Entry                    → submit order + set stop
-       └── [5] Exit / Trail             → manage open position
+       ├── [1] Decision Tree            → Long | Short | None
+       │     ├── Signal (condition)
+       │     ├── Action : Signal        → side effect anywhere in tree
+       │     ├── LogicalNode (AND/OR)
+       │     └── Filter (gate)
+       ├── [2] Entry                    → submit order + set stop
+       └── [3] Exit / Trail             → manage open position
                  │
                  └── Risk Management    → session-level guard (max loss, max trades)
 ```
@@ -30,7 +32,7 @@ OnBarUpdate()
 |---|---|---|
 | Signal / Decision Tree | `Signal`, `LogicalNode`, `RangeNode` | Determine trade direction from market data |
 | Filter | `ValueInRangeFilter` | Gate signal by an external condition (value in range) |
-| Action | `Action`, `RollingProfileAction` | Side effect before or after entry |
+| Action | `Action : Signal`, `RollingProfileAction` | Decision Tree node; executes a side effect at any position in the tree. Execution order is determined by tree structure |
 | Entry | `Entry`, `BarStopLossEntry`, `SignalStopLossEntry`, `FiboRetracementEntry` | Order submission and initial stop placement |
 | Exit | `BarCloseTarget` | Fixed profit target |
 | Trail | `Trail`, `BarHiLoTrail` | Dynamic stop management after activation |
@@ -38,15 +40,15 @@ OnBarUpdate()
 
 ## Key Rules
 
-Signals are evaluated first. If the decision tree returns `None`, the remaining components are not invoked — the pattern short-circuits and waits for the next bar or tick.
+The decision tree is evaluated first. If it returns `None`, the remaining components are not invoked — the pattern short-circuits and waits for the next bar or tick.
 
-Action executes before Entry. It is typically used for cancelling pending limit orders, logging, or updating rolling profile state before a new order is submitted.
+Action inherits from `Signal` and is a Decision Tree node — it can appear at any position in the tree. Execution order is determined by tree structure, not by a fixed pipeline sequence.
 
 Risk Management is the last barrier. It blocks Entry independently of the signal result, enforcing session-level caps on loss, drawdown, profit, and trade count.
 
 ## See Also
 
-- [Action](action.md) — side effects before/after entry
+- [Action](action.md) — side effect node in the decision tree
 - [Entry](entry.md) — order submission (Market, Limit, StopLimit)
 - [Exit](exit.md) — profit target and exit signals
 - [Trail](trail.md) — trailing stop management
