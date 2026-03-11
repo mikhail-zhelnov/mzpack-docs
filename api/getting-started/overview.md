@@ -25,8 +25,7 @@ The API is organized into three layers:
 | Type | What It Represents |
 |---|---|
 | [Candle / ICandle](../core-types/candle.md) | OHLCV bar data |
-| [Tick, Trade, AggregatedTrade](../core-types/tick-and-trade.md) | Individual ticks, reconstructed trades, and aggregated trade records |
-| [VolumeProfile](../core-types/volume-profile.md) | Horizontal volume distribution with POC, Value Area, VWAP, and TPO data |
+| [Tick & ITrade](../core-types/tick-and-trade.md) | Individual ticks and trade data |
 
 **Indicators API** — each chart indicator is accessible through a typed interface:
 

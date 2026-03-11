@@ -1,12 +1,12 @@
 ---
 sidebar_position: 2
-title: "Tick, Trade & TradeList"
-description: "Reference for Tick, TickVolume, ITrade, Trade, and TradeList types used for market data processing in MZpack."
+title: "Tick & ITrade"
+description: "Reference for Tick, TickVolume, and ITrade types used for market data processing in MZpack."
 ---
 
-# Tick, Trade & TradeList
+# Tick & ITrade
 
-Low-level types representing individual market ticks and aggregated/reconstructed trades.
+Low-level types representing individual market ticks and trade data.
 
 **Namespace:** `MZpack`
 
@@ -84,48 +84,6 @@ Contract for a trade entity — either a single execution or a reconstructed agg
 | Method | Returns | Description |
 |---|---|---|
 | `Equals(ITrade)` | `bool` | Compare trades by `Id` |
-
-## Trade (class)
-
-**Inheritance:** `Trade : ITrade`
-
-Concrete implementation of `ITrade`. Provides constructors for building trades from execution events.
-
-### Constructor
-
-```csharp
-new Trade(TradeSide side, DateTime time, bool reconstructed, bool tapeSupport)
-```
-
-Use the constants `Trade.RECONSTRUCTED_TRADE` / `Trade.SINGLE_TRADE` and `Trade.TAPE_SUPPORT` for readability.
-
-### Key Methods
-
-| Method | Returns | Description |
-|---|---|---|
-| `AddTick(ExecutionEventArgs)` | `void` | Add a tick from an execution event |
-| `AddTick(Tick)` | `void` | Add a `Tick` struct |
-| `AddTick(bool, double, long, int)` | `void` | Add a tick with explicit parameters |
-| `AddSingleTrade(Trade)` | `void` | Aggregate another single trade into this reconstructed trade |
-| `Intersects(Trade)` | `bool` | Check price range intersection with another trade |
-| `Intersects(double, double)` | `bool` | Check intersection with a price range (hi, lo) |
-| `GetRange()` | `double` | Return Hi − Lo |
-
-## TradeList (class)
-
-**Inheritance:** `TradeList : List<Trade>, ITradeList`
-
-A list of `Trade` objects with convenience methods and `IEnumerable<ITrade>` support.
-
-### Methods
-
-| Method | Returns | Description |
-|---|---|---|
-| `GetHighest()` | `Trade` | Trade with the highest price level |
-| `GetLowest()` | `Trade` | Trade with the lowest price level |
-| `Add(Trade, int)` | `void` | Add a trade with a max count limit (removes oldest if exceeded) |
-| `ContainsRange(TradeList)` | `bool` | Check if all trades from another list are present |
-| `OutOfTime(DateTime, int)` | `bool` | Check if any trade is older than `period` seconds |
 
 ## TradeSide Enum
 
