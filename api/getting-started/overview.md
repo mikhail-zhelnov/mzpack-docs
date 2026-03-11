@@ -24,7 +24,7 @@ The API is organized into three layers:
 
 | Type | What It Represents |
 |---|---|
-| [Candle / ICandle](../core-types/candle.md) | OHLCV bar data |
+| [ICandle](../core-types/candle.md) | OHLCV bar data |
 | [Tick & ITrade](../core-types/tick-and-trade.md) | Individual ticks and trade data |
 
 **Indicators API** — each chart indicator is accessible through a typed interface:
