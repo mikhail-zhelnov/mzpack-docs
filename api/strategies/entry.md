@@ -1,5 +1,5 @@
 ---
-sidebar_position: 10
+sidebar_position: 11
 title: "Entry"
 description: "Reference for Entry, BarStopLossEntry, SignalStopLossEntry, and FiboRetracementEntry — order submission and protective orders."
 ---

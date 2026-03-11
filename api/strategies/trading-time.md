@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: "TradingTime"
 description: "Reference for TradingTime — restrict strategy trading to specific time windows."
 ---

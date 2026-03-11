@@ -1,5 +1,5 @@
 ---
-sidebar_position: 11
+sidebar_position: 12
 title: "Exit"
 description: "Reference for ExitBase and BarCloseTarget — exit conditions that close positions based on market events."
 ---

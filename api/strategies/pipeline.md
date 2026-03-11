@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 title: "Strategy Pipeline"
 description: "Runtime execution order of pattern components — signals, filters, actions, entry, exit, trail, and risk management."
 ---

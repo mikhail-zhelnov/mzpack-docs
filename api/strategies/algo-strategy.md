@@ -28,14 +28,16 @@ Strategy
 │   │   └── FiltersTree (Decision Tree)
 │   │       └── Root LogicalNode
 │   │           └── Filter X
-│   └── Exit Pattern
-│       └── SignalsTree
-│           └── Signal E
+│   ├── Exit Pattern
+│   │   └── SignalsTree
+│   │       └── Signal E
+│   ├── Reversal Pattern
+│   ├── ScaleIn Pattern
+│   └── ScaleOut Pattern
 ├── Positions
 │   └── Position
-│       ├── Entry[] (Market / Limit / StopLimit)
-│       ├── Exit (Stop Loss, Profit Target)
-│       └── Trail (Trailing Stop)
+│       └── Entry[] (Market / Limit / StopLimit)
+│            └── Exit / Trail — stop loss, profit target, trailing stop
 ├── TradingTimes[]
 └── RiskManagement
 ```

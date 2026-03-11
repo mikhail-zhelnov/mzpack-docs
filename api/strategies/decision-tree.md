@@ -1,5 +1,5 @@
 ---
-sidebar_position: 14
+sidebar_position: 15
 title: "Decision Tree"
 description: "Reference for Pattern, SignalsTree, FiltersTree, LogicalNode, and RangeNode — the decision tree that evaluates trade signals."
 ---

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 title: "ChartRange"
 description: "Reference for ChartRange and IRange — define bar/price ranges for signal validation in the decision tree."
 ---

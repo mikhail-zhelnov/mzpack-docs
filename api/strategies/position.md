@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: "Position"
 description: "Reference for Position and Positions — position management within MZpack strategy patterns."
 ---

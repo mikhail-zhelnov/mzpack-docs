@@ -1,5 +1,5 @@
 ---
-sidebar_position: 9
+sidebar_position: 10
 title: "Action"
 description: "Reference for Action and RollingProfileAction — decision tree nodes that execute side effects during signal evaluation."
 ---

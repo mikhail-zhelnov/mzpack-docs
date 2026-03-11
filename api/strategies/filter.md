@@ -1,5 +1,5 @@
 ---
-sidebar_position: 13
+sidebar_position: 14
 title: "Filter"
 description: "Reference for ValueInRangeFilter — gates the decision tree by checking if an indicator value falls within a range."
 ---

@@ -27,12 +27,12 @@ MZpackStrategyBase
       │    │    ├── Actions — side effects (e.g. rolling profile)
       │    │    ├── Filters — confirm or reject signals
       │    │    └── LogicalNode — AND / OR / CONJUNCTION
-      │    ├── Entry — order submission (Market, Limit, StopLimit)
-      │    │    └── Exit / Trail — stop loss, profit target, trailing stop
-      │    └── Risk Management — daily limits
+      │    └── Entry — order submission (Market, Limit, StopLimit)
+      │         └── Exit / Trail — stop loss, profit target, trailing stop
       ├── Reversal Pattern
       ├── ScaleIn Pattern
-      └── ScaleOut Pattern
+      ├── ScaleOut Pattern
+      └── Risk Management — daily limits
 ```
 
 ## Strategy Lifecycle
@@ -61,8 +61,9 @@ OnExecutionUpdate(...)         → Fill events
 
 1. [MZpackStrategyBase](mzpack-strategy-base.md) — base class and lifecycle
 2. [Algo.Strategy](algo-strategy.md) — pattern-oriented framework
-3. [Position](position.md) — position management
-4. [Signals Overview](signals/overview.md) — signal system and all built-in signals
-5. [Pipeline](pipeline.md) — Action, Filter, Decision Tree components
-6. [Entry](entry.md) / [Exit](exit.md) / [Trail](trail.md) — order management
-7. [Risk Management](risk-management.md) — daily limits and caps
+3. [Pattern](pattern.md) — pattern types and evaluation
+4. [Position](position.md) — position management
+5. [Signals Overview](signals/overview.md) — signal system and all built-in signals
+6. [Pipeline](pipeline.md) — Action, Filter, Decision Tree components
+7. [Entry](entry.md) / [Exit](exit.md) / [Trail](trail.md) — order management
+8. [Risk Management](risk-management.md) — daily limits and caps

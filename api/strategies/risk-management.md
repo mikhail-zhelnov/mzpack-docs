@@ -1,5 +1,5 @@
 ---
-sidebar_position: 15
+sidebar_position: 16
 title: "Risk Management"
 description: "Reference for RiskManagement — session-level guard that enforces daily profit, loss, drawdown, and trade count limits."
 ---
