@@ -101,7 +101,6 @@ All samples are included in the MZpack source code wrapped in `#if APISAMPLE` bl
 | Sample | Class | What It Demonstrates |
 |---|---|---|
 | [Advanced Template](../samples/advanced-template.md) | AdvancedTemplate | Advanced MZpack strategy template with full indicator setup |
-| [Algo.Strategy Abstract Class](../samples/algo-strategy-abstract.md) | AlgoStrategy1 | Algo.Strategy abstract class with custom "no entries on stop loss bar" filter |
 | [Biggest Trade Indicator](../samples/biggest-trade-indicator.md) | BiggestTradeIndicator | Custom indicator marking the biggest trade with a rectangle |
 | [Control Panel](../samples/control-panel.md) | ControlPanel | Control Panel with [ControlPanel] attribute and CreateControlPanelElements() |
 | [Custom Plots](../samples/custom-plots.md) | CustomPlots | Access mzFootprint data, custom plots via StrategyPlotIndicator |
