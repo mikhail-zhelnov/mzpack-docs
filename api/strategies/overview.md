@@ -22,14 +22,17 @@ Most production strategies use `Algo.Strategy` because it handles signal evaluat
 ```
 MZpackStrategyBase
  └── Algo.Strategy
-      └── Pattern
-           ├── Signals (Decision Tree)
-           │    ├── Actions — generate trading direction
-           │    ├── Filters — confirm or reject signals
-           │    └── LogicalNode — AND / OR / CONJUNCTION
-           ├── Entry — order submission (Market, Limit, StopLimit)
-           ├── Exit / Trail — stop loss, profit target, trailing stop
-           └── Risk Management — daily limits
+      ├── Entry Pattern
+      │    ├── Signals (Decision Tree)
+      │    │    ├── Actions — side effects (e.g. rolling profile)
+      │    │    ├── Filters — confirm or reject signals
+      │    │    └── LogicalNode — AND / OR / CONJUNCTION
+      │    ├── Entry — order submission (Market, Limit, StopLimit)
+      │    │    └── Exit / Trail — stop loss, profit target, trailing stop
+      │    └── Risk Management — daily limits
+      ├── Reversal Pattern
+      ├── ScaleIn Pattern
+      └── ScaleOut Pattern
 ```
 
 ## Strategy Lifecycle
