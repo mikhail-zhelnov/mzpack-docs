@@ -97,6 +97,6 @@ description: "Reference for Position and Positions — position management withi
 ## See Also
 
 - [Algo.Strategy](algo-strategy.md) — parent strategy class
-- [Entry](../strategy-pipeline/entry.md) — order submission
-- [Exit](../strategy-pipeline/exit.md) — stop loss and profit target
-- [Trail](../strategy-pipeline/trail.md) — trailing stop
+- [Entry](./entry.md) — order submission
+- [Exit](./exit.md) — stop loss and profit target
+- [Trail](./trail.md) — trailing stop

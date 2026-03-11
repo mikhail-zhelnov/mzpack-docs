@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 9
 title: "Action"
 description: "Reference for the Action stage in the MZpack strategy pipeline, defining trade actions and signal generation."
 ---

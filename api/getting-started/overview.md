@@ -42,15 +42,15 @@ The API is organized into three layers:
 
 | Component | Role |
 |---|---|
-| [Action](../strategy-pipeline/action.md) | Signal generation — processes market data and outputs a trading direction |
-| [Filter](../strategy-pipeline/filter.md) | Trade filtering — confirms or rejects signals based on additional conditions |
-| [Decision Tree](../strategy-pipeline/decision-tree.md) | Combines signals and filters using AND/OR/CONJUNCTION logic |
-| [Entry](../strategy-pipeline/entry.md) | Order submission — market, limit, or stop-limit with protective orders |
-| [Exit](../strategy-pipeline/exit.md) | Position closing — stop loss, profit target, and exit signals |
-| [Trail](../strategy-pipeline/trail.md) | Trailing stop — follows price at a configurable distance after activation |
-| [Risk Management](../strategy-pipeline/risk-management.md) | Daily limits — loss, drawdown, profit, and trade count caps |
+| [Action](../strategies/action.md) | Signal generation — processes market data and outputs a trading direction |
+| [Filter](../strategies/filter.md) | Trade filtering — confirms or rejects signals based on additional conditions |
+| [Decision Tree](../strategies/decision-tree.md) | Combines signals and filters using AND/OR/CONJUNCTION logic |
+| [Entry](../strategies/entry.md) | Order submission — market, limit, or stop-limit with protective orders |
+| [Exit](../strategies/exit.md) | Position closing — stop loss, profit target, and exit signals |
+| [Trail](../strategies/trail.md) | Trailing stop — follows price at a configurable distance after activation |
+| [Risk Management](../strategies/risk-management.md) | Daily limits — loss, drawdown, profit, and trade count caps |
 
-For a detailed walkthrough of how these components connect, see [Pipeline Overview](../strategy-pipeline/overview.md).
+For a detailed walkthrough of how these components connect, see [Pipeline Overview](../strategies/pipeline.md).
 
 ## Strategy Indicator Classes
 

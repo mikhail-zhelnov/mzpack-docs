@@ -105,4 +105,4 @@ Extend the `Signal` base class to create your own signal. See [Custom Signal](cu
 ## See Also
 
 - [Signal Base Classes](signal-base.md) — Node, Signal, LogicalNode, RangeNode
-- [Decision Tree](../strategy-pipeline/decision-tree.md) — how signals combine in patterns
+- [Decision Tree](../decision-tree.md) — how signals combine in patterns

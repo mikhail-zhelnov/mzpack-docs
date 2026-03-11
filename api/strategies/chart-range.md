@@ -81,4 +81,4 @@ var pattern = new Pattern(strategy, Logic.And, range,
 ## See Also
 
 - [Algo.Strategy](algo-strategy.md) — strategy class
-- [Decision Tree](../strategy-pipeline/decision-tree.md) — signal/filter tree structure
+- [Decision Tree](./decision-tree.md) — signal/filter tree structure
