@@ -76,4 +76,4 @@ long delta = bar.Delta;
 double poc = bar.POC;
 ```
 
-All data properties are guarded by the `#if DATA` compilation symbol. Strategy indicator classes are not visible on the chart by default — use **Partially Visible** mode to show only the data relevant to validated signals. See [Algo Strategy — Partially Visible](../samples/algo-strategy-partially-visible.md) for a code sample.
+Strategy indicator classes are not visible on the chart by default — use **Partially Visible** mode to show only the data relevant to validated signals. See [Algo Strategy — Partially Visible](../samples/algo-strategy-partially-visible.md) for a code sample.

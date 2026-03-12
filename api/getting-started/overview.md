@@ -6,7 +6,7 @@ description: "Overview of the MZpack API for building custom indicators and auto
 
 # API Overview
 
-The MZpack API is a C# framework for building custom indicators and automated trading strategies on NinjaTrader 8. It exposes all public classes of the MZpack library, including data types guarded by the `#if DATA` compilation symbol. This gives you programmatic access to the same order flow data, volume profiling, and trade detection that power the MZpack chart indicators — letting you create your own analysis tools and trading algorithms.
+The MZpack API is a C# framework for building custom indicators and automated trading strategies on NinjaTrader 8. It exposes all public classes of the MZpack library. This gives you programmatic access to the same order flow data, volume profiling, and trade detection that power the MZpack chart indicators — letting you create your own analysis tools and trading algorithms.
 
 ## What You Can Build
 

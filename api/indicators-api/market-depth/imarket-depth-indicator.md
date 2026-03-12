@@ -19,8 +19,6 @@ Requires Level 2 data — live or replay only. Historical backtesting without Le
 
 ## Key Data Properties
 
-These properties are available in `#if DATA` builds only.
-
 | Property | Type | Description |
 |---|---|---|
 | `RealtimeOrderBook` | `IRealtimeOrderBook` | Current real-time DOM snapshot |

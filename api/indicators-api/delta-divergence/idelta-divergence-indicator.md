@@ -17,7 +17,7 @@ description: "Reference for the IDeltaDivergenceIndicator interface — access t
 
 | Property | Type | Description |
 |---|---|---|
-| `Divergences` | `Divergences` | Collection of detected divergences (`#if DATA`) |
+| `Divergences` | `Divergences` | Collection of detected divergences |
 
 ## ZigZag Configuration
 

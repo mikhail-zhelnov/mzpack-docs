@@ -17,7 +17,7 @@ description: "Reference for the IVolumeDeltaIndicator interface — access to vo
 
 | Property | Type | Description |
 |---|---|---|
-| `VolumeDeltaBars` | `Dictionary<int, IVolumeDeltaBar>` | Volume/delta bars indexed by bar index (`#if DATA`) |
+| `VolumeDeltaBars` | `Dictionary<int, IVolumeDeltaBar>` | Volume/delta bars indexed by bar index |
 
 ## Configuration Properties
 

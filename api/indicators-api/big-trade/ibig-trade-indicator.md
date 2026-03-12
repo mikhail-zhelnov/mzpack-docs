@@ -14,8 +14,6 @@ description: "Reference for the IBigTradeIndicator interface — access to filte
 
 ## Key Data Properties
 
-These properties are available in `#if DATA` builds only.
-
 | Property | Type | Description |
 |---|---|---|
 | `Trades` | `List<ITrade>` | All trades that pass the current filter |

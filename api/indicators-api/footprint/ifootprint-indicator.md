@@ -14,8 +14,6 @@ description: "Reference for the IFootprintIndicator interface — access to foot
 
 ## Key Data Properties
 
-These properties are available in `#if DATA` builds only.
-
 | Property | Type | Description |
 |---|---|---|
 | `FootprintBars` | `Dictionary<int, IFootprintBar>` | All footprint bars indexed by bar index |
