@@ -81,6 +81,10 @@ Each signal also has an **Override filters** option that lets it bypass the glob
 | Trail after / distance / step | Trail activation threshold, trailing distance, and step size in ticks | 15 / 10 / 1 |
 | Enter by limit order | Use limit orders instead of market orders for entries | Off |
 
+### Source Code
+
+See [Footprint Action Source Code](/api/source-code/footprint-action) for a developer-level walkthrough of the class structure, decision tree construction, all 10 signal implementations, and data export schema.
+
 ---
 
 ## GhostResistance Strategy
@@ -198,6 +202,10 @@ The GhostResistance Control Panel provides runtime buttons:
 - Price action with frequent stop-runs and wicks beyond key levels
 - Avoid strong trending days where reversals fail more frequently
 
+### Source Code
+
+See [GhostResistance Source Code](/api/source-code/ghost-resistance) for a developer-level walkthrough of the class structure, indicator wiring, signal implementations, and decision tree construction.
+
 ---
 
 ## Data Export Strategy
@@ -269,3 +277,7 @@ Each indicator export can run in one of two temporalities:
 |---|---|
 | **Historical** | Exports data from loaded historical bars (requires backtesting mode) |
 | **Realtime** | Exports data as it arrives during live trading |
+
+### Source Code
+
+See [Data Export Source Code](/api/source-code/data-export) and [Drawing Objects Export Source Code](/api/source-code/drawing-objects-export) for developer-level walkthroughs of the export strategy implementations.

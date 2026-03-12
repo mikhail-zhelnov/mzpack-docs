@@ -122,3 +122,14 @@ All samples are included in the MZpack source code wrapped in `#if APISAMPLE` bl
 | [Technical Indicators](../samples/technical-indicators.md) | MZpackTechnicalSample0 | Using well-known technical indicators in MZpack strategies |
 | [Risk Management](../samples/risk-management.md) | RiskManagement | RiskManagement class demo (OnBarClose) |
 | [Trading Times](../samples/trading-times.md) | TradingTimes | TradingTimes feature (OnBarClose) |
+
+## Source Code
+
+The [Source Code](../source-code/footprint-action.md) section provides developer-level walkthroughs of the 4 built-in strategy source files — class structure, indicator wiring, signal implementations, decision tree construction, and data export schemas:
+
+| Strategy | What It Demonstrates |
+|---|---|
+| [Footprint Action](../source-code/footprint-action.md) | 10 signals, AND/OR tree with mandatory grouping, runtime signal toggle, EMA indicator, per-signal bar filters |
+| [Ghost Resistance](../source-code/ghost-resistance.md) | 3 indicators, AND tree with OR sub-node, signal dependency, limit orders, one-entry-per-bar filter |
+| [Data Export](../source-code/data-export.md) | Non-trading utility, conditional indicators, per-indicator export schemas, 100+ export fields |
+| [Drawing Objects Export](../source-code/drawing-objects-export.md) | Minimal strategy, XML schema loading, ChartObjectDescriptor mappings |
