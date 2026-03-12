@@ -55,6 +55,6 @@ If you are new to NinjaScript, start with the [NinjaTrader 8 Help Guide](https:/
 Before proceeding to [Project Setup](project-setup.md), confirm:
 
 1. **NinjaTrader 8 launches** and connects to a data feed (live or Sim101)
-2. **MZpack is installed** — type `mz` in the Indicators dialog and verify all six indicators appear (see [Installation](/docs/getting-started/installation))
-3. **Your license is active** — open any MZpack indicator properties and confirm it loads without a license error
+2. **MZpack Strategies/API is installed** — verify that `MZpackStrategies` appears in the Strategies dialog
+3. **Your license is active** — add any MZpack strategy to a chart and confirm it loads without a license error
 4. **Visual Studio 2022 is installed** (if you plan to use it instead of the built-in editor)
