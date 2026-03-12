@@ -8,8 +8,8 @@ description: "Source code walkthrough of the GhostResistance built-in strategy â
 
 Production built-in strategy targeting liquidity traps â€” reversals at support/resistance levels where stop orders and breakout entries from trapped traders get absorbed. Combines bar metrics, absorption zones, big trade detection, and volume profile level proximity using AND logic. Demonstrates conditional indicator creation, signal dependency (level signals read absorption direction), limit order entry, and one-entry-per-bar filtering.
 
-**Source:** `MZpack.NT8/Algo/Strategies/GhostResistance/GhostResistance.cs`
-**Signals:** `MZpack.NT8/Algo/Strategies/GhostResistance/*.cs` (3 signal files + ExportDataSchema.cs)
+**Source:** `[INSTALL PATH]/API/Strategies/GhostResistance/GhostResistance.cs`
+**Signals:** `[INSTALL PATH]/API/Strategies/GhostResistance/*.cs` (3 signal files + ExportDataSchema.cs)
 
 ## What It Covers
 

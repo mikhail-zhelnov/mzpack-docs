@@ -10,7 +10,7 @@ description: "Reference for Entry, BarStopLossEntry, SignalStopLossEntry, and Fi
 
 **Namespace:** `MZpack.NT8.Algo`
 **Inheritance:** `Entry : EntryBase`
-**Source:** `MZpack.NT8/Algo/Extensions/Entries/Entry.cs`
+**Source:** `[INSTALL PATH]/API/Extensions/Entries/Entry.cs`
 
 ## EntryBase
 

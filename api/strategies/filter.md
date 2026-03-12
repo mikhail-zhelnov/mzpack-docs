@@ -10,7 +10,7 @@ description: "Reference for ValueInRangeFilter — gates the decision tree by ch
 
 **Namespace:** `MZpack.NT8.Algo.Filters`
 **Inheritance:** `ValueInRangeFilter : Signal`
-**Source:** `MZpack.NT8/Algo/Filters/ValueInRangeFilter.cs`
+**Source:** `[INSTALL PATH]/API/Filters/ValueInRangeFilter.cs`
 
 ## Properties
 

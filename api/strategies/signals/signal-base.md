@@ -15,7 +15,7 @@ All signals inherit from `Node`, which provides tree structure, direction handli
 `Node` is the abstract base class for all elements in the decision tree.
 
 **Inheritance:** `Node : ViewModelBase, ICloneable`
-**Source:** `MZpack.NT8/Algo/Signals/Node.cs`
+**Source:** `[INSTALL PATH]/API/Signals/Node.cs`
 
 ### Key Properties
 
@@ -57,7 +57,7 @@ All signals inherit from `Node`, which provides tree structure, direction handli
 `Signal` extends `Node` with market data processing, indicator access, and chart range tracking.
 
 **Inheritance:** `Signal : Node`
-**Source:** `MZpack.NT8/Algo/Signal.cs`
+**Source:** `[INSTALL PATH]/API/Signal.cs`
 
 ### Key Properties
 
@@ -98,7 +98,7 @@ public Signal(Strategy strategy, MarketDataSource source,
 `LogicalNode` provides AND/OR/CONJUNCTION logic between child nodes.
 
 **Inheritance:** `LogicalNode : Node`
-**Source:** `MZpack.NT8/Algo/Signals/LogicalNode.cs`
+**Source:** `[INSTALL PATH]/API/Signals/LogicalNode.cs`
 
 ### Properties
 
@@ -136,7 +136,7 @@ root.Add(orNode);
 `RangeNode` implements `IRange` to constrain how far apart signals can validate and still count as one pattern.
 
 **Inheritance:** `RangeNode : Node, IRange` | `Range : RangeNode`
-**Source:** `MZpack.NT8/Algo/Signals/RangeNode.cs`, `MZpack.NT8/Algo/Range.cs`
+**Source:** `[INSTALL PATH]/API/Signals/RangeNode.cs`, `[INSTALL PATH]/API/Range.cs`
 
 ### Properties
 

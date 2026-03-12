@@ -11,7 +11,7 @@ description: "Reference for StrategyFootprintIndicator — the strategy wrapper 
 **Namespace:** `MZpack.NT8.Algo.Indicators`
 **Inheritance:** `StrategyFootprintIndicator : mzFootprint, IFootprintIndicator`
 **Data level:** Level 1
-**Source:** `MZpack.NT8/Algo/Indicators/StrategyFootprintIndicator.cs`
+**Source:** `[INSTALL PATH]/API/Indicators/StrategyFootprintIndicator.cs`
 
 ## Setup in a Strategy
 

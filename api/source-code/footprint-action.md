@@ -8,8 +8,8 @@ description: "Source code walkthrough of the FootprintAction built-in strategy â
 
 Production built-in strategy that combines 10 footprint-based trading signals using configurable AND/OR logic with mandatory signal grouping. This is the most feature-rich built-in strategy and demonstrates advanced decision tree construction, runtime signal enable/disable, and per-signal bar filter overrides.
 
-**Source:** `MZpack.NT8/Algo/Strategies/FootprintAction/FootprintAction.cs`
-**Signals:** `MZpack.NT8/Algo/Strategies/FootprintAction/*.cs` (10 signal files + ExportDataSchema.cs)
+**Source:** `[INSTALL PATH]/API/Strategies/FootprintAction/FootprintAction.cs`
+**Signals:** `[INSTALL PATH]/API/Strategies/FootprintAction/*.cs` (10 signal files + ExportDataSchema.cs)
 
 ## What It Covers
 

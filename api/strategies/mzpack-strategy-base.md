@@ -10,7 +10,7 @@ description: "Reference for MZpackStrategyBase — the abstract base class for a
 
 **Namespace:** `MZpack.NT8.Algo`
 **Inheritance:** `MZpackStrategyBase : StrategyRenderBase : NinjaTrader.NinjaScript.Strategies.Strategy`
-**Source:** `MZpack.NT8/Algo/MZpackStrategyBase.cs`
+**Source:** `[INSTALL PATH]/API/MZpackStrategyBase.cs`
 
 ## Delegates
 

@@ -10,7 +10,7 @@ description: "Reference for Pattern and Patterns — top-level containers that h
 
 **Namespace:** `MZpack.NT8.Algo`
 **Inheritance:** `Pattern : StrategyItem`
-**Source:** `MZpack.NT8/Algo/Pattern.cs`
+**Source:** `[INSTALL PATH]/API/Pattern.cs`
 
 ## Pattern Types
 

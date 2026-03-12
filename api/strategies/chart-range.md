@@ -10,7 +10,7 @@ description: "Reference for ChartRange and IRange — define bar/price ranges fo
 
 **Namespace:** `MZpack.NT8.Algo`
 **Inheritance:** `ChartRange : ICloneable`
-**Source:** `MZpack.NT8/Algo/ChartRange.cs`
+**Source:** `[INSTALL PATH]/API/ChartRange.cs`
 
 ## Properties
 
@@ -38,7 +38,7 @@ description: "Reference for ChartRange and IRange — define bar/price ranges fo
 
 `IRange` defines the constraints for how far apart signals can be (in bars and ticks) and still count as part of the same pattern.
 
-**Source:** `MZpack.NT8/Algo/IRange.cs`
+**Source:** `[INSTALL PATH]/API/IRange.cs`
 
 | Property | Type | Default | Description |
 |---|---|---|---|

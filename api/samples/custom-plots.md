@@ -8,7 +8,7 @@ description: "Custom chart plots via StrategyPlotIndicator — overlay and panel
 
 Demonstrates `StrategyPlotIndicator` for drawing custom plot lines on the chart. Two indicators are created: one overlaid on the price chart, and one on a separate panel below.
 
-**Source:** `MZpack.NT8/Algo/Samples/Built-in/CustomPlots.cs`
+**Source:** `[INSTALL PATH]/API/Samples/Built-in/CustomPlots.cs`
 **Class:** `CustomPlots : MZpackStrategyBase`
 
 ## What It Covers

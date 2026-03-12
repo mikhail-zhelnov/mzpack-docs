@@ -11,7 +11,7 @@ description: "Reference for StrategyVolumeProfileIndicator — the strategy wrap
 **Namespace:** `MZpack.NT8.Algo.Indicators`
 **Inheritance:** `StrategyVolumeProfileIndicator : mzVolumeProfile, IVolumeProfileIndicator`
 **Data level:** Level 1
-**Source:** `MZpack.NT8/Algo/Indicators/StrategyVolumeProfileIndicator.cs`
+**Source:** `[INSTALL PATH]/API/Indicators/StrategyVolumeProfileIndicator.cs`
 
 ## Setup in a Strategy
 

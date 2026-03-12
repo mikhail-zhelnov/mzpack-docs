@@ -8,7 +8,7 @@ description: "Access StrategyFootprintIndicator data — bar stats, POC/VA, delt
 
 Demonstrates how to access footprint bar data from `StrategyFootprintIndicator`. The `OnBarCloseHandler` prints bar statistics, POC/VA levels, imbalances, SR zones, cluster zones, and session profile values.
 
-**Source:** `MZpack.NT8/Algo/Samples/Built-in/DataAccess_mzFootprint.cs`
+**Source:** `[INSTALL PATH]/API/Samples/Built-in/DataAccess_mzFootprint.cs`
 **Class:** `DataAccess_mzFootprint : MZpackStrategyBase`
 
 ## Indicator Setup

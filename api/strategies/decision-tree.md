@@ -35,7 +35,7 @@ Pattern.Evaluate()
 Top-level container that holds both trees and drives evaluation.
 
 **Inheritance:** `Pattern : StrategyItem`
-**Source:** `MZpack.NT8/Algo/Pattern.cs`
+**Source:** `[INSTALL PATH]/API/Pattern.cs`
 
 ### Properties
 
@@ -70,7 +70,7 @@ Creates both `SignalsTree` and `FiltersTree` with the specified root logic and r
 Wraps a root `LogicalNode` and evaluates all signals on each market event.
 
 **Inheritance:** `SignalsTree : ViewModelBase`
-**Source:** `MZpack.NT8/Algo/SignalsTree.cs`
+**Source:** `[INSTALL PATH]/API/SignalsTree.cs`
 
 ### Properties
 
@@ -104,7 +104,7 @@ public SignalsTree(Pattern pattern, Logic rootLogic, Range range)
 Evaluated only after `SignalsTree` validates. If the filter expires (out of range), the entire pattern resets.
 
 **Inheritance:** `FiltersTree : SignalsTree`
-**Source:** `MZpack.NT8/Algo/FiltersTree.cs`
+**Source:** `[INSTALL PATH]/API/FiltersTree.cs`
 
 ### Behavior
 
@@ -119,7 +119,7 @@ Evaluated only after `SignalsTree` validates. If the filter expires (out of rang
 AND/OR combiner node in the decision tree.
 
 **Inheritance:** `LogicalNode : Node`
-**Source:** `MZpack.NT8/Algo/Signals/LogicalNode.cs`
+**Source:** `[INSTALL PATH]/API/Signals/LogicalNode.cs`
 
 ### Properties
 
@@ -158,7 +158,7 @@ Allowed child types: `LogicalNode`, `Signal`, `RangeNode`.
 Constrains how far apart signals can validate (in bars and ticks) and still count as one pattern.
 
 **Inheritance:** `RangeNode : Node, IRange`
-**Source:** `MZpack.NT8/Algo/Signals/RangeNode.cs`
+**Source:** `[INSTALL PATH]/API/Signals/RangeNode.cs`
 
 ### Properties
 

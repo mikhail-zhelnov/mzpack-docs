@@ -11,7 +11,7 @@ description: "Reference for StrategyBigTradeIndicator — the strategy wrapper f
 **Namespace:** `MZpack.NT8.Algo.Indicators`
 **Inheritance:** `StrategyBigTradeIndicator : mzBigTrade, IBigTradeIndicator`
 **Data level:** Level 1
-**Source:** `MZpack.NT8/Algo/Indicators/StrategyBigTradeIndicator.cs`
+**Source:** `[INSTALL PATH]/API/Indicators/StrategyBigTradeIndicator.cs`
 
 ## Setup in a Strategy
 

@@ -12,7 +12,7 @@ description: "Reference for StrategyDeltaDivergenceIndicator — the strategy wr
 **Inheritance:** `StrategyDeltaDivergenceIndicator : mzDeltaDivergence, IDeltaDivergenceIndicator`
 **Conditional:** `#if !FREE`
 **Data level:** Level 1
-**Source:** `MZpack.NT8/Algo/Indicators/StrategyDeltaDivergenceIndicator.cs`
+**Source:** `[INSTALL PATH]/API/Indicators/StrategyDeltaDivergenceIndicator.cs`
 
 ## Setup in a Strategy
 

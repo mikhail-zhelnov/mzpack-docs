@@ -8,7 +8,7 @@ description: "Fibonacci retracement entry strategy using FiboRetracementEntry wi
 
 Demonstrates the `FiboRetracementEntry` class by assigning swing high/low from the previous bar in `OnPositionOpenFilter`. This is a strategy subclass (not `MZpackStrategyBase`) — it must be used with a `MZpackStrategyBase` host that configures entries with `FiboRetracementEntry` objects.
 
-**Source:** `MZpack.NT8/Algo/Samples/Built-in/FiboRetracementEntry.cs`
+**Source:** `[INSTALL PATH]/API/Samples/Built-in/FiboRetracementEntry.cs`
 **Class:** `FiboRetracementEntryStrategy : MZpack.NT8.Algo.Strategy`
 
 ## What It Covers

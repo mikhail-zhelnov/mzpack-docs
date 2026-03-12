@@ -12,7 +12,7 @@ description: "Reference for StrategyMarketDepthIndicator — the strategy wrappe
 **Inheritance:** `StrategyMarketDepthIndicator : mzMarketDepth, IMarketDepthIndicator`
 **Conditional:** `#if !FREE`
 **Data level:** Level 2
-**Source:** `MZpack.NT8/Algo/Indicators/StrategyMarketDepthIndicator.cs`
+**Source:** `[INSTALL PATH]/API/Indicators/StrategyMarketDepthIndicator.cs`
 
 :::warning
 Requires Level 2 data — live or replay only. DOM data is not available in historical backtesting without replay.

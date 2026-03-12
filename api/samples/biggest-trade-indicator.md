@@ -8,7 +8,7 @@ description: "Custom indicator that marks the biggest trade on the chart with a 
 
 Demonstrates custom chart rendering with `StrategyBigTradeIndicator`. The strategy finds the biggest trade visible on the chart and draws a rectangle around its marker using SharpDX.
 
-**Source:** `MZpack.NT8/Algo/Samples/Built-in/BiggestTradeIndicator.cs`
+**Source:** `[INSTALL PATH]/API/Samples/Built-in/BiggestTradeIndicator.cs`
 **Class:** `BiggestTradeIndicator : MZpackStrategyBase`
 
 ## What It Covers

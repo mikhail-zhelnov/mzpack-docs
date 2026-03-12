@@ -8,7 +8,7 @@ description: "RiskManagement class with daily loss, profit, and trade count limi
 
 Demonstrates the `RiskManagement` class with daily loss, profit, and trade count limits. Trades up/down bars on bar close using a simple `UpDownBarSignal`.
 
-**Source:** `MZpack.NT8/Algo/Samples/Built-in/RiskManagement.cs`
+**Source:** `[INSTALL PATH]/API/Samples/Built-in/RiskManagement.cs`
 **Class:** `RiskManagement : MZpackStrategyBase`
 
 ## What It Covers

@@ -8,7 +8,7 @@ description: "Source code walkthrough of the Data_Export built-in strategy — u
 
 Utility strategy that exports indicator data to CSV files — no trading, no decision tree. Demonstrates conditional indicator creation based on enabled export groups, per-indicator `IndicatorExport` objects with independent data schemas, and the `ExportDataSource`/`ExportGranularity` system.
 
-**Source:** `MZpack.NT8/Algo/Strategies/Data_Export/Data_Export.cs`
+**Source:** `[INSTALL PATH]/API/Strategies/Data_Export/Data_Export.cs`
 
 ## What It Covers
 

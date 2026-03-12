@@ -10,7 +10,7 @@ description: "Reference for Action and RollingProfileAction — decision tree no
 
 **Namespace:** `MZpack.NT8.Algo`
 **Inheritance:** `Action : Signal`
-**Source:** `MZpack.NT8/Algo/Actions/Action.cs`
+**Source:** `[INSTALL PATH]/API/Actions/Action.cs`
 
 ## Properties
 
@@ -37,7 +37,7 @@ public Action(Strategy strategy, MarketDataSource source,
 Creates a rolling volume profile over a specified number of bars.
 
 **Inheritance:** `RollingProfileAction : Action`
-**Source:** `MZpack.NT8/Algo/Actions/RollingProfileAction.cs`
+**Source:** `[INSTALL PATH]/API/Actions/RollingProfileAction.cs`
 
 ### Properties
 

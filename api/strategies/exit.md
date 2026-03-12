@@ -10,7 +10,7 @@ description: "Reference for ExitBase and BarCloseTarget — exit conditions that
 
 **Namespace:** `MZpack.NT8.Algo`
 **Inheritance:** `ExitBase` (abstract)
-**Source:** `MZpack.NT8/Algo/Extensions/Exits/ExitBase.cs`
+**Source:** `[INSTALL PATH]/API/Extensions/Exits/ExitBase.cs`
 
 ## ExitBase Properties
 

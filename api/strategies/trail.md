@@ -10,7 +10,7 @@ description: "Reference for TrailBase, Trail, and BarHiLoTrail — trailing stop
 
 **Namespace:** `MZpack.NT8.Algo`
 **Inheritance:** `TrailBase` (abstract)
-**Source:** `MZpack.NT8/Algo/Extensions/Trails/TrailBase.cs`
+**Source:** `[INSTALL PATH]/API/Extensions/Trails/TrailBase.cs`
 
 ## TrailBase Properties
 
@@ -43,7 +43,7 @@ description: "Reference for TrailBase, Trail, and BarHiLoTrail — trailing stop
 Activates after a profit threshold, then moves the stop every N ticks at a fixed distance behind the current price.
 
 **Inheritance:** `Trail : TrailBase`
-**Source:** `MZpack.NT8/Algo/Extensions/Trails/Trail.cs`
+**Source:** `[INSTALL PATH]/API/Extensions/Trails/Trail.cs`
 
 ### Properties
 
@@ -73,7 +73,7 @@ public Trail(int trailAfterTicks, int trailDistanceTicks, int trailStepTicks)
 Trails the stop to the high or low of a bar N bars ago, with an optional tick shift.
 
 **Inheritance:** `BarHiLoTrail : TrailBase`
-**Source:** `MZpack.NT8/Algo/Extensions/Trails/BarHiLoTrail.cs`
+**Source:** `[INSTALL PATH]/API/Extensions/Trails/BarHiLoTrail.cs`
 
 ### Properties
 

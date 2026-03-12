@@ -10,7 +10,7 @@ description: "Reference for RiskManagement — session-level guard that enforces
 
 **Namespace:** `MZpack.NT8.Algo`
 **Inheritance:** `RiskManagement`
-**Source:** `MZpack.NT8/Algo/RiskManagement.cs`
+**Source:** `[INSTALL PATH]/API/RiskManagement.cs`
 
 ## Properties
 

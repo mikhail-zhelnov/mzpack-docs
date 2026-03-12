@@ -8,7 +8,7 @@ description: "EMA, ATR, and MACD technical indicators within an MZpack strategy.
 
 Demonstrates how to use well-known technical indicators (EMA, ATR, MACD) within MZpack strategies. On bar close, prints values from all three indicators.
 
-**Source:** `MZpack.NT8/Algo/Samples/Built-in/MZpackTechnicalSample0.cs`
+**Source:** `[INSTALL PATH]/API/Samples/Built-in/MZpackTechnicalSample0.cs`
 **Class:** `MZpackTechnicalSample0 : MZpackStrategyBase`
 
 ## What It Covers

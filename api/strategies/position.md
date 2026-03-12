@@ -10,7 +10,7 @@ description: "Reference for Position and Positions — position management withi
 
 **Namespace:** `MZpack.NT8.Algo`
 **Inheritance:** `Position : StrategyItem` | `Positions : StrategyItem`
-**Source:** `MZpack.NT8/Algo/Position.cs`, `MZpack.NT8/Algo/Positions.cs`
+**Source:** `[INSTALL PATH]/API/Position.cs`, `[INSTALL PATH]/API/Positions.cs`
 
 ## Position Properties
 

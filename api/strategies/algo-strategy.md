@@ -10,7 +10,7 @@ description: "Reference for Algo.Strategy — the pattern-oriented strategy clas
 
 **Namespace:** `MZpack.NT8.Algo`
 **Inheritance:** `Strategy : ViewModelBase`
-**Source:** `MZpack.NT8/Algo/Strategy.cs`
+**Source:** `[INSTALL PATH]/API/Strategy.cs`
 
 ## Architecture
 

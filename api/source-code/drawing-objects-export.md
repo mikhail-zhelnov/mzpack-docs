@@ -8,7 +8,7 @@ description: "Source code walkthrough of the DrawingObjects_Export built-in stra
 
 The simplest built-in strategy — a 119-line utility that exports chart drawing objects (indicators that draw on the chart, such as Boss Order Blocks, Imbalance Profile Lidar markers, etc.) to CSV files. Demonstrates `DrawingObjectsExport`, XML schema loading/creation, `ChartObjectDescriptor` with `MapItem` mappings, and the `DataSchema.LoadFromXml`/`SaveToXml` persistence pattern.
 
-**Source:** `MZpack.NT8/Algo/Strategies/DrawingObjects_Export/DrawingObjects_Export.cs`
+**Source:** `[INSTALL PATH]/API/Strategies/DrawingObjects_Export/DrawingObjects_Export.cs`
 
 ## What It Covers
 

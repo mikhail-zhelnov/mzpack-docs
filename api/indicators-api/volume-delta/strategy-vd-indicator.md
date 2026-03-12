@@ -12,7 +12,7 @@ description: "Reference for StrategyVolumeDeltaIndicator — the strategy wrappe
 **Inheritance:** `StrategyVolumeDeltaIndicator : mzVolumeDelta, IVolumeDeltaIndicator`
 **Conditional:** `#if !FREE`
 **Data level:** Level 1
-**Source:** `MZpack.NT8/Algo/Indicators/StrategyVolumeDeltaIndicator.cs`
+**Source:** `[INSTALL PATH]/API/Indicators/StrategyVolumeDeltaIndicator.cs`
 
 ## Setup in a Strategy
 

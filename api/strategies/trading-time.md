@@ -9,7 +9,7 @@ description: "Reference for TradingTime — restrict strategy trading to specifi
 `TradingTime` defines a time window during which the strategy is allowed to trade. Outside these windows, the strategy will not open new positions. Multiple `TradingTime` instances can be added to `Strategy.TradingTimes` for complex schedules.
 
 **Namespace:** `MZpack.NT8.Algo`
-**Source:** `MZpack.NT8/Algo/TradingTime.cs`
+**Source:** `[INSTALL PATH]/API/TradingTime.cs`
 
 ## Properties
 
