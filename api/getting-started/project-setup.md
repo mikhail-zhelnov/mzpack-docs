@@ -100,8 +100,6 @@ namespace NinjaTrader.NinjaScript.Strategies.MyProject
 }
 ```
 
-For custom indicators, use `NinjaTrader.NinjaScript.Indicators.MyProject`.
-
 ## Minimal Strategy Template
 
 A minimal MZpack strategy with one indicator:
