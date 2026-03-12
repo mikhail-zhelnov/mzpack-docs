@@ -53,7 +53,7 @@ Right-click **References → Add Reference → Browse** and add the following DL
 
 | Assembly | Provides |
 |---|---|
-| `MZpack.NT8.dll` | MZpack API — all `MZpack.*` namespaces |
+| `MZpack.NT8.Pro.dll` | MZpack API — all `MZpack.*` namespaces |
 
 **From NinjaTrader installation directory** (typically `C:\Program Files\NinjaTrader 8\bin\`):
 
