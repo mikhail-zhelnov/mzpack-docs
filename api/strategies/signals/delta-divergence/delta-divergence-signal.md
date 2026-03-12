@@ -12,6 +12,7 @@ Detects divergence between price and cumulative delta at ZigZag swing points. A 
 **Inheritance:** `DeltaDivergenceSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
 **Indicator:** StrategyDeltaDivergenceIndicator
+**Source:** `[INSTALL PATH]/API/Signals/DeltaDivergenceSignal.cs`
 
 ## Parameters
 

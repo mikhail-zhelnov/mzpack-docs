@@ -12,6 +12,7 @@ Evaluates the delta rate of change of the current bar. Positive rate signals Lon
 **Inheritance:** `DeltaRateSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
 **Indicator:** StrategyFootprintIndicator
+**Source:** `[INSTALL PATH]/API/Signals/DeltaRateSignal.cs`
 
 ## Parameters
 

@@ -12,6 +12,7 @@ Evaluates order flow metrics of a footprint bar (volume, delta) against threshol
 **Inheritance:** `OrdferflowBarMetricsSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
 **Indicator:** StrategyFootprintIndicator
+**Source:** `[INSTALL PATH]/API/Signals/OrderflowBarMetricsSignal.cs`
 
 :::note Class name
 The class name contains a typo (`Ordferflow` instead of `Orderflow`) in the source code. Use the exact name `OrdferflowBarMetricsSignal` when referencing this class.

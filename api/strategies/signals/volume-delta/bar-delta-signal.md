@@ -12,6 +12,7 @@ Evaluates the delta of the current bar. Positive delta signals Long, negative de
 **Inheritance:** `BarDeltaSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
 **Indicator:** StrategyFootprintIndicator or StrategyVolumeDeltaIndicator
+**Source:** `[INSTALL PATH]/API/Signals/BarDeltaSignal.cs`
 
 ## Parameters
 

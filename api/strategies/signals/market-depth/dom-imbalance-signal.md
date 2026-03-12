@@ -12,6 +12,7 @@ Evaluates the bid/ask volume ratio in the real-time order book (DOM). A high bid
 **Inheritance:** `DOMImbalanceSignal : Signal`
 **Data source:** Level2 | **Calculate:** NotApplicable
 **Indicator:** StrategyMarketDepthIndicator
+**Source:** `[INSTALL PATH]/API/Signals/DOMImbalanceSignal.cs`
 
 :::warning
 Requires Level 2 data — live or replay only. Not available in historical backtesting.

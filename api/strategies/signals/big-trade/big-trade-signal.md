@@ -12,6 +12,7 @@ Triggers when a big trade is detected by the mzBigTrade indicator. By default, a
 **Inheritance:** `BigTradeSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnEachTick
 **Indicator:** StrategyBigTradeIndicator
+**Source:** `[INSTALL PATH]/API/Signals/BigTradeSignal.cs`
 
 ## Parameters
 

@@ -12,6 +12,7 @@ Searches for consecutive cluster zones in the footprint. Cluster zones represent
 **Inheritance:** `ClusterZonesSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
 **Indicator:** StrategyFootprintIndicator
+**Source:** `[INSTALL PATH]/API/Signals/ClusterZonesSignal.cs`
 
 ## Parameters
 

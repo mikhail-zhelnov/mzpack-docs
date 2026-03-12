@@ -12,6 +12,7 @@ Detects iceberg orders in the current bar. Icebergs on the bid side signal Long 
 **Inheritance:** `BarIcebergsSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnEachTick
 **Indicator:** StrategyVolumeDeltaIndicator
+**Source:** `[INSTALL PATH]/API/Signals/BarIcebergsSignal.cs`
 
 ## Parameters
 

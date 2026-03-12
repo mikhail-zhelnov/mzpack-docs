@@ -12,6 +12,7 @@ Detects stacked imbalances in the current footprint bar. Returns `Long` when buy
 **Inheritance:** `FootprintImbalanceSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnEachTick
 **Indicator:** StrategyFootprintIndicator
+**Source:** `[INSTALL PATH]/API/Signals/FootprintImbalanceSignal.cs`
 
 ## Parameters
 

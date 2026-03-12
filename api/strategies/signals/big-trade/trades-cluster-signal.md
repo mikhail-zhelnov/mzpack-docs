@@ -12,6 +12,7 @@ Detects a cluster of trades on a specific side (bid or ask) that meet volume, co
 **Inheritance:** `TradesClusterSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnEachTick
 **Indicator:** StrategyBigTradeIndicator
+**Source:** `[INSTALL PATH]/API/Signals/TradesClusterSignal.cs`
 
 ## Parameters
 

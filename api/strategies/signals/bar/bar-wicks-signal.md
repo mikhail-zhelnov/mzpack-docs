@@ -11,6 +11,7 @@ Detects bars with a significant wick (shadow) on one side and a close at the opp
 **Namespace:** `MZpack.NT8.Algo.Signals`
 **Inheritance:** `BarWickSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
+**Source:** `[INSTALL PATH]/API/Signals/BarWickSignal.cs`
 
 ## Parameters
 

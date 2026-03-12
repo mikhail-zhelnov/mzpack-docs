@@ -11,6 +11,7 @@ Triggers when a bar's total volume meets or exceeds a minimum threshold. The sig
 **Namespace:** `MZpack.NT8.Algo.Signals`
 **Inheritance:** `BarVolumeSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
+**Source:** `[INSTALL PATH]/API/Signals/BarVolumeSignal.cs`
 
 ## Parameters
 

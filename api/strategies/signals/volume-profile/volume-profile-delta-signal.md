@@ -12,6 +12,7 @@ Evaluates the delta of the most recent volume profile. A negative profile delta 
 **Inheritance:** `VolumeProfileDeltaSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
 **Indicator:** StrategyVolumeProfileIndicator
+**Source:** `[INSTALL PATH]/API/Signals/VolumeProfileDeltaSignal.cs`
 
 ## Parameters
 

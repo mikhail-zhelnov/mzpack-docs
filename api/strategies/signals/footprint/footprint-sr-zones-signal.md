@@ -12,6 +12,7 @@ Detects active support/resistance zones based on imbalance or absorption data. C
 **Inheritance:** `FootprintSRZonesSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnEachTick
 **Indicator:** StrategyFootprintIndicator
+**Source:** `[INSTALL PATH]/API/Signals/FootprintSRZonesSignal.cs`
 
 ## Parameters
 

@@ -12,6 +12,7 @@ Evaluates the current price position relative to a volume profile level — VWAP
 **Inheritance:** `RelativeToProfileSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
 **Indicator:** IVolumeProfileIndicator
+**Source:** `[INSTALL PATH]/API/Signals/RelativeToProfileSignal.cs`
 
 ## Parameters
 

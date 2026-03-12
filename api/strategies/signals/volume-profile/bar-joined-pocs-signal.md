@@ -12,6 +12,7 @@ Detects a specified number of consecutive joined POCs (Point of Control levels w
 **Inheritance:** `BarJoinedPOCsSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnEachTick
 **Indicator:** StrategyFootprintIndicator
+**Source:** `[INSTALL PATH]/API/Signals/BarJoinedPOCsSignal.cs`
 
 ## Parameters
 

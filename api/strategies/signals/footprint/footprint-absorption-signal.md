@@ -12,6 +12,7 @@ Detects absorption levels in the current footprint bar. Absorption indicates pas
 **Inheritance:** `FootprintAbsorptionSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnEachTick
 **Indicator:** StrategyFootprintIndicator
+**Source:** `[INSTALL PATH]/API/Signals/FootprintAbsoprtionSignal.cs`
 
 ## Parameters
 

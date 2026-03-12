@@ -12,6 +12,7 @@ Evaluates the cumulative delta of the current session. Positive cumulative delta
 **Inheritance:** `CumulativeDeltaSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
 **Indicator:** StrategyFootprintIndicator
+**Source:** `[INSTALL PATH]/API/Signals/CumulativeDeltaSignal.cs`
 
 ## Parameters
 

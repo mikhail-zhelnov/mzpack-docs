@@ -11,6 +11,7 @@ Returns a direction based on whether the current bar is bullish (Close > Open) o
 **Namespace:** `MZpack.NT8.Algo.Signals`
 **Inheritance:** `UpDownBarSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
+**Source:** `[INSTALL PATH]/API/Signals/UpDownBarSignal.cs`
 
 ## Parameters
 

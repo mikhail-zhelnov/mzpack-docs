@@ -11,6 +11,7 @@ Evaluates one or more bar metrics (body size, wick proportions, candlestick patt
 **Namespace:** `MZpack.NT8.Algo.Signals`
 **Inheritance:** `BarMetricsSignal : Signal`
 **Data source:** Level1 | **Calculate:** OnBarClose
+**Source:** `[INSTALL PATH]/API/Signals/BarMetricsSignal.cs`
 
 ## Constructors
 
