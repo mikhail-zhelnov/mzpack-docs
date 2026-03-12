@@ -426,6 +426,10 @@ Custom support/resistance levels drawn on the chart with mouse interaction.
 | **Modify: Mouse Left +** | LeftAlt | Key modifier to move a level |
 | **Drag with Mouse** | true | Enable drag-and-drop level repositioning |
 
+:::tip
+See [Sound Files](/docs/getting-started/sound-files) for the full list of pre-installed sounds and how to add custom WAV files.
+:::
+
 ## Performance Tips
 
 - Set **Ticks per level** to 2+ for instruments with many price levels

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: "Licensing"
 description: "How to activate, manage, and troubleshoot your MZpack license"
 ---

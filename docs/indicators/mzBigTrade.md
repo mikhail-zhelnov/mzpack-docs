@@ -402,6 +402,10 @@ Extra filters are applied on top of the main filters.
 | **Send Email** | false | Send email notification on filtered trade |
 | **Email address** | — | Destination email address |
 
+:::tip
+See [Sound Files](/docs/getting-started/sound-files) for the full list of pre-installed sounds and how to add custom WAV files.
+:::
+
 ## Reconstruct Tape Mode
 
 The MZpack order flow core reconstructs individual tick trades into aggregated trades. The **Reconstruct tape** option (enabled by default) controls this behavior.

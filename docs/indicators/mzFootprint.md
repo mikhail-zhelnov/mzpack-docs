@@ -603,7 +603,7 @@ Configurable alerts for any metric crossing a threshold. Each alert supports:
 
 - **Enable** — turn the alert on/off
 - **Threshold** — trigger value
-- **Sound** — custom WAV file
+- **Sound** — alert sound file (see [Sound Files](/docs/getting-started/sound-files))
 - **On bar close** — fire alerts only on completed bars
 - **Email** — send email notifications (for imbalance/absorption alerts)
 

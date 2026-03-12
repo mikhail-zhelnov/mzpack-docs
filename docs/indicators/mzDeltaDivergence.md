@@ -121,6 +121,10 @@ Colored regions highlight divergence zones between breakpoint A and breakpoint B
 | **Divergence alert: enable** | false | Enable alert on divergence detection (real-time only) |
 | **Divergence alert: sound** | mzpack_alert2.wav | Alert sound file |
 
+:::tip
+See [Sound Files](/docs/getting-started/sound-files) for the full list of pre-installed sounds and how to add custom WAV files.
+:::
+
 ## Use Cases for ES
 
 The following presets demonstrate common mzDeltaDivergence configurations for E-mini S&P 500 (ES). Each use case lists only settings that differ from defaults. Recommended chart type: 1000 Tick.

@@ -413,6 +413,10 @@ Four views working together: historical DOM heatmap reveals where large orders r
 | **Extreme alert** | false | Alert when extreme limit order volume appears |
 | **Extreme sound** | ding.wav | Sound file for extreme volume alerts |
 
+:::tip
+See [Sound Files](/docs/getting-started/sound-files) for the full list of pre-installed sounds and how to add custom WAV files.
+:::
+
 ### General
 
 | Setting | Default | Description |

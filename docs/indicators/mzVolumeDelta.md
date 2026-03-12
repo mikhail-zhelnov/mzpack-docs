@@ -194,6 +194,10 @@ When Color mode is set to **Custom**, bars are colored based on 4 value threshol
 | **Bar Delta alert: threshold** | 1000 | Absolute delta value to trigger the alert |
 | **Bar Delta alert: sound** | mzpack_alert1.wav | Alert sound file |
 
+:::tip
+See [Sound Files](/docs/getting-started/sound-files) for the full list of pre-installed sounds and how to add custom WAV files.
+:::
+
 ## Plots
 
 The indicator exposes 5 NinjaScript output plots that can be used by other indicators and strategies:
