@@ -278,7 +278,7 @@ When a strategy uses multiple indicators, the chart can become cluttered. **Part
 | StrategyFootprintIndicator | IFootprintBar.PartiallyVisible |
 | StrategyMarketDepthIndicator | IMarketDepthBlock.PartiallyVisible |
 
-Toggle Partially Visible mode by clicking the "eye" button next to the indicator name in the chart.
+Toggle Partially Visible mode by clicking the "eye" button next to the indicator name in the chart. See [Algo Strategy — Partially Visible](/api/samples/algo-strategy-partially-visible) for a full code sample.
 
 ## Logging
 

@@ -72,7 +72,7 @@ All signals inherit from `Node`, which provides tree structure, direction handli
 | `ChartRange` | `ChartRange` | Bar/price range where signal validated |
 | `Time` | `DateTime` | When signal was validated |
 | `Description` | `string` | Textual description of validated state |
-| `PartiallyVisibleMode` | `SignalPartiallyVisibleMode` | Visibility in Partially Visible mode |
+| `PartiallyVisibleMode` | `SignalPartiallyVisibleMode` | Visibility in [Partially Visible](../../samples/algo-strategy-partially-visible.md) mode |
 
 ### Constructor
 

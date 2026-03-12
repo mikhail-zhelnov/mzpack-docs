@@ -32,7 +32,7 @@ Strategies use their own internal indicator classes rather than the chart indica
 | StrategyMarketDepthIndicator | [mzMarketDepth](../indicators/mzMarketDepth.md) |
 | StrategyDeltaDivergenceIndicator | [mzDeltaDivergence](../indicators/mzDeltaDivergence.md) |
 
-Strategy indicators are not visible on the chart by default. Use **Partially Visible** mode to show only the indicator data relevant to validated signals — see [Visualization](strategy-framework.md#visualization).
+Strategy indicators are not visible on the chart by default. Use **Partially Visible** mode to show only the indicator data relevant to validated signals — see [Visualization](strategy-framework.md#visualization) and [Algo Strategy — Partially Visible](/api/samples/algo-strategy-partially-visible) sample.
 
 ## Strategy Framework at a Glance
 
