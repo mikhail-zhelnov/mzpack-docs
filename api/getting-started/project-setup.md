@@ -32,9 +32,8 @@ namespace NinjaTrader.NinjaScript.Strategies
 }
 ```
 
-5. Press **F5** to compile
-
-The built-in editor automatically resolves MZpack references from the `Documents\NinjaTrader 8\bin\Custom\` directory.
+5. Add a reference to `MZpack.NT8.Pro.dll`: right-click in the editor, choose **References...**, click **Add**, select `MZpack.NT8.Pro.dll`, then click **Open**. Click **OK** to close the References window.
+6. Press **F5** to compile
 
 ## Option 2: Visual Studio 2022
 
