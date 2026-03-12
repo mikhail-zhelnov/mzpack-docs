@@ -8,7 +8,7 @@ description: "Patterns with ATM, BigTradeSignal, EMASignal, and DOMImbalanceFilt
 
 Demonstrates a pattern-based Algo.Strategy that combines custom `BigTradeSignal`, `EMASignal`, and `DOMImbalanceFilter`. Requires Level 2 data (live or replay only). Uses dual entries with independent stop/target settings and limit order support with cancel-after-bars logic.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/MZpackAlgoStrategy1.cs` (uses `AlgoStrategy1.cs`)
+**Source:** `[INSTALL PATH]/API/Samples/MZpackAlgoStrategy1.cs` (uses `AlgoStrategy1.cs`)
 **Class:** `MZpackAlgoStrategy1 : MZpackStrategyBase`
 
 ## What It Covers

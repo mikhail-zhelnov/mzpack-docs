@@ -8,7 +8,7 @@ description: "TradingTimes feature with configurable time windows and session br
 
 Demonstrates the `TradingTimes` feature with two configurable time windows. Trades up/down bars on bar close using a simple `UpDownBarSignal`.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/TradingTimes.cs`
+**Source:** `[INSTALL PATH]/API/Samples/TradingTimes.cs`
 **Class:** `TradingTimes : MZpackStrategyBase`
 
 ## What It Covers

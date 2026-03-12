@@ -8,7 +8,7 @@ description: "Algo.Strategy with proprietary ATM and TradesClusterSignal"
 
 Demonstrates an Algo.Strategy that uses `TradesClusterSignal` to detect trade clusters on both Ask and Bid sides, then enters with market orders using breakeven and trailing stop management.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/MZpackAlgoStrategy0.cs`
+**Source:** `[INSTALL PATH]/API/Samples/MZpackAlgoStrategy0.cs`
 **Class:** `MZpackAlgoStrategy0 : MZpackStrategyBase`
 
 ## What It Covers

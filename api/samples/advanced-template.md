@@ -8,7 +8,7 @@ description: "Production-ready Algo.Strategy template with footprint indicator, 
 
 A production-ready `Algo.Strategy` template that demonstrates most framework features in a single strategy. Use it as a starting point for your own strategies — replace the placeholder signal logic with real conditions.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/AdvancedTemplate.cs`
+**Source:** `[INSTALL PATH]/API/Samples/AdvancedTemplate.cs`
 **Signal:** `[INSTALL PATH]/API/Signals/Built-in/AdvancedSignalTemplate.cs`
 
 ## What It Covers

@@ -8,7 +8,7 @@ description: "Export indicator values with Historical/Realtime temporality"
 
 Demonstrates how to export MZpack indicator data to CSV files using the `IndicatorExport` and `DataSchema` classes. Set `ExportTemporality` to `Historical` for chart data or `Realtime` for live data. Saving begins when the strategy is disabled.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/ExportIndicatorsValues.cs`
+**Source:** `[INSTALL PATH]/API/Samples/ExportIndicatorsValues.cs`
 **Class:** `ExportIndicatorsValues : MZpackStrategyBase`
 
 ## What It Covers

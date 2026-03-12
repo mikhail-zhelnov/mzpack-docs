@@ -8,7 +8,7 @@ description: "StrategyMarketDepthIndicator with StrategyFootprintIndicator, DOM 
 
 Demonstrates `StrategyMarketDepthIndicator` with `StrategyFootprintIndicator`, combining DOM imbalance, block, and pace-of-tape rules. Requires Level 2 data (live/replay only). Recommended for ES 5 Min chart during RTH. This is a custom strategy without Algo.Strategy.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/MZpackCustomStrategy4.cs`
+**Source:** `[INSTALL PATH]/API/Samples/MZpackCustomStrategy4.cs`
 **Class:** `MZpackCustomStrategy4 : MZpackStrategyBase`
 
 ## What It Covers

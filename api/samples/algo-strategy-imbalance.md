@@ -8,7 +8,7 @@ description: "Algo.Strategy with FootprintImbalanceSignal"
 
 Demonstrates an Algo.Strategy that uses `FootprintImbalanceSignal` to detect footprint imbalances, with trading time windows, risk management, and a custom strategy subclass that tracks entry bar indices.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/MZpackAlgoStrategy_Imbalance.cs`
+**Source:** `[INSTALL PATH]/API/Samples/MZpackAlgoStrategy_Imbalance.cs`
 **Class:** `MZpackAlgoStrategy_Imbalance : MZpackStrategyBase`
 
 ## What It Covers

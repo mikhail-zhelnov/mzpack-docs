@@ -8,7 +8,7 @@ description: "StrategyVolumeProfileIndicator with VWAP/POC rules for backtesting
 
 Demonstrates a custom strategy (without Algo.Strategy) that uses `StrategyVolumeProfileIndicator` with VWAP standard deviation and a running average POC calculation. Uses NinjaTrader `EnterLong`/`EnterShort` directly with `OnBarCloseHandler` logic, suitable for backtesting in Strategy Analyzer.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/MZpackCustomStrategy0.cs`
+**Source:** `[INSTALL PATH]/API/Samples/MZpackCustomStrategy0.cs`
 **Class:** `MZpackCustomStrategy0 : MZpackStrategyBase`
 
 ## What It Covers

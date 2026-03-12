@@ -8,7 +8,7 @@ description: "Access StrategyVolumeDeltaIndicator data — volume, delta, cumula
 
 Demonstrates how to access volume delta bar data from `StrategyVolumeDeltaIndicator`. The `OnBarCloseHandler` prints volume, delta, cumulative delta, and iceberg volume for each bar.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/DataAccess_mzVolumeDelta.cs`
+**Source:** `[INSTALL PATH]/API/Samples/DataAccess_mzVolumeDelta.cs`
 **Class:** `DataAccess_mzVolumeDelta : MZpackStrategyBase`
 
 ## Indicator Setup

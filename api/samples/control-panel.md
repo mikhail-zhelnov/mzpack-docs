@@ -8,7 +8,7 @@ description: "MZpack Control Panel with [ControlPanel] attribute and custom UI e
 
 Demonstrates both ways to add controls to the MZpack Control Panel: the `[ControlPanel]` attribute on properties, and custom UI elements via `CreateControlPanelElements()`. The strategy trades up/down bars on bar close.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/ControlPanel.cs`
+**Source:** `[INSTALL PATH]/API/Samples/ControlPanel.cs`
 **Class:** `ControlPanel : MZpackStrategyBase`
 
 ## What It Covers

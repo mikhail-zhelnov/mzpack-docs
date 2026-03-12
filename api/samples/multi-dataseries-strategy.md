@@ -8,7 +8,7 @@ description: "StrategyFootprintIndicator and StrategyVolumeProfileIndicator on d
 
 Demonstrates using indicators attached to different data series. A `StrategyFootprintIndicator` runs on the primary data series and a `StrategyVolumeProfileIndicator` runs on a secondary 30-minute series. Prints bar data from both indicators on bar close.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/MultiDataSeriesStrategy.cs`
+**Source:** `[INSTALL PATH]/API/Samples/MultiDataSeriesStrategy.cs`
 **Class:** `MultiDataSeriesStrategy : MZpackStrategyBase`
 
 ## What It Covers

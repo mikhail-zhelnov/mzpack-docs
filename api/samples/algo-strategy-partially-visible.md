@@ -8,7 +8,7 @@ description: "Algo.Strategy with TradesClusterSignal, DOMImbalanceSignal, absorp
 
 Demonstrates **Partially Visible** mode — when enabled, strategy indicators only render plots related to validated signals, keeping the chart uncluttered. The strategy combines `TradesClusterSignal` for trade clusters, a custom `AbsorptionSRZonesSignal` for absorption zones, and `DOMImbalanceSignal` as a filter.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/MZpackAlgoStrategy2.cs`
+**Source:** `[INSTALL PATH]/API/Samples/MZpackAlgoStrategy2.cs`
 **Class:** `MZpackAlgoStrategy2 : MZpackStrategyBase`
 
 ## What It Covers

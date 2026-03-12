@@ -8,7 +8,7 @@ description: "Liquidity migration from StrategyMarketDepthIndicator (1 Tick, liv
 
 Demonstrates liquidity migration data from `StrategyMarketDepthIndicator`. Use on a 1 Tick chart, live or replay only. This is a custom strategy without Algo.Strategy.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/MZpackCustomStrategy6.cs`
+**Source:** `[INSTALL PATH]/API/Samples/MZpackCustomStrategy6.cs`
 **Class:** `MZpackCustomStrategy6 : MZpackStrategyBase`
 
 ## What It Covers

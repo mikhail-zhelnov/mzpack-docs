@@ -8,7 +8,7 @@ description: "Algo.Strategy trading on a secondary instrument/data series in unm
 
 Demonstrates trading on a second data series using `Algo.Strategy` in unmanaged mode. Adds a secondary instrument/timeframe via `AddDataSeries` and routes trade execution to it.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/MultiDataSeriesAdvancedStrategy.cs`
+**Source:** `[INSTALL PATH]/API/Samples/MultiDataSeriesAdvancedStrategy.cs`
 **Class:** `MultiDataSeriesAdvancedStrategy : MZpackStrategyBase`
 
 ## What It Covers

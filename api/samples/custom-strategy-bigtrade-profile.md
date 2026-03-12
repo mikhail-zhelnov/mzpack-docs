@@ -8,7 +8,7 @@ description: "StrategyBigTradeIndicator with StrategyVolumeProfileIndicator in C
 
 Demonstrates `StrategyBigTradeIndicator` with `StrategyVolumeProfileIndicator` in Custom mode for backtesting (OnBarClose). This is a custom strategy without Algo.Strategy — it uses NinjaTrader `EnterLong`/`EnterShort` directly.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/MZpackCustomStrategy1.cs`
+**Source:** `[INSTALL PATH]/API/Samples/MZpackCustomStrategy1.cs`
 **Class:** `MZpackCustomStrategy1 : MZpackStrategyBase`
 
 ## What It Covers

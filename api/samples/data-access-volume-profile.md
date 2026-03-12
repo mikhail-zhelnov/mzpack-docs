@@ -8,7 +8,7 @@ description: "Access StrategyVolumeProfileIndicator data — session profiles wi
 
 Demonstrates how to access volume profile data from `StrategyVolumeProfileIndicator` with Minute accuracy. On each bar close, the strategy prints developing POC, VAH, VAL, and VWAP values for the current session profile.
 
-**Source:** `[INSTALL PATH]/API/Samples/Built-in/DataAccess_mzVolumeProfile_MinuteAccuracy.cs`
+**Source:** `[INSTALL PATH]/API/Samples/DataAccess_mzVolumeProfile_MinuteAccuracy.cs`
 **Class:** `DataAccess_mzVolumeProfile_MinuteAccuracy : MZpackStrategyBase`
 
 ## Indicator Setup
