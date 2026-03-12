@@ -293,3 +293,4 @@ pattern.Filters.Root.AddChild(
 - [Signal Base Classes](../strategies/signals/signal-base.md) — `PartiallyVisibleMode` property
 - [Filter](../strategies/filter.md) — filter in decision tree
 - [Custom Signal](../strategies/signals/custom-signal.md) — creating your own signal
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples

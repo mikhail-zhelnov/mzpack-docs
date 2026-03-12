@@ -84,3 +84,4 @@ bar.DeltaLo + bar.OpenDelta    // Min cumulative delta in bar
 - [MZpackStrategyBase](../strategies/mzpack-strategy-base.md) — base class
 - [Data Access — mzFootprint](data-access-footprint.md) — footprint data
 - [Data Access — mzVolumeProfile](data-access-volume-profile.md) — volume profile data
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples

@@ -94,3 +94,4 @@ The `OnRenderTargetChanged` override sets `BiggestTradeMarkerStroke.RenderTarget
 ## See Also
 
 - [MZpackStrategyBase](../strategies/mzpack-strategy-base.md) — base class
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples

@@ -343,3 +343,4 @@ public override UIElement[] CreateControlPanelElements()
 - [Risk Management](../strategies/risk-management.md) — daily limits
 - [TradingTime](../strategies/trading-time.md) — time windows
 - [Custom Signal](../strategies/signals/custom-signal.md) — creating your own signal
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples

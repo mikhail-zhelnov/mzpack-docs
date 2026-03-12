@@ -138,3 +138,4 @@ The included `UpDownBarSignal` is a simple on-bar-close signal: Long for up-bars
 
 - [MZpackStrategyBase](../strategies/mzpack-strategy-base.md) — `CreateControlPanelElements()` reference
 - [Advanced Template](advanced-template.md) — control panel with Trading On/Off, Close, Break Even buttons
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples

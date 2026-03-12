@@ -118,3 +118,4 @@ With `ProfileAccuracy.Minute`, set `Calculate = Calculate.OnBarClose` on both th
 - [MZpackStrategyBase](../strategies/mzpack-strategy-base.md) — base class
 - [Data Access — mzFootprint](data-access-footprint.md) — footprint data
 - [Data Access — mzVolumeDelta](data-access-volume-delta.md) — volume delta data
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples

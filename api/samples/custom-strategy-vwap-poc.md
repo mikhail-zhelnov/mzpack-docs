@@ -7,3 +7,7 @@ description: "StrategyVolumeProfileIndicator with VWAP/POC rules for backtesting
 # Custom Strategy — VWAP/POC
 
 *Content coming soon.*
+
+## See Also
+
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples

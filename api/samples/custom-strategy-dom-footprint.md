@@ -7,3 +7,7 @@ description: "StrategyMarketDepthIndicator with StrategyFootprintIndicator, DOM 
 # Custom Strategy — DOM + Footprint
 
 *Content coming soon.*
+
+## See Also
+
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples

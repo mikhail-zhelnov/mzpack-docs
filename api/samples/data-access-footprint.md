@@ -219,3 +219,4 @@ if (currentSession != null)
 - [Data Access — mzVolumeDelta](data-access-volume-delta.md) — volume delta data
 - [Data Access — mzVolumeProfile](data-access-volume-profile.md) — volume profile data
 - [Custom Plots](custom-plots.md) — plotting footprint data
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples

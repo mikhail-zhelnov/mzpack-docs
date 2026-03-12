@@ -128,3 +128,4 @@ customPlotsOnPanelIndicator.Visible = true;
 
 - [MZpackStrategyBase](../strategies/mzpack-strategy-base.md) — base class
 - [Data Access — mzFootprint](data-access-footprint.md) — footprint data access
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples

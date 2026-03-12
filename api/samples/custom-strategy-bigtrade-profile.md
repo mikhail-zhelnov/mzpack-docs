@@ -7,3 +7,7 @@ description: "StrategyBigTradeIndicator with StrategyVolumeProfileIndicator in C
 # Custom Strategy — BigTrade + VolumeProfile
 
 *Content coming soon.*
+
+## See Also
+
+- [Working with Samples](../getting-started/project-setup.md#working-with-samples) — how to compile samples
