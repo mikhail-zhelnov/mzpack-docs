@@ -115,6 +115,8 @@ The threshold is a percentage ratio. For example, with a 300% threshold: if Ask 
 
 Consecutive imbalances stacked at adjacent price levels indicate strong directional conviction.
 
+![Diagonal imbalance explanation](./img/diagonal-imbalance-explanation-chart.png)
+
 ## Absorption
 
 Absorption is the counterpart to imbalance. Where imbalance shows *aggressive* activity, absorption shows *passive* defense — limit orders quietly absorbing market orders without letting price advance.
