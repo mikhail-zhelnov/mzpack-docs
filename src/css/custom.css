@@ -21,6 +21,13 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* Images: natural size, shrink only if wider than container */
+article img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
 /* Code block styling */
 .prism-code {
   font-size: 0.9rem;
