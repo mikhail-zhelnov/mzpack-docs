@@ -12,10 +12,12 @@ MZpack uses machine-locked licenses that are tied to your hardware. An internet 
 
 | License | Indicators | API/Strategies | Duration |
 |---|---|---|---|
-| **MZpack Indicators** | All 6 indicators | No | Subscription or perpetual |
-| **MZpack Strategies** | No | Full strategy framework | Perpetual |
+| **MZpack Indicators**\* | All 6 indicators | No | Subscription or perpetual |
+| **MZpack Strategies**\* | No | Full strategy framework | Perpetual |
 | **MZpack Indicators TRIAL** | All 6 indicators | No | 14 days |
 | **MZpack FREE** | Limited features | No | Unlimited |
+
+\* Refers to the **w/ Divergence** versions of MZpack Indicators and MZpack Strategies.
 
 ## Activation
 
