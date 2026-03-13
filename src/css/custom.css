@@ -28,6 +28,15 @@ article img {
   height: auto;
   margin-left: 10%;
   margin-right: 10%;
+  cursor: zoom-in;
+}
+
+.medium-zoom-overlay {
+  z-index: 999;
+}
+
+.medium-zoom-image--opened {
+  z-index: 1000;
 }
 
 /* Code block styling */

@@ -3,6 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
+  clientModules: ['./src/clientModules/imageZoom.js'],
   title: 'MZpack',
   tagline: 'Order flow analysis and algorithmic trading for NinjaTrader 8',
   favicon: 'img/favicon.ico',

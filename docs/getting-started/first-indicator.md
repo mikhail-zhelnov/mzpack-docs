@@ -50,11 +50,11 @@ The mzFootprint indicator overlays order flow data directly on your price bars. 
 
 ## Step 4: Configure Settings
 
-To customize the indicator:
+The quickest way to adjust settings is through the **on-the-fly settings** available on the indicator toolbar at the top of the chart. Click the indicator name on the toolbar to access commonly used settings without opening any dialogs. You can also toggle indicator visibility using the **eye** button next to the indicator name.
 
-1. Right-click the chart and select **Indicators**
-2. Select **mzFootprint** from the list of active indicators
-3. Adjust settings in the properties panel on the right
+:::tip
+For the full list of settings, right-click the chart, select **Indicators**, choose **mzFootprint** from the active indicators list, and adjust in the properties panel.
+:::
 
 ![mzFootprint settings panel with categories](./img/footprint-settings-panel-settings.png)
 
@@ -89,4 +89,5 @@ Once you're comfortable with mzFootprint, try adding other MZpack indicators to 
 
 - Learn the concepts behind order flow analysis in the [Concepts](../concepts/order-flow.md) section
 - Explore each indicator's full settings in the [Indicators](../indicators/overview.md) section
+- Build automated trading with MZpack [Strategies](../strategies/overview.md)
 - If you're a developer, see the [API Reference](/api/getting-started/overview) to build custom indicators and strategies

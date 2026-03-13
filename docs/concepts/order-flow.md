@@ -141,6 +141,8 @@ Zone strength depends on:
 
 A zone is terminated when price crosses through it and closes beyond the zone (above a resistance zone or below a support zone), or at the end of a session if the **Break on session** option is enabled.
 
+![Imbalance-based support and resistance zones](./img/imbalance-sr-zones-chart.png)
+
 See [mzFootprint — Imbalance S/R Zones](../indicators/mzFootprint.md#imbalance-sr-zones) for configuration details.
 
 ## Key Order Flow Metrics

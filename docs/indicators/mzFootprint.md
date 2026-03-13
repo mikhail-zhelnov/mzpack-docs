@@ -40,6 +40,8 @@ The indicator supports two independent footprint columns (Left and Right), each 
 | **Ask** | Only ask-side volume |
 | **None** | Column hidden |
 
+![Footprint styles: BidAsk, Volume, Delta](./img/footprint-styles-three-comparison.png)
+
 ## Cluster Visualization
 
 Each footprint column supports three cluster rendering styles:
@@ -186,6 +188,8 @@ With the default 200% threshold, this cluster is flagged as an imbalance.
 - The more volume traded and the more consecutive levels in a zone, the stronger that zone is
 - Zones can be canceled at session end (Break on session) or when price crosses and stays beyond the zone
 
+![Diagonal imbalance calculation on footprint](./img/footprint-imbalance-diagonal-chart.png)
+
 ### Imbalance Markers
 
 When footprint values are not visible (zoomed out), markers indicate where imbalances occur:
@@ -209,6 +213,8 @@ Project horizontal support/resistance zones from consecutive imbalance levels:
 | **S/R zones: break on session** | true | End zones at session boundaries |
 | **S/R zones: opacity, %** | 25 | Zone fill transparency |
 | **S/R zones: alert** | false | Sound alert when price approaches a zone |
+
+![Imbalance S/R zones on chart](./img/footprint-sr-zones-chart.png)
 
 ## Absorption
 
@@ -236,6 +242,8 @@ Global absorption settings:
 | **S/R zones: ended by** | ByBarHighLow | Zone termination rule |
 | **S/R zones: break on session** | true | End zones at session boundaries |
 | **S/R zones: opacity, %** | 25 | Zone fill transparency |
+
+![Absorption zones at bar extremes](./img/footprint-absorption-zones-chart.png)
 
 ## Unfinished Auction
 
@@ -303,6 +311,8 @@ Ratio Numbers classify bar activity into three states based on configurable boun
 ## Statistics Grid
 
 A detailed grid displaying up to 16 real-time metrics per bar, rendered alongside the footprint.
+
+![Statistics grid with 6 metrics per bar](./img/footprint-statistics-grid-chart.png)
 
 ### Available Metrics
 
