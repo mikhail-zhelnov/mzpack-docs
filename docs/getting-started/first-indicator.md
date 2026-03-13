@@ -35,6 +35,8 @@ For your first experience, use a **Sim101** account with a liquid futures instru
 
 The footprint chart will begin rendering on your chart once enough data is loaded.
 
+![Indicators dialog with mzFootprint selected](./img/add-indicator-dialog-settings.png)
+
 ## Step 3: Understand the Display
 
 The mzFootprint indicator overlays order flow data directly on your price bars. Each bar shows:
@@ -44,6 +46,8 @@ The mzFootprint indicator overlays order flow data directly on your price bars. 
 - **Imbalances** — highlighted cells where the bid/ask ratio exceeds a threshold, indicating aggressive buying or selling
 - **POC** — the price level with the highest volume within the bar (Point of Control)
 
+![mzFootprint first look on ES chart](./img/footprint-first-look-chart.png)
+
 ## Step 4: Configure Settings
 
 To customize the indicator:
@@ -51,6 +55,8 @@ To customize the indicator:
 1. Right-click the chart and select **Indicators**
 2. Select **mzFootprint** from the list of active indicators
 3. Adjust settings in the properties panel on the right
+
+![mzFootprint settings panel with categories](./img/footprint-settings-panel-settings.png)
 
 Key settings categories:
 
