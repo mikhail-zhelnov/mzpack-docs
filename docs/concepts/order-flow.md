@@ -60,6 +60,8 @@ MZpack processes historical data with NinjaTrader's **Tick Replay** option enabl
 
 ## Footprint (Cluster) Charts
 
+![Annotated footprint bar anatomy](./img/footprint-anatomy-annotated-chart.png)
+
 The footprint chart is the primary order flow visualization. It breaks each price bar into individual price levels and shows the volume transacted at each level, split by buying and selling activity.
 
 Each cell in a footprint is called a **cluster** — it represents a single price level within a bar. A cluster can display:
