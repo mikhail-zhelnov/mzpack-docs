@@ -21,11 +21,13 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-/* Images: natural size, shrink only if wider than container */
+/* Images: natural size, shrink only if wider than container, 5% padding left/right */
 article img {
-  max-width: 100%;
+  max-width: 90%;
   width: auto;
   height: auto;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 /* Code block styling */
