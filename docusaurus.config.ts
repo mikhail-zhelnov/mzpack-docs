@@ -12,8 +12,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://mikhail-zhelnov.github.io',
-  baseUrl: '/mzpack-docs/',
+  url: 'https://docs.mzpack.pro',
+  baseUrl: '/',
 
   organizationName: 'mikhail-zhelnov',
   projectName: 'mzpack-docs',
