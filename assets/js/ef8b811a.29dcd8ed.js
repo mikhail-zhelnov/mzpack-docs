@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkmzpack_docs=globalThis.webpackChunkmzpack_docs||[]).push([[8947],{6600(a){a.exports=JSON.parse('{"authors":[{"name":"MZpack Team","title":"Development Team","url":"https://mzpack.pro","key":"mzpack","page":null,"count":1}]}')}}]);

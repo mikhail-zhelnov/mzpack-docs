@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkmzpack_docs=globalThis.webpackChunkmzpack_docs||[]).push([[7472],{5513(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Welcome to MZpack Documentation","permalink":"/mzpack-docs/blog/2024/01/01/welcome","unlisted":false,"date":"2024-01-01T00:00:00.000Z"}]}')}}]);

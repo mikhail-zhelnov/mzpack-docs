@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://mikhail-zhelnov.github.io/mzpack-docs/blog</id>
+    <id>https://docs.mzpack.pro/blog</id>
     <title>MZpack Blog</title>
     <updated>2024-01-01T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://mikhail-zhelnov.github.io/mzpack-docs/blog"/>
+    <link rel="alternate" href="https://docs.mzpack.pro/blog"/>
     <subtitle>MZpack Blog</subtitle>
-    <icon>https://mikhail-zhelnov.github.io/mzpack-docs/img/favicon.ico</icon>
+    <icon>https://docs.mzpack.pro/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Welcome to MZpack Documentation]]></title>
-        <id>https://mikhail-zhelnov.github.io/mzpack-docs/blog/2024/01/01/welcome</id>
-        <link href="https://mikhail-zhelnov.github.io/mzpack-docs/blog/2024/01/01/welcome"/>
+        <id>https://docs.mzpack.pro/blog/2024/01/01/welcome</id>
+        <link href="https://docs.mzpack.pro/blog/2024/01/01/welcome"/>
         <updated>2024-01-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Welcome to the MZpack documentation site. Here you will find user guides, API reference, and release notes for MZpack indicators and strategies for NinjaTrader 8.]]></summary>
         <content type="html"><![CDATA[<p>Welcome to the MZpack documentation site. Here you will find user guides, API reference, and release notes for MZpack indicators and strategies for NinjaTrader 8.</p>

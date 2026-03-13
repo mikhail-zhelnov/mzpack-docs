@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkmzpack_docs=globalThis.webpackChunkmzpack_docs||[]).push([[1637],{8504(a){a.exports=JSON.parse('{"metadata":{"permalink":"/mzpack-docs/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"MZpack release notes and changelog","blogTitle":"Release Notes"}}')}}]);

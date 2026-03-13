@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkmzpack_docs=globalThis.webpackChunkmzpack_docs||[]).push([[1903],{1912(s){s.exports=JSON.parse('{"blogBasePath":"/mzpack-docs/blog","blogTitle":"Release Notes","authorsListPath":"/mzpack-docs/blog/authors"}')}}]);
