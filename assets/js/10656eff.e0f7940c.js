@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkmzpack_docs=globalThis.webpackChunkmzpack_docs||[]).push([[6508],{4194(a){a.exports=JSON.parse('{"tags":[{"label":"announcement","permalink":"/mzpack-docs/blog/tags/announcement","count":1}]}')}}]);

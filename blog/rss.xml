@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>MZpack Blog</title>
+        <link>https://mikhail-zhelnov.github.io/mzpack-docs/blog</link>
+        <description>MZpack Blog</description>
+        <lastBuildDate>Mon, 01 Jan 2024 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Welcome to MZpack Documentation]]></title>
+            <link>https://mikhail-zhelnov.github.io/mzpack-docs/blog/2024/01/01/welcome</link>
+            <guid>https://mikhail-zhelnov.github.io/mzpack-docs/blog/2024/01/01/welcome</guid>
+            <pubDate>Mon, 01 Jan 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Welcome to the MZpack documentation site. Here you will find user guides, API reference, and release notes for MZpack indicators and strategies for NinjaTrader 8.]]></description>
+            <content:encoded><![CDATA[<p>Welcome to the MZpack documentation site. Here you will find user guides, API reference, and release notes for MZpack indicators and strategies for NinjaTrader 8.</p>
+<p>This site is under active development. Check back for updates.</p>]]></content:encoded>
+            <category>announcement</category>
+        </item>
+    </channel>
+</rss>
