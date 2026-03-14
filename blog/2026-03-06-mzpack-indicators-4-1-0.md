@@ -1,5 +1,5 @@
 ---
-title: "MZpack Indicators 4.1.0"
+title: "MZpack Indicators w/ Divergence 4.1.0"
 authors: [mzpack]
 tags: [indicators]
 ---
