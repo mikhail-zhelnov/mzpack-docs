@@ -43,3 +43,34 @@ article img {
 .prism-code {
   font-size: 0.9rem;
 }
+
+/* Blog sidebar: collapsible year groups */
+details.blog-year-group {
+  margin-top: 0.5rem;
+  border: none;
+}
+
+details.blog-year-group summary {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  padding: 0;
+}
+
+details.blog-year-group summary::-webkit-details-marker {
+  display: none;
+}
+
+details.blog-year-group summary h3 {
+  display: inline;
+  margin-bottom: 0;
+}
+
+details.blog-year-group summary h3::before {
+  content: '▸ ';
+  font-size: 0.8em;
+}
+
+details.blog-year-group[open] summary h3::before {
+  content: '▾ ';
+}

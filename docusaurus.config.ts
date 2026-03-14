@@ -44,6 +44,8 @@ const config: Config = {
           showReadingTime: true,
           blogTitle: 'Release Notes',
           blogDescription: 'MZpack release notes and changelog',
+          blogSidebarCount: 'ALL',
+          blogSidebarTitle: 'All Releases',
           editUrl: 'https://github.com/mikhail-zhelnov/mzpack-docs/edit/main/',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -163,6 +165,11 @@ const config: Config = {
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} MZpack. Built with Docusaurus.`,
+    },
+    blog: {
+      sidebar: {
+        groupByYear: true,
+      },
     },
     prism: {
       theme: prismThemes.github,
