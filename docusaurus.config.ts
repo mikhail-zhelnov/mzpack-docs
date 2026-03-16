@@ -158,8 +158,12 @@ const config: Config = {
               to: '/blog',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/mikhail-zhelnov/mzpack-docs',
+              label: 'Discord',
+              href: 'https://discord.gg/ET8MBqW83d',
+            },
+            {
+              label: 'Helpdesk',
+              href: 'https://mzpack.freshdesk.com',
             },
           ],
         },
