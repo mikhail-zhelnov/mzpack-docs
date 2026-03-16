@@ -28,6 +28,18 @@ function HomepageHeader() {
             to="/api/getting-started/overview">
             API Reference
           </Link>
+          <Link
+            className="button button--secondary button--outline button--lg"
+            style={{marginLeft: '1rem'}}
+            href="https://discord.gg/ET8MBqW83d">
+            Discord
+          </Link>
+          <Link
+            className="button button--secondary button--outline button--lg"
+            style={{marginLeft: '1rem'}}
+            href="https://mzpack.freshdesk.com">
+            Helpdesk
+          </Link>
         </div>
       </div>
     </header>
