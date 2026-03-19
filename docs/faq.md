@@ -72,3 +72,7 @@ License keys are sent within the next business day after purchase, usually withi
 ### Can I transfer my license to another machine?
 
 Yes. MZpack licenses are machine-locked, so a transfer is required when you move to a new machine or replace critical hardware (motherboard, CPU). You'll need to purchase the Transfer Service at mzpack.pro. See [Licensing — Transfer](getting-started/licensing.md#transfer-to-another-machine) for the full steps.
+
+### How can I manage my subscription provided by PayPro Global?
+
+Your MZpack subscription payments are collected by **PayPro Global**. To manage your subscription, update payment details, or download invoices, visit the [PayPro Global Customer Portal](https://payproglobal.com/customer-support/).
