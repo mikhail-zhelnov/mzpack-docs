@@ -90,7 +90,7 @@ When your subscription expires, MZpack indicators will stop loading. Renew your 
 
 | Error Message | Cause | Solution |
 |---|---|---|
-| **License key is not valid** | Incorrect key format | Double-check the key and re-enter it |
+| **License key is not valid** | Incorrect key format | Double-check the key and re-enter it. Expected format: `XXXXX-XXXXX-XXXXX-XXXXX-XXXXX` |
 | **Invalid Hardware Id** | License is bound to a different machine | [Transfer your license](#transfer-to-another-machine) to the new machine |
 | **Subscription expired** | License period has ended | Renew your subscription |
 | **License cannot be verified for this machine** | Machine limit exceeded | [Transfer your license](#transfer-to-another-machine) to free up an activation slot |
