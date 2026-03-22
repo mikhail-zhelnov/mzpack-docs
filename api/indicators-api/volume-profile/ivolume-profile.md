@@ -71,6 +71,20 @@ description: "Reference for IVolumeProfile and Profile2 — volume profile data 
 | `IBHigh` | `double` | Initial Balance High |
 | `IBLow` | `double` | Initial Balance Low |
 
+## LVN/HVN Data
+
+| Property | Type | Description |
+|---|---|---|
+| `LVNs` | `IReadOnlyList<IVolumeNode>` | Low Volume Nodes detected in the profile |
+| `HVNs` | `IReadOnlyList<IVolumeNode>` | High Volume Nodes detected in the profile |
+
+### IVolumeNode
+
+| Property | Type | Description |
+|---|---|---|
+| `Price` | `double` | Price level of the node |
+| `Volume` | `long` | Volume at the node price level |
+
 ## Per-Level Data
 
 | Property | Type | Description |

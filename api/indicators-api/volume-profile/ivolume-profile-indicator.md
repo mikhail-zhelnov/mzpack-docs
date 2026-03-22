@@ -70,6 +70,23 @@ description: "Reference for the IVolumeProfileIndicator interface — access to 
 | `DevelopingTickPOC` | `bool` | Show developing Tick POC |
 | `TicksPerLevel` | `int` | Number of ticks per level |
 
+## LVN/HVN Properties
+
+| Property | Type | Description |
+|---|---|---|
+| `Detection` | `LVNHVNDetection` | Detection method — `PercentOfPOC` or `LocalExtrema` |
+| `DetectionNeighbors` | `int` | Number of neighbors on each side for LocalExtrema detection |
+| `LVNMode` | `NodeLevelMode` | LVN display mode |
+| `LVNThreshold` | `float` | LVN threshold as percent of POC volume |
+| `LVNMaxCount` | `int` | Maximum number of LVN levels |
+| `LVNEndOfSession` | `bool` | Stop naked LVN lines at session boundary |
+| `LVNLevelsValuesMode` | `LevelsValuesMode` | Values displayed at LVN levels |
+| `HVNMode` | `NodeLevelMode` | HVN display mode |
+| `HVNThreshold` | `float` | HVN threshold as percent of POC volume |
+| `HVNMaxCount` | `int` | Maximum number of HVN levels |
+| `HVNEndOfSession` | `bool` | Stop naked HVN lines at session boundary |
+| `HVNLevelsValuesMode` | `LevelsValuesMode` | Values displayed at HVN levels |
+
 ## Stacked Profiles Properties
 
 | Property | Type | Description |

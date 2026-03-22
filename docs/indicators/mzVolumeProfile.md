@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "mzVolumeProfile"
-description: "Volume profile and Market Profile (TPO) indicator with POC, Value Area, VWAP, stacked profiles, and TPO levels for NinjaTrader 8"
+description: "Volume profile and Market Profile (TPO) indicator with POC, Value Area, VWAP, LVN/HVN, stacked profiles, and TPO levels for NinjaTrader 8"
 ---
 
 # mzVolumeProfile
@@ -22,6 +22,7 @@ The mzVolumeProfile indicator displays horizontal volume distribution across pri
 - **3 independent stacked profiles** on the chart right margin
 - **Profile statistics** — Volume, Delta, High/Low, Range, POC, VAH/VAL, VWAP, Begin/End, TPOs
 - **Custom profiles** with mouse interaction — add, divide, merge, unmerge, split
+- **LVN/HVN detection** — Low Volume Nodes and High Volume Nodes with highlight, extended, and naked level modes
 - **5 color modes** — Solid, Saturation, Heatmap, GrayScaleHeatmap, Custom
 - **Profile accuracy** — Tick (precise) or Minute (fast)
 - **Working time filter** with start/stop time
@@ -58,7 +59,7 @@ The mzVolumeProfile indicator displays horizontal volume distribution across pri
 |---|---|
 | **Ladders** | Horizontal histogram bars showing volume at each price level |
 | **Area** | Filled area shape |
-| **Contour** | Outline only |
+| **Contour** | Outline only — uses the **Contour** stroke setting for line style and color |
 
 ## Profile Types
 
@@ -147,6 +148,7 @@ When Color mode is set to **Custom**, you choose between two sub-modes:
 | **Relative width** | false | Scale width of profiles relative to each other across all chart profiles |
 | **Profile: left margin, px** | 0 | Left margin in pixels |
 | **Profile: right margin, px** | 10 | Right margin in pixels |
+| **Contour** | Gray, 2px | Line style for Contour profile view |
 | **Color mode** | Solid | Solid, Saturation, Heatmap, GrayScaleHeatmap, or Custom |
 | **Custom color mode** | Percent | Percent (10 tiers) or Value (5 thresholds) |
 | **VA color** | RoyalBlue | Value Area ladder color |
@@ -192,6 +194,51 @@ When Color mode is set to **Custom**, you choose between two sub-modes:
 | **Naked** | Level extends until price touches it (then disappears) |
 | **Developing** | Level updates in real time as the profile builds |
 | **DevelopingNaked** | Developing + disappears when price touches the level |
+
+### LVN/HVN (Low/High Volume Nodes)
+
+LVN (Low Volume Nodes) and HVN (High Volume Nodes) identify price levels in the volume profile where volume is significantly low or high. These levels often act as support/resistance (HVN) or areas where price can move quickly through (LVN).
+
+#### Detection Methods
+
+| Method | Description |
+|---|---|
+| **LocalExtrema** | Detects local minima (LVN) and maxima (HVN) by comparing each price level to its N neighbors on each side |
+| **PercentOfPOC** | LVN = levels below a threshold % of POC volume; HVN = levels above a threshold % of POC volume |
+
+#### LVN/HVN Settings
+
+| Setting | Default | Description |
+|---|---|---|
+| **LVN/HVN: detection** | LocalExtrema | Detection method — LocalExtrema or PercentOfPOC |
+| **LVN/HVN: neighbors** | 7 | Number of neighbors on each side for LocalExtrema detection (1–20) |
+| **LVN: mode** | Off | LVN level mode — Off, Highlight, Extended, Naked, HighlightAndExtended, HighlightAndNaked |
+| **LVN: threshold, %** | 20 | LVN threshold as percent of POC volume (PercentOfPOC mode) |
+| **LVN: max count** | 5 | Maximum number of LVN levels to display (1–50) |
+| **LVN: end of session** | false | Stop naked LVN lines at session boundary |
+| **LVN: highlight** | Green | LVN ladder highlight color |
+| **LVN: highlight opacity** | 90 | LVN highlight transparency (1–100) |
+| **LVN: line** | Green, Dot, 2px | LVN level line style |
+| **LVN: level values** | None | Value displayed at LVN level lines — Price, Volume, Delta, or None |
+| **HVN: mode** | Off | HVN level mode — Off, Highlight, Extended, Naked, HighlightAndExtended, HighlightAndNaked |
+| **HVN: threshold, %** | 70 | HVN threshold as percent of POC volume (PercentOfPOC mode) |
+| **HVN: max count** | 5 | Maximum number of HVN levels to display (1–50) |
+| **HVN: end of session** | false | Stop naked HVN lines at session boundary |
+| **HVN: highlight** | Red | HVN ladder highlight color |
+| **HVN: highlight opacity** | 90 | HVN highlight transparency (1–100) |
+| **HVN: line** | Red, Dot, 2px | HVN level line style |
+| **HVN: level values** | None | Value displayed at HVN level lines — Price, Volume, Delta, or None |
+
+#### Node Level Modes
+
+| Mode | Description |
+|---|---|
+| **Off** | Node detection disabled |
+| **Highlight** | Highlight the node price levels on the profile ladders |
+| **Extended** | Draw level lines extending to the chart right edge |
+| **Naked** | Draw level lines that extend until price touches them |
+| **HighlightAndExtended** | Highlight ladders + extended level lines |
+| **HighlightAndNaked** | Highlight ladders + naked level lines |
 
 ### Volume Profile VWAP
 

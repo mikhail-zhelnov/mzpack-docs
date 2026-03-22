@@ -102,6 +102,32 @@ Display mode for profile levels (POC, VAH, VAL).
 | `Developing` | Developing levels shown over time |
 | `DevelopingNaked` | Developing naked levels |
 
+### NodeLevelMode
+
+**Namespace:** `MZpack`
+
+Display mode for LVN/HVN volume nodes.
+
+| Value | Description |
+|---|---|
+| `Off` | Node detection disabled |
+| `Highlight` | Highlight node price levels on the profile |
+| `Extended` | Draw level lines extending to the chart right edge |
+| `Naked` | Draw level lines that extend until price touches them |
+| `HighlightAndExtended` | Highlight + extended level lines |
+| `HighlightAndNaked` | Highlight + naked level lines |
+
+### LVNHVNDetection
+
+**Namespace:** `MZpack`
+
+Detection method for Low/High Volume Nodes.
+
+| Value | Description |
+|---|---|
+| `PercentOfPOC` | Detect nodes by volume threshold as percent of POC volume |
+| `LocalExtrema` | Detect nodes as local minima/maxima among N neighbors |
+
 ### ProfileLevelType
 
 **Namespace:** `MZpack`
