@@ -215,7 +215,7 @@ LVN (Low Volume Nodes) and HVN (High Volume Nodes) identify price levels in the 
 | **LVN: mode** | Off | LVN level mode — Off, Highlight, Extended, Naked, HighlightAndExtended, HighlightAndNaked |
 | **LVN: threshold, %** | 20 | LVN threshold as percent of POC volume (PercentOfPOC mode) |
 | **LVN: max count** | 5 | Maximum number of LVN levels to display (1–50) |
-| **LVN: end of session** | false | Stop naked LVN lines at session boundary |
+| **LVN: end of session** | true | Stop naked LVN lines at session boundary |
 | **LVN: highlight** | Green | LVN ladder highlight color |
 | **LVN: highlight opacity** | 90 | LVN highlight transparency (1–100) |
 | **LVN: line** | Green, Dot, 2px | LVN level line style |
@@ -223,7 +223,7 @@ LVN (Low Volume Nodes) and HVN (High Volume Nodes) identify price levels in the 
 | **HVN: mode** | Off | HVN level mode — Off, Highlight, Extended, Naked, HighlightAndExtended, HighlightAndNaked |
 | **HVN: threshold, %** | 70 | HVN threshold as percent of POC volume (PercentOfPOC mode) |
 | **HVN: max count** | 5 | Maximum number of HVN levels to display (1–50) |
-| **HVN: end of session** | false | Stop naked HVN lines at session boundary |
+| **HVN: end of session** | true | Stop naked HVN lines at session boundary |
 | **HVN: highlight** | Red | HVN ladder highlight color |
 | **HVN: highlight opacity** | 90 | HVN highlight transparency (1–100) |
 | **HVN: line** | Red, Dot, 2px | HVN level line style |
