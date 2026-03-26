@@ -76,3 +76,26 @@ Yes. MZpack licenses are machine-locked, so a transfer is required when you move
 ### How can I manage my subscription provided by PayPro Global?
 
 Your MZpack subscription payments are collected by **PayPro Global**. To manage your subscription, update payment details, or download invoices, visit the [PayPro Global Customer Portal](https://payproglobal.com/customer-support/).
+
+### Is MZpack ready to use immediately after installation, or is some initial setup required?
+
+The installation itself is simple — MZpack deploys all indicators, chart templates, and workspaces automatically. However, there are a few steps you need to take before things work correctly:
+
+- **Enable Tick Replay** in NinjaTrader (**Tools → Options → Market Data**), and also turn it on per chart via **Data Series → Tick Replay**. Without this, the indicators won't process historical Bid/Ask data accurately — this is the most important step.
+- **Activate your license** — an activation prompt appears on first launch.
+
+Once those are done, you can load a workspace and start analyzing right away using the pre-built chart templates. For live trading with the strategies, some additional tuning of filters, stops, and risk limits is expected — the strategies ship with default values, but they're designed to be adjusted to your instrument and style rather than used blindly out of the box.
+
+So in short: ready to analyze quickly, ready to trade after some parameter review.
+
+## Strategies
+
+### Do the built-in strategies include recommendations for specific instruments and timeframes?
+
+Each built-in strategy comes with dedicated documentation covering its logic, signals, filters, and recommended usage scenarios — but explicit per-asset or per-timeframe recommendations are not provided.
+
+For **Footprint Action**, the documentation focuses on the 10 order-flow signals and available filters, leaving instrument and timeframe selection to the trader's discretion.
+
+For **Ghost Resistance**, the documentation is more specific about market conditions: the strategy performs best during rotational, range-bound sessions with clearly defined support/resistance levels and frequent stop-runs. Strong trend days and news events are flagged as unfavorable conditions.
+
+Both strategies are designed for liquid futures markets, making instruments like ES or NQ natural candidates — but no default configuration is tied to a specific symbol or bar type. Finding the right combination for your setup will require your own testing and optimization.
