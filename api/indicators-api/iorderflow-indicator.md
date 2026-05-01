@@ -61,8 +61,8 @@ Configuration for order flow calculation and tape reconstruction.
 | Property | Type | Default | Description |
 |---|---|---|---|
 | `OrderflowCalculationMode` | `OrderflowCalculationMode` | — | How bid/ask volumes are assigned to trades |
-| `ReconstructTape` | `bool` | — | Enable tape reconstruction (aggregates individual trades into big trades) |
-| `ReconstructTape_UseTimestampsOnly` | `bool` | — | Use only timestamps for reconstruction (ignore DOM pressure/support) |
+| `ReconstructTape` | `bool` | `true` | Enable tape reconstruction (aggregates individual trades into big trades) |
+| `ReconstructTape_UseTimestampsOnly` | `bool` | `false` | Use only timestamps for tape reconstruction; Level 1 (best bid/ask) events are ignored, including for live data. Trades with equal timestamps are merged. Enable for exact match between reconstructed historical and live data. Iceberg detection, DOM pressure, and DOM support are unavailable when enabled |
 | `OrderflowApplyMode` | `OrderflowApplyMode` | — | When mode changes take effect |
 | `IcebergAlgo` | `IcebergAlgo` | — | Iceberg detection algorithm |
 | `ReconstructTapeChangedUI` | `bool` | — | UI state flag: tape reconstruction setting changed |

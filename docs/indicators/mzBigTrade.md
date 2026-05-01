@@ -408,14 +408,15 @@ See [Sound Files](/docs/getting-started/sound-files) for the full list of pre-in
 
 ## Reconstruct Tape Mode
 
-The MZpack order flow core reconstructs individual tick trades into aggregated trades. The **Reconstruct tape** option (enabled by default) controls this behavior.
+The MZpack order flow core reconstructs individual tick trades into aggregated trades. The settings below (group **Orderflow**) control reconstruction behavior.
 
-The **'Reconstruct tape' apply** setting (under Orderflow) is specific to mzBigTrade:
+| Setting | Default | Description |
+|---|---|---|
+| **Reconstruct tape** | true | Reconstruct tape using timestamps and Level 1 (best bid/ask) events. Required for Iceberg detection, DOM pressure, and DOM support |
+| **Reconstruct tape: timestamps only** | false | Use only timestamps for reconstruction — Level 1 (best bid/ask) events are ignored, including for live data, and trades with equal timestamps are merged. Enable to get an exact match between reconstructed historical and reconstructed live data. Iceberg detection, DOM pressure, and DOM support are unavailable when enabled |
+| **'Reconstruct tape' apply** | ChartReload | `ChartReload` — reload the chart to apply changes (minimizes memory). `OnTheFly` — apply changes without reloading (requires more memory). mzBigTrade only |
 
-- **ChartReload** (default) — reload the chart to apply changes to the Reconstruct tape option. Use this to minimize memory consumption
-- **OnTheFly** — apply Reconstruct tape changes on the fly without reloading. Requires more memory
-
-**Note:** Disabling Reconstruct tape or using the OnTheFly method significantly increases memory consumption. Iceberg detection, DOM pressure, and DOM support require Reconstruct tape to be enabled with timestamps-only mode disabled.
+**Note:** Disabling Reconstruct tape or using the OnTheFly method significantly increases memory consumption. Iceberg detection, DOM pressure, and DOM support require Reconstruct tape to be enabled **with timestamps-only mode disabled**.
 
 ## Non-Bid/Ask Data Support
 

@@ -419,6 +419,17 @@ Built-in delta divergence signal detection (licensed builds only).
 
 For full divergence analysis, see the dedicated [mzDeltaDivergence](mzDeltaDivergence.md) indicator.
 
+## Reconstruct Tape Mode
+
+The MZpack order flow core reconstructs individual tick trades into aggregated trades. The settings below (group **Orderflow**) control reconstruction behavior.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Reconstruct tape** | true | Reconstruct tape using timestamps and Level 1 (best bid/ask) events. Required for Iceberg detection, DOM pressure, and DOM support |
+| **Reconstruct tape: timestamps only** | false | Use only timestamps for reconstruction — Level 1 (best bid/ask) events are ignored, including for live data, and trades with equal timestamps are merged. Enable to get an exact match between reconstructed historical and reconstructed live data. Iceberg detection, DOM pressure, and DOM support are unavailable when enabled |
+
+**Note:** Iceberg detection, DOM pressure, and DOM support require Reconstruct tape to be enabled **with timestamps-only mode disabled**.
+
 ## Use Cases for ES
 
 The following presets demonstrate common mzFootprint configurations for E-mini S&P 500 (ES). Each use case lists only settings that differ from defaults.

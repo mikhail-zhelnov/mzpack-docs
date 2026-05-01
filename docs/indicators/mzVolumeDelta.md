@@ -61,7 +61,7 @@ Iceberg orders are large hidden orders that are executed in smaller visible port
 | **Hard** | Strict detection — requires strong evidence of iceberg behavior |
 | **Soft** | Relaxed detection — flags more potential iceberg activity |
 
-**Note:** The **Reconstruct tape** option (under General settings) must be enabled for iceberg features to work. When Reconstruct tape is off, the Show setting must be set to **Volume** (icebergs are unavailable).
+**Note:** Iceberg features require the **Reconstruct tape** option enabled **with timestamps-only mode disabled** (see [Reconstruct Tape Mode](#reconstruct-tape-mode)). When these conditions are not met, the Show setting must be set to **Volume** (icebergs are unavailable).
 
 ## Delta Mode
 
@@ -211,6 +211,17 @@ The indicator exposes 5 NinjaScript output plots that can be used by other indic
 | **Cumulative Delta** | Running cumulative delta |
 
 Set any non-transparent color for a plot to display the current value marker on the chart scale. Use the **Scale plots** toggles in Presentation settings to include specific plots in the chart scale calculation.
+
+## Reconstruct Tape Mode
+
+The MZpack order flow core reconstructs individual tick trades into aggregated trades. The settings below (group **Orderflow**) control reconstruction behavior.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Reconstruct tape** | true | Reconstruct tape using timestamps and Level 1 (best bid/ask) events. Required for Iceberg detection, DOM pressure, and DOM support |
+| **Reconstruct tape: timestamps only** | false | Use only timestamps for reconstruction — Level 1 (best bid/ask) events are ignored, including for live data, and trades with equal timestamps are merged. Enable to get an exact match between reconstructed historical and reconstructed live data. Iceberg detection, DOM pressure, and DOM support are unavailable when enabled |
+
+**Note:** Iceberg detection requires Reconstruct tape to be enabled **with timestamps-only mode disabled**.
 
 ## Non-Bid/Ask Data Support
 
