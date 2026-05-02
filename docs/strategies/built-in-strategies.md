@@ -29,6 +29,45 @@ Each signal can be individually enabled or disabled. Every signal has its own ba
 | **Volume Sequencing** | Multiple price levels with increasing volume, indicating large trader activity |
 | **Hammer with Absorption** | Absorption (trapped sellers/buyers) detected in the wick of a hammer candle pattern |
 
+### Signal-specific parameters
+
+Every signal exposes the same **common controls** — Enable, Mandatory, Override filters, Min bar Volume, Min bar Delta, Min bar Delta % — so the tables below list only the extras specific to each signal. Delta Divergence, Delta Tail, Delta Surge/Drop, Delta Trap, and Above/Below POC have no extras and are configured entirely with the common controls.
+
+#### Delta Flip
+
+| Setting | Description | Range | Default |
+|---|---|---|---|
+| Precision | Sensitivity of the delta-flip detection | 1–100 | 40 |
+
+#### Delta Slingshot
+
+| Setting | Description | Range | Default |
+|---|---|---|---|
+| Lookback bars | Number of prior bars compared to the closed bar (closed bar excluded) | 1–100 | 3 |
+
+#### Stacked Imbalances
+
+| Setting | Description | Range | Default |
+|---|---|---|---|
+| Stacked Imbalances: reverse | Reverse the direction of the signal | bool | Off |
+| Imbalances: % | Imbalance percentage threshold | ≥ 0.01 | 68 |
+| Number | Minimum number of imbalances in the stack (1 = single imbalance) | ≥ 1 | 3 |
+| Volume filter | Minimum total volume in the imbalance S/R zone | ≥ 0 | 0 |
+| Above/below POC | Require the stack to be on the correct side of the POC | bool | On |
+
+#### Volume Sequencing
+
+| Setting | Description | Range | Default |
+|---|---|---|---|
+| Levels | Number of consecutive price levels with increasing volume required | 2–5 | 4 |
+
+#### Hammer with Absorption
+
+| Setting | Description | Range | Default |
+|---|---|---|---|
+| Wick % | Minimum wick size as percentage of bar range | 1–100 | 35 |
+| POC | Require absorption to be at/above/below the POC accordingly | bool | On |
+
 ### Bar Filters
 
 Each signal applies bar-level filters to the bars it analyzes. The bars that filters apply to depend on the signal:
