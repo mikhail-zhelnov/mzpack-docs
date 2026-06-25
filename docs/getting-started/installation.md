@@ -21,6 +21,10 @@ Available editions:
 | **MZpack FREE** | Free edition with limited indicator features |
 | **MZpack Indicators TRIAL** | Full-featured 14-day trial |
 
+:::note
+Your browser, Windows SmartScreen, or antivirus may flag the installer as "suspicious" or potentially containing malware. This is a **false positive** caused by the installer's code protection, not an actual threat. Choose **Keep** / **Download anyway** to continue. See [Why does my browser flag the installer?](../faq.md#why-does-my-browser-or-antivirus-flag-the-mzpack-installer) in the FAQ for details.
+:::
+
 ## Install
 
 1. Close NinjaTrader 8 if it is running

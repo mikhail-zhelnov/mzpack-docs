@@ -50,6 +50,20 @@ There are three ways:
 2. **Chart overlay** — the current version is displayed in the bottom-right corner of the chart. You can hide this via the indicator's **General → Version** checkbox.
 3. **Label property** — the **Label** property shown in the indicator setup dialog reflects the version from when the indicator was first added to the chart, not the currently installed version. Do not rely on it to check your current version.
 
+### Why does my browser or antivirus flag the MZpack installer?
+
+When you download the installer (`.exe`), your browser, Windows SmartScreen, or antivirus may warn that the file is "suspicious" or may contain malware. This is a **false positive** — the file is safe.
+
+The installer is digitally signed with a Code Signing certificate that verifies it genuinely comes from us and has not been modified. It is also protected with commercial code-protection software that encrypts and obfuscates the executable to prevent tampering and unauthorized redistribution. Because malware sometimes uses similar techniques, automated scanners (Google Safe Browsing, Windows SmartScreen, some AV engines) may flag protected installers based on heuristics — not because any actual threat was found.
+
+You can verify the signature yourself: right-click the downloaded file → **Properties → Digital Signatures** to confirm it is signed by us.
+
+What you can do:
+
+1. Choose **Keep** / **Download anyway** to complete the download.
+2. Download only from official MZpack sources — [mzpack.pro](https://mzpack.pro) or links posted in our official channels. Never use third-party mirrors.
+3. If your antivirus quarantines the file, add an exception for the MZpack installer.
+
 ## Licensing
 
 ### Where can I find my license key?
