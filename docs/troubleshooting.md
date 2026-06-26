@@ -76,6 +76,21 @@ Without Tick Replay enabled, historical bars lack the tick-by-tick detail needed
 
 Some features — such as iceberg detection and DOM pressure — require live data because NinjaTrader does not provide historical Level 2 data. These features will always show data only for bars built in real time.
 
+### File access errors or missing tick data (OneDrive / cloud-synced folders)
+
+If you see errors like `System.IO.IOException: The process cannot access the file '...db\tick\...ncd' because it is being used by another process` or "Unable to save data," your NinjaTrader 8 data folder is most likely inside a OneDrive-synced folder.
+
+By default NinjaTrader stores its database under `Documents\NinjaTrader 8`. If Windows has redirected your **Documents** folder into OneDrive, NinjaTrader deletes and rewrites `.ncd` files every time it saves market data — while OneDrive is holding the same files open for syncing. The two processes collide, the save fails, and tick data can be left incomplete or corrupted.
+
+This is **not an MZpack issue**. NinjaTrader does not support running its database from cloud-synced folders (OneDrive, Dropbox, Google Drive) for this reason. It also directly affects backtesting: MZpack strategies require Tick Replay with downloaded tick data (see [Footprint shows no data](#footprint-shows-no-data-or-all-zeros) above), and if those `.ncd` files can't be saved, backtests may return no trades or unreliable results.
+
+**How to fix it:**
+
+1. **Recommended — move Documents out of OneDrive.** Open **OneDrive → Settings → Backup / Manage backup** and turn off backup for the **Documents** folder. Windows returns Documents to your local profile (`C:\Users\<you>\Documents`) and NinjaTrader runs locally.
+2. **Or exclude only NinjaTrader from syncing.** If you want to keep Documents in OneDrive, open **OneDrive → Settings → Account → Choose folders** and uncheck `Documents\NinjaTrader 8`.
+
+After either change, restart NinjaTrader, confirm it is reading from the local (non-OneDrive) folder, and re-download tick data for the instruments and dates you backtest, since some data may not have been saved while the conflict was active.
+
 ## Getting Help
 
 If you can't resolve your issue with the steps above, contact support via the helpdesk at [mzpack.pro](https://mzpack.pro).
