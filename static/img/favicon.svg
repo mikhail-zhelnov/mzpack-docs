@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MZpack docs icon">
+  <rect width="64" height="64" rx="14" fill="#10b860"/>
+  <path d="M16 45V19h7l9 13 9-13h7v26h-7V30l-9 12-9-12v15z" fill="#ffffff"/>
+  <path d="M38 45v-6l10-14h-9v-6h18v6L47 39h10v6z" fill="#ffffff"/>
+</svg>

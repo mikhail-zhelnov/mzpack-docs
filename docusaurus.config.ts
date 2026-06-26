@@ -6,7 +6,7 @@ const config: Config = {
   clientModules: ['./src/clientModules/imageZoom.js'],
   title: 'MZpack',
   tagline: 'Order flow analysis and algorithmic trading for NinjaTrader 8',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   future: {
     v4: true,
@@ -90,11 +90,10 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'MZpack',
       logo: {
         alt: 'MZpack Logo',
-        src: 'img/logo.svg',
-        srcDark: 'img/logo-dark.svg',
+        src: 'img/logo.png',
+        srcDark: 'img/logo-dark.png',
       },
       items: [
         {
