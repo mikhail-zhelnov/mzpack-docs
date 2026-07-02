@@ -125,7 +125,7 @@ All samples are included in the MZpack source code wrapped in `#if APISAMPLE` bl
 
 ## Source Code
 
-The [Source Code](../source-code/footprint-action.md) section provides developer-level walkthroughs of the 4 built-in strategy source files — class structure, indicator wiring, signal implementations, decision tree construction, and data export schemas:
+The [Source Code](../source-code/overview.md) section provides developer-level walkthroughs of the 4 built-in strategy source files — class structure, indicator wiring, signal implementations, decision tree construction, and data export schemas. For where these files live on disk, see [Source Code Location](source-code-location.md).
 
 | Strategy | What It Demonstrates |
 |---|---|
