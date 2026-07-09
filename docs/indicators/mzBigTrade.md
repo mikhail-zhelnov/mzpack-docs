@@ -14,9 +14,10 @@ The mzBigTrade indicator detects and visualizes significant trades in the order 
 
 - **2 presentation modes** — Default (markers on bars) and Tape (visual tape)
 - **4 marker types** — Line, Bubble, Box, Bar
-- **6 marker positions** — First, Last, Hi, Lo, POC, Stacked
+- **7 marker positions** — First, Last, Hi, Lo, POC, Stacked, StackedByTime
 - **2 filter types** — Auto (statistical) and Manual (fine-grained)
-- **Iceberg order detection** with Hard/Soft algorithms (real-time only)
+- **Iceberg order detection** — Hard/Soft algorithms (real-time only) and the Tape algorithm, which also works on historical bars
+- **Click to stack trades by time** — lay a bar's trades out as a time-ordered column
 - **DOM pressure analysis** — liquidity pushing/pulling on best bid/ask
 - **DOM support detection** — Market-Limit order identification
 - **Aggression (sweep) filter** — trades spanning multiple price levels
@@ -58,14 +59,27 @@ Controls where the marker is placed relative to the trade's price range:
 | **Lo** | Lowest price of the trade |
 | **POC** | Point of Control — price level with the most volume in the trade |
 | **Stacked** | Trades organized vertically as a chain within each bar (see Stacked Tape below) |
+| **StackedByTime** | Trades of each bar laid out as a single time-ordered column (see Stacked by Time below) |
 
-**Note:** Stacked position is available for Bubble and Box markers only.
+**Note:** Stacked and StackedByTime positions are available for Bubble and Box markers only.
 
 ### Stacked Tape
 
 When Marker position is set to **Stacked**, trades are organized vertically by bar like a chain, in the order they arrive from the order flow. New buy trades are added at the top, and new sell trades at the bottom of each chain.
 
 Stacked tape is useful when working with non-reconstructed tape or when there are many small trades for the instrument. Recommended for use on tick-based timeframes (e.g., 20 Ticks).
+
+### Stacked by Time
+
+When Marker position is set to **StackedByTime**, all trades of a bar are laid out as a single column ordered by trade time, earliest first. Buy and sell trades share the same column — unlike **Stacked**, where buys grow upward and sells grow downward from the trade price. This makes the sequence of the bar's order flow easy to read.
+
+**Stacked by time: from bar edge** (default: true) anchors the column at the bar edge it grows from — the high for an up bar, the low for a down bar — instead of at the trade price.
+
+#### Click to Stack
+
+Instead of switching Marker position permanently, you can stack a single bar on demand. With **Click: stack trades by time** enabled (default), left-click a bar holding two or more trades to temporarily lay its trades out as a time-ordered column. Click any of its trades again to revert.
+
+Click-to-stack is available in Default presentation mode, with Bubble, Box, or Bar markers, and with Marker position set to First, Last, Hi, Lo, or POC. The stacked state is temporary — it is not saved and resets when the chart or script reloads.
 
 ## Filtering
 
@@ -102,14 +116,36 @@ This filter identifies market participants trading with significant rounded size
 
 ## Iceberg Detection
 
-Iceberg orders are large hidden orders executed in smaller visible portions. The indicator detects iceberg activity using two algorithms. Iceberg detection works on **live or Market Replay data only** — NinjaTrader 8 does not provide the Level 2 data needed for iceberg detection on historical bars.
+Iceberg orders are large hidden orders executed in smaller visible portions. The indicator detects iceberg activity using three algorithms.
 
-| Algorithm | Description |
-|---|---|
-| **Hard** | Uses volumes on best bid/ask price levels to calculate the size of the hidden liquidity. Strict detection requiring strong evidence of iceberg behavior |
-| **Soft** | Adds positive DOM pressure (if any) to the iceberg size calculated by the Hard algorithm. Relaxed detection that flags more potential iceberg activity |
+| Algorithm | Data required | Description |
+|---|---|---|
+| **Hard** | Live or Market Replay | Uses volumes on best bid/ask price levels to calculate the size of the hidden liquidity. Strict detection requiring strong evidence of iceberg behavior |
+| **Soft** | Live or Market Replay | Adds positive DOM pressure (if any) to the iceberg size calculated by the Hard algorithm. Relaxed detection that flags more potential iceberg activity |
+| **Tape** | Any, including historical | Estimates hidden refilling-iceberg volume from the trade's fill composition rather than from the order book |
+
+Hard and Soft read the order book, so they work on **live or Market Replay data only** — NinjaTrader 8 does not provide the Level 2 data needed to reconstruct the book on historical bars. The Tape algorithm has no such limitation.
 
 When iceberg volume is detected, the trade marker is rendered with a special border (Iceberg color). The iceberg border is shown if the iceberg value is greater than or equal to the iceberg filter threshold, even if the Iceberg filter is disabled.
+
+### Tape Algorithm
+
+The Tape algorithm looks at how a trade was filled. A refilling iceberg leaves a distinctive trace: a run of consecutive fills of identical size at the same price, as the hidden order is replenished after each hit. That run is called a **clip**.
+
+Two thresholds define what counts as a clip:
+
+- **Iceberg: tape min clip** (default: 20) — the minimum identical-fill size to consider.
+- **Iceberg: tape min refills** (default: 3) — the minimum number of consecutive identical fills that qualify as a refilling iceberg.
+
+For a confirmed clip of `N` fills of size `C`, the hidden volume is estimated as `(N − 1) × C`, plus the trailing partial fill when it does not exceed the clip size. The result is deduplicated against the order-book estimate at the trade's start price, so enabling Tape alongside Hard or Soft does not double-count the same liquidity.
+
+Because it reads the stored fill composition of an already-reconstructed trade, the Tape algorithm works on cold historical data where the order book is unavailable. **Reconstruct tape** must be enabled with timestamps-only mode disabled.
+
+**Tape** is an independent toggle, not a value of the **Iceberg: algorithm** setting — you can run it on its own or together with Hard/Soft. Its result is written into the same iceberg volume, so the iceberg filter threshold, **Marker size relative to = Iceberg**, the Iceberg Volume Profile, and the pop-up all use it unchanged. Changing a Tape parameter recalculates the chart on the fly, with no reload.
+
+:::note
+The Tape algorithm is not available in the free version.
+:::
 
 ## DOM Pressure
 
@@ -202,6 +238,14 @@ A floating window that shows all parameters of a trade when hovering over its ma
 
 Enable **Order ticks** to sort tick data by volume within the pop-up. When disabled, ticks are ordered by time as they arrive in the order flow.
 
+When the Tape iceberg algorithm is enabled and a clip is detected, the pop-up adds a line describing it:
+
+```
+Clip: 5 x 57 @7510.5 (+14)
+```
+
+This reads as five refills of 57 contracts each at price 7510.5. The optional `(+14)` suffix is a trailing partial refill.
+
 ## Use Cases for ES
 
 The following presets demonstrate common mzBigTrade configurations for E-mini S&P 500 (ES). Each use case lists only settings that differ from defaults.
@@ -237,6 +281,22 @@ Reveal hidden liquidity at key price levels. Requires real-time or Market Replay
 | **Trades Volume Profile: Show** | true |
 
 Markers sized by iceberg volume reveal where hidden orders absorb price movement. Enable Trades Volume Profile to build an Iceberg VP — a volume profile based on detected iceberg sizes. Clusters of icebergs at a price level indicate strong hidden support/resistance.
+
+### Historical Iceberg Detection (Tape)
+
+Find refilling icebergs on historical bars, where the order book is unavailable.
+
+| Setting | Value |
+|---|---|
+| **Type** | Manual |
+| **Iceberg: enable** | true |
+| **Iceberg: tape** | true |
+| **Iceberg: tape min clip** | 20 |
+| **Iceberg: tape min refills** | 3 |
+| **Marker size relative to** | Iceberg |
+| **Trades Volume Profile: Show** | true |
+
+Unlike the Hard/Soft preset above, this configuration needs no real-time data — the Tape algorithm reconstructs hidden volume from each trade's fill composition. Lower **min refills** to 2 to catch shorter clips at the cost of more false positives; raise **min clip** on liquid instruments where small identical fills occur by chance. Hover a marker to see the detected clip.
 
 ### Aggressive Sweeps / Stop Runs
 
@@ -289,6 +349,10 @@ Auto mode statistically selects the 75 largest trades (5 days × 15/day). Zoom i
 
 ## Settings Reference
 
+:::note
+Default values apply to newly added indicator instances only. Saved templates and workspaces keep the values stored in them, so a setting whose default changed in a new release keeps its old value until you re-add the indicator or change the setting by hand.
+:::
+
 ### Filters
 
 | Setting | Default | Description |
@@ -303,6 +367,9 @@ Auto mode statistically selects the 75 largest trades (5 days × 15/day). Zoom i
 | **Iceberg: enable** | false | Enable iceberg volume filtering (Manual mode only) |
 | **Iceberg: algorithm** | Hard | Iceberg detection algorithm — Hard or Soft (Manual mode only) |
 | **Iceberg: min volume** | 10 | Minimum iceberg volume (Manual mode only) |
+| **Iceberg: tape** | false | Estimate hidden refilling-iceberg volume from the trade's fill composition. Complements the DOM-based Hard/Soft algorithm, including where the order book is unavailable (shown when Iceberg: enable is on) |
+| **Iceberg: tape min clip** | 20 | Minimum identical-fill size to count as a clip (shown when Iceberg: tape is on) |
+| **Iceberg: tape min refills** | 3 | Minimum number of consecutive identical fills to qualify as a refilling iceberg (shown when Iceberg: tape is on) |
 | **DOM pressure: enable** | false | Enable DOM pressure filtering (Manual mode only) |
 | **DOM pressure: min abs.volume** | 5 | Minimum absolute DOM pressure volume (Manual mode only) |
 | **DOM pressure: max abs.volume** | -1 | Maximum absolute DOM pressure volume, -1 = unlimited (Manual mode only) |
@@ -343,7 +410,9 @@ Extra filters are applied on top of the main filters.
 | **Marker size relative to** | Volume | What value determines marker size — Volume, Iceberg, DOMpressure, or DOMsupport (Default mode only) |
 | **Max number of trades in chart frame** | 100 | Maximum trades displayed in the visible chart frame, range: 1–800. Has priority over all filters (Default mode only, Volume marker base only) |
 | **Trade marker** | Bubble | Marker shape — Line, Bubble, Box, or Bar |
-| **Marker position** | Last | Marker placement — First, Last, Hi, Lo, POC, or Stacked (Default mode only, non-Bar markers) |
+| **Marker position** | Last | Marker placement — First, Last, Hi, Lo, POC, Stacked, or StackedByTime (Default mode only, non-Bar markers) |
+| **Stacked by time: from bar edge** | true | Anchor the Stacked-by-time column at the bar edge it grows from (high for up bars, low for down bars) instead of the trade price. Shown when the StackedByTime position or click-to-stack is active |
+| **Click: stack trades by time** | true | Left-click a bar with 2+ trades to temporarily lay its trades out as a time-ordered column. Not saved on reload (Default mode only, Bubble/Box/Bar markers at First/Last/Hi/Lo/POC) |
 | **Buy line** | LimeGreen, 6px | Buy-side line style (Line marker only) |
 | **Sell line** | Red, 6px | Sell-side line style (Line marker only) |
 | **Max line length** | 300 | Maximum line length in chart bars (Line marker only) |
@@ -365,14 +434,14 @@ Extra filters are applied on top of the main filters.
 | **Volume text: position** | Inside | Volume label placement — Inside, OutsideLeft, OutsideRight, or Off |
 | **Volume text: auto-scale** | true | Automatically adjust volume text size based on chart zoom |
 | **Volume text: font** | Montserrat, 12pt | Font for volume labels |
-| **Buy volume in shape color** | White | Volume text color inside buy markers (Bubble/Box/Bar markers) |
-| **Sell volume in shape color** | White | Volume text color inside sell markers (Bubble/Box/Bar markers) |
+| **Buy volume in shape color** | ForestGreen | Volume text color inside buy markers (Bubble/Box/Bar markers) |
+| **Sell volume in shape color** | Red | Volume text color inside sell markers (Bubble/Box/Bar markers) |
 
 ### Trades Volume Profile
 
 | Setting | Default | Description |
 |---|---|---|
-| **Show** | false | Display the trades volume profile |
+| **Show** | true | Display the trades volume profile |
 | **Width** | 200 | Profile width in pixels, range: 100–2000 |
 | **Position** | Left | Profile placement — Left, Right, or RightOnChartMargin |
 | **Margin** | 0 | Profile margin in pixels, range: 0–2000 |

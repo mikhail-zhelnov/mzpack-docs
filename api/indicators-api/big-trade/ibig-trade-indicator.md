@@ -39,6 +39,9 @@ description: "Reference for the IBigTradeIndicator interface — access to filte
 |---|---|---|
 | `IcebergFilterEnable` | `bool` | Enable iceberg detection filter |
 | `IcebergFilterMin` | `double` | Minimum iceberg volume |
+| `IcebergTapeEnable` | `bool` | Enable the Tape iceberg algorithm, which estimates hidden volume from the trade's fill composition |
+| `TapeMinClip` | `long` | Tape algorithm: minimum identical-fill size to count as a clip |
+| `TapeMinRefills` | `int` | Tape algorithm: minimum number of consecutive identical fills to qualify as a refilling iceberg |
 
 ## DOM Pressure and Support Filters
 

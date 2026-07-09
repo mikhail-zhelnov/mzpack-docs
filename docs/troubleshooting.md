@@ -74,7 +74,7 @@ Common causes:
 
 Without Tick Replay enabled, historical bars lack the tick-by-tick detail needed for accurate order flow reconstruction. Enable Tick Replay in your Data Series settings for consistent results between historical and real-time data.
 
-Some features — such as iceberg detection and DOM pressure — require live data because NinjaTrader does not provide historical Level 2 data. These features will always show data only for bars built in real time.
+Some features — DOM pressure, DOM support, and the Hard/Soft iceberg algorithms — require live data because NinjaTrader does not provide historical Level 2 data. These features will always show data only for bars built in real time. The exception is mzBigTrade's [Tape iceberg algorithm](indicators/mzBigTrade.md#tape-algorithm), which estimates hidden volume from each trade's fill composition and therefore also works on historical bars.
 
 ### File access errors or missing tick data (OneDrive / cloud-synced folders)
 
