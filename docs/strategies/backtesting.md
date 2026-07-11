@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Backtesting"
-description: "Backtest MZpack strategies in NinjaTrader 8 — Strategy Analyzer with Tick Replay for order flow, and Market Replay for Level 2 / DOM strategies."
+description: "Backtest MZpack strategies in NinjaTrader 8 — Strategy Analyzer with Tick Replay for order flow, and Market Replay for bid/ask-volume and order-book strategies."
 ---
 
 # Backtesting
@@ -10,20 +10,21 @@ MZpack strategies process the market **tick by tick** — their logic runs off N
 
 There are two paths:
 
-- **Strategy Analyzer + Tick Replay** — for order flow strategies that need only Level 1 (historical Bid/Ask) data.
-- **Market Replay (Playback)** — for strategies that need Level 2 (the order book / DOM), which NinjaTrader does not store historically.
+- **Strategy Analyzer + Tick Replay** — for order flow strategies that need only historical trades and best Bid/Ask *prices*.
+- **Market Replay (Playback)** — for strategies that need data Tick Replay cannot reconstruct: best Bid/Ask *volumes* or the full order book (Level 2 / DOM), neither of which NinjaTrader stores historically.
 
 ## Choosing your path
 
-| Strategy uses… | Data needed | Backtest path |
+| Strategy uses… | Data required | Backtest path |
 |---|---|---|
-| Footprint, delta, volume profile, big trades (Level 1) | Historical Bid/Ask | **Strategy Analyzer + Tick Replay** |
-| mzMarketDepth, iceberg (Hard/Soft), DOM pressure/support, Smart/Predatory trades (Level 2) | Order book (DOM) | **Market Replay (Playback)** or live |
+| Footprint, delta, volume profile, big trades | Historical trades + best Bid/Ask prices | **Strategy Analyzer + Tick Replay** |
+| Iceberg (Hard/Soft), DOM pressure/support, Smart/Predatory trades | Best Bid/Ask **volumes** (full Level 1 quote sizes) | **Market Replay (Playback)** or live |
+| mzMarketDepth | Full order book (Level 2 / DOM) | **Market Replay (Playback)** or live |
 
-The dividing line is Level 1 vs Level 2. NinjaTrader can *replay* historical Level 1 (trades and best bid/ask) through Tick Replay, but it keeps **no** historical order book — so any Level 2 feature can only be exercised against Market Replay or live data. See [Order Flow — Data Levels](../concepts/order-flow.md#data-levels) for the distinction.
+What separates the paths is what Tick Replay can reconstruct. Tick Replay replays historical **trades and best bid/ask prices** — enough for footprint, delta, volume profile, and big trades. It does **not** reconstruct the **volumes** resting at the best bid/ask, nor the full order book. So features that need bid/ask volumes (iceberg Hard/Soft, DOM pressure/support, Smart/Predatory trades) or the full depth (mzMarketDepth) can only be exercised against Market Replay or live data. See [Order Flow — Data Levels](../concepts/order-flow.md#data-levels) for the distinction.
 
 :::note
-mzBigTrade's [Tape iceberg algorithm](../indicators/mzBigTrade.md#tape-algorithm) is the exception on the Level 2 side: it derives hidden volume from each trade's fill composition instead of the order book, so it also works on historical bars under Tick Replay.
+mzBigTrade's [Tape iceberg algorithm](../indicators/mzBigTrade.md#tape-algorithm) is the exception: it derives hidden volume from each trade's fill composition instead of from bid/ask volumes or the order book, so it also works on historical bars under Tick Replay.
 :::
 
 ## Prerequisites: Tick Replay
@@ -41,11 +42,11 @@ Without Tick Replay, order flow indicators cannot reconstruct historical data �
 
 This is the primary path for order flow strategies.
 
-### 1. Make the strategy backtest-ready
+### 1. Enable the Backtesting parameter
 
-MZpack strategies are **not active in the historical state by default**, but the Strategy Analyzer runs in the historical state only. You must therefore tell the strategy to work on historical bars:
+MZpack strategies are **not active in the historical state by default**, but the Strategy Analyzer runs in the historical state only. The strategy's **Backtesting** parameter is what lets it run on historical data — without it the strategy stays idle in the Analyzer and produces no trades. Enable it one of two ways:
 
-- **From the UI** — enable the **MZpack: backtesting** option in the strategy settings window.
+- **From the UI** — turn on the **Backtesting** parameter (MZpack category) in the strategy settings window.
 - **From code** — set `EnableBacktesting = true` in `State.SetDefaults`:
 
 ```csharp
@@ -90,7 +91,7 @@ For volume profile / footprint work, the two must agree: **Tick** accuracy requi
 
 ## Path 2 — Market Replay (Playback)
 
-Use Market Replay when the strategy relies on Level 2 data — **mzMarketDepth**, the **Hard/Soft iceberg** algorithms, **DOM pressure/support**, or **Smart/Predatory** trade detection. These work only on live or Market Replay data, because NinjaTrader provides no historical order book. (The one Level-2-flavored exception is mzBigTrade's [Tape algorithm](../indicators/mzBigTrade.md#tape-algorithm), which works historically under Tick Replay.)
+Use Market Replay when the strategy relies on data Tick Replay cannot reconstruct — the **volumes** at the best bid/ask (**Hard/Soft iceberg** algorithms, **DOM pressure/support**, **Smart/Predatory** trade detection) or the full order book (**mzMarketDepth**). These work only on live or Market Replay data, because NinjaTrader stores neither historically. (The exception is mzBigTrade's [Tape algorithm](../indicators/mzBigTrade.md#tape-algorithm), which works historically under Tick Replay.)
 
 At a high level, backtesting against Market Replay means:
 
@@ -101,7 +102,7 @@ At a high level, backtesting against Market Replay means:
 For the full mechanics of downloading replay data and using the Playback connection, see NinjaTrader's own documentation: [Playback Connection](https://ninjatrader.com/support/helpguides/nt8/playback_connection.htm).
 
 :::note
-The Strategy Analyzer runs on historical data only, so Level 2 strategies **cannot** be backtested there — Market Replay (or live) is the only way to exercise their order-book logic.
+The Strategy Analyzer runs on historical data only, so these strategies **cannot** be backtested there — Market Replay (or live) is the only way to exercise bid/ask-volume and order-book logic.
 :::
 
 ## Troubleshooting
