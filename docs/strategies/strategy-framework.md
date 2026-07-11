@@ -241,16 +241,9 @@ Risk management tracks both realized and unrealized PnL. An open position's floa
 
 ## Backtesting
 
-MZpack strategies can be backtested in the NinjaTrader Strategy Analyzer:
+MZpack strategies can be backtested in the NinjaTrader **Strategy Analyzer** (order flow strategies, using Tick Replay) or against a **Market Replay** connection (Level 2 / DOM strategies). Enable the **MZpack: backtesting** option — or set `EnableBacktesting = true` in code — so the strategy works in the historical state.
 
-1. Enable the **MZpack: backtesting** option in the strategy settings
-2. Open NinjaTrader **Strategy Analyzer**
-3. Select your strategy and configure the backtest parameters
-4. Run the backtest
-
-:::note
-Enabling backtesting increases historical data loading time for mzFootprint and mzVolumeProfile indicators, as load-time optimizations must be disabled to calculate all values on historical bars.
-:::
+See **[Backtesting](./backtesting.md)** for the full workflow, Tick Replay prerequisites, and how to choose between the two paths.
 
 ## Visualization
 
