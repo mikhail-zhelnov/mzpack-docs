@@ -139,7 +139,7 @@ Two thresholds define what counts as a clip:
 
 For a confirmed clip of `N` fills of size `C`, the hidden volume is estimated as `(N − 1) × C`, plus the trailing partial fill when it does not exceed the clip size. The result is deduplicated against the order-book estimate at the trade's start price, so enabling Tape alongside Hard or Soft does not double-count the same liquidity.
 
-Because it reads the stored fill composition of an already-reconstructed trade, the Tape algorithm works on cold historical data where the order book is unavailable. **Reconstruct tape** must be enabled with timestamps-only mode disabled.
+Because it reads the stored fill composition of an already-reconstructed trade, the Tape algorithm works on cold historical data where the order book is unavailable. **Reconstruct tape** must be enabled — but unlike Hard and Soft, the Tape algorithm also works with **Reconstruct tape: timestamps only** enabled, which is what makes it the iceberg algorithm to use when [backtesting](../strategies/backtesting.md#4-tape-reconstruction-matching-historical-to-live).
 
 **Tape** is an independent toggle, not a value of the **Iceberg: algorithm** setting — you can run it on its own or together with Hard/Soft. Its result is written into the same iceberg volume, so the iceberg filter threshold, **Marker size relative to = Iceberg**, the Iceberg Volume Profile, and the pop-up all use it unchanged. Changing a Tape parameter recalculates the chart on the fly, with no reload.
 
@@ -482,10 +482,10 @@ The MZpack order flow core reconstructs individual tick trades into aggregated t
 | Setting | Default | Description |
 |---|---|---|
 | **Reconstruct tape** | true | Reconstruct tape using timestamps and Level 1 (best bid/ask) events. Required for Iceberg detection, DOM pressure, and DOM support |
-| **Reconstruct tape: timestamps only** | false | Use only timestamps for reconstruction — Level 1 (best bid/ask) events are ignored, including for live data, and trades with equal timestamps are merged. Enable to get an exact match between reconstructed historical and reconstructed live data. Iceberg detection, DOM pressure, and DOM support are unavailable when enabled |
+| **Reconstruct tape: timestamps only** | false | Use only timestamps for reconstruction — Level 1 (best bid/ask) events are ignored, including for live data, and trades with equal timestamps are merged. Enable to get an exact match between reconstructed historical and reconstructed live data — recommended for [backtesting](../strategies/backtesting.md#4-tape-reconstruction-matching-historical-to-live). Hard/Soft iceberg detection, DOM pressure, and DOM support are unavailable when enabled; the **Tape** iceberg algorithm still works |
 | **'Reconstruct tape' apply** | ChartReload | `ChartReload` — reload the chart to apply changes (minimizes memory). `OnTheFly` — apply changes without reloading (requires more memory). mzBigTrade only |
 
-**Note:** Disabling Reconstruct tape or using the OnTheFly method significantly increases memory consumption. Iceberg detection, DOM pressure, and DOM support require Reconstruct tape to be enabled **with timestamps-only mode disabled**.
+**Note:** Disabling Reconstruct tape or using the OnTheFly method significantly increases memory consumption. Hard/Soft iceberg detection, DOM pressure, and DOM support require Reconstruct tape to be enabled **with timestamps-only mode disabled**. The [Tape iceberg algorithm](#tape-algorithm) only requires Reconstruct tape — it works in timestamps-only mode as well.
 
 ## Non-Bid/Ask Data Support
 

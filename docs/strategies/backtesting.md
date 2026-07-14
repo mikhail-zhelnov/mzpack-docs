@@ -24,8 +24,10 @@ There are two paths:
 What separates the paths is what Tick Replay can reconstruct. Tick Replay replays historical **trades and best bid/ask prices** — enough for footprint, delta, volume profile, and big trades. It does **not** reconstruct the **volumes** resting at the best bid/ask, nor the full order book. So features that need bid/ask volumes (iceberg Hard/Soft, DOM pressure/support, Smart/Predatory trades) or the full depth (mzMarketDepth) can only be exercised against Market Replay or live data. See [Order Flow — Data Levels](../concepts/order-flow.md#data-levels) for the distinction.
 
 :::note
-mzBigTrade's [Tape iceberg algorithm](../indicators/mzBigTrade.md#tape-algorithm) is the exception: it derives hidden volume from each trade's fill composition instead of from bid/ask volumes or the order book, so it also works on historical bars under Tick Replay.
+mzBigTrade's [Tape iceberg algorithm](../indicators/mzBigTrade.md#tape-algorithm) is the exception: it derives hidden volume from each trade's fill composition instead of from bid/ask volumes or the order book, so it also works on historical bars under Tick Replay — including in timestamps-only reconstruction (see below).
 :::
+
+Data is only half the picture. How MZpack aggregates ticks into *trades* also differs between historical and live data unless you configure it — see [Tape reconstruction](#4-tape-reconstruction-matching-historical-to-live), which is what makes big trades in a backtest match the ones you see live.
 
 ## Prerequisites: Tick Replay
 
@@ -47,7 +49,7 @@ This is the primary path for order flow strategies.
 MZpack strategies are **not active in the historical state by default**, but the Strategy Analyzer runs in the historical state only. The strategy's **Backtesting** parameter is what lets it run on historical data — without it the strategy stays idle in the Analyzer and produces no trades. Enable it one of two ways:
 
 - **From the UI** — turn on the **Backtesting** parameter (MZpack category) in the strategy settings window.
-- **From code** — set `EnableBacktesting = true` in `State.SetDefaults`:
+- **From code** — set [`EnableBacktesting`](/api/strategies/mzpack-strategy-base) `= true` in `State.SetDefaults`:
 
 ```csharp
 protected override void OnStateChange()
@@ -87,6 +89,34 @@ See [Order Flow — Trade Classification](../concepts/order-flow.md#trade-classi
 
 :::tip Profile accuracy vs Tick Replay
 For volume profile / footprint work, the two must agree: **Tick** accuracy requires Tick Replay **on**; **Minute** accuracy (used to speed up very long ranges) requires Tick Replay **off**. A mismatch triggers a warning and suppresses historical output.
+:::
+
+### 4. Tape reconstruction: matching historical to live
+
+An exchange reports a single large market order as a burst of individual fills. MZpack's order flow core aggregates those ticks back into one **reconstructed trade** — and mzBigTrade's filters (trade volume, aggression, iceberg) all run against that *aggregated* trade, not against the raw ticks. So the aggregation rule decides which big trades exist in the first place.
+
+In the default mode (**Reconstruct tape: enable**), a reconstructed trade is closed by any of three events: a newer timestamp, a change of aggressor side, **or a Level 1 best bid/ask event**. That third trigger is the problem for backtesting. A live feed and NinjaTrader's historical Tick Replay do not deliver the same Level 1 event stream, so the same ticks aggregate into *different* trades with *different* volumes in the Strategy Analyzer than they would live. A strategy that fires on "trade volume ≥ 100" will therefore see big trades in the backtest that it would never have seen live — and miss ones it would have caught.
+
+:::tip Recommended for backtesting
+Enable **Reconstruct tape: timestamps only** (group **Orderflow**). Trade boundaries then depend only on timestamp and aggressor side — the two inputs that are identical in historical and live data — which gives a **100% match between historical and live big trades**. Trades sharing a timestamp are merged; Level 1 events are ignored.
+:::
+
+**What timestamps-only mode changes:**
+
+| Feature | Under timestamps-only |
+|---|---|
+| Big trade volume, aggression, delta | Reconstructed identically in history and live |
+| Iceberg — **Tape** algorithm | **Works** (reads the trade's fill composition, not the order book) |
+| Iceberg — **Hard** / **Soft** | Disabled — they read bid/ask volumes, which don't exist on historical data anyway |
+| DOM pressure / DOM support | Disabled — same reason |
+| Smart / Predatory trades | Unavailable historically regardless of this setting |
+
+In the Strategy Analyzer this costs you nothing: everything the setting disables is real-time-only to begin with, and the one iceberg algorithm that *does* work on historical bars — [Tape](../indicators/mzBigTrade.md#tape-algorithm) — keeps working.
+
+:::warning The setting applies to live data too
+**Reconstruct tape: timestamps only** is not a backtest-only switch — it changes reconstruction on live data as well. That is exactly what makes the match possible, so leave it **on when trading live** if you want the chart to reproduce the backtest. Turning it off live re-introduces Level 1 boundaries and your live big trades will no longer correspond to the backtested ones.
+
+Note also that Tape iceberg volume is derived from the trade's fill composition, so its *values* differ between timestamps-only and the default mode — consistent between history and live, but not comparable across the two modes.
 :::
 
 ## Path 2 — Market Replay (Playback)
