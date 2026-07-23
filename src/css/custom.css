@@ -21,30 +21,45 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-/* Images: natural size, shrink only if wider than container, 10% padding left/right */
-article img {
-  max-width: 80%;
-  width: auto;
+/* --- Content images ------------------------------------------------------
+   Two rendering paths:
+   • Plain <img> — dev-server preview and standalone markdown images.
+   • IdealImage (production) — a class-less <div> wrapper (inline background +
+     position:relative) holding an <svg> placeholder, then the loaded <img>
+     which carries an inline width:100%.
+
+   An earlier version constrained the wrapper by matching its inline
+   `position:relative` substring. That matches the server-rendered HTML, but
+   once React re-renders the wrapper on lazy-load the browser re-serialises the
+   style attribute WITH spaces (`position: relative`), so the substring selector
+   silently stopped matching. The still-100%-wide image kept the 10% left margin
+   and rode ~10% of the column width past the edge, over the right-hand TOC.
+
+   Fix: match the wrapper structurally — a class-less div holding an img/svg —
+   which is immune to how the inline style is formatted. Centre with auto
+   margins (they can never overflow) rather than a fixed 10%. */
+article .markdown img {
   height: auto;
-  margin-left: 10%;
-  margin-right: 10%;
   cursor: zoom-in;
 }
 
-/* IdealImage renders <img position:absolute; left:0; width:100%> inside a
-   position:relative wrapper. The `article img` margins above would shift that
-   absolute image 10% right while it stays 100% wide, so it overflowed the
-   content column and rode over the right-hand TOC. The sizing and centering
-   belong on the wrapper instead; the image just fills it. */
-article .markdown > div[style*='position:relative'] {
+/* Plain images: cap and centre. IdealImage's inner <img> (inline width:100%)
+   is excluded here so it fills its constrained wrapper instead. */
+article .markdown img:not([style*='width']) {
+  display: block;
   max-width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-inline: auto;
 }
 
-article .markdown > div[style*='position:relative'] img {
-  margin-left: 0;
-  margin-right: 0;
+/* IdealImage wrapper: constrain + centre; the inner image fills it.
+   Structural match first, with the inline-style substrings (both spellings)
+   kept as belt-and-suspenders. */
+article .markdown > div:not([class]):has(> img),
+article .markdown > div:not([class]):has(> svg),
+article .markdown > div[style*='position:relative'],
+article .markdown > div[style*='position: relative'] {
+  max-width: 80%;
+  margin-inline: auto;
 }
 
 .medium-zoom-overlay {
