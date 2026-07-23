@@ -10,7 +10,7 @@ This release rebuilds mzBigTrade DOM pressure detection around a refill-signatur
 
 ## DOM pressure (mzBigTrade)
 
-DOM pressure is now detected from the Level-1 quote stream instead of the order book. A price sitting at the best bid/ask that is repeatedly consumed by same-side aggressors and replenished within a short window is flagged as a defended level. Positive DOM pressure means net liquidity was refilled (absorption / resistance); negative means net liquidity was pulled. Detection is feed-time based and works on live data and Market Replay only. Not available in the free version.
+DOM pressure detection is rebuilt around a refill signature. Instead of measuring the liquidity change at the best bid/ask at the moment a single trade executes, the indicator now follows a price level across trades: a price sitting at the best bid/ask that is repeatedly consumed by same-side aggressors and replenished within a short window is flagged as a defended level. Positive DOM pressure means net liquidity was refilled (absorption / resistance); negative means net liquidity was pulled. Detection still runs on the Level-1 quote stream (best bid/ask sizes), is feed-time based, and works on live data and Market Replay only. Not available in the free version.
 
 ### New
 
