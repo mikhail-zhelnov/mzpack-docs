@@ -4,6 +4,8 @@ title: "mzBigTrade"
 description: "Big trade detection indicator with iceberg orders, DOM pressure/support, aggression, and smart trade filtering for NinjaTrader 8"
 ---
 
+import Image from '@theme/IdealImage';
+
 # mzBigTrade
 
 The mzBigTrade indicator detects and visualizes significant trades in the order flow. It aggregates tick data into trades, applies configurable volume and order flow filters, and renders the results as markers on the price chart. The indicator includes iceberg order detection, DOM pressure/support analysis, aggression (sweep) detection, and smart/predatory trade identification.
@@ -156,7 +158,7 @@ A **signature** forms when a level is hit and refilled again and again. As long 
 - **Positive DOM pressure** — the level was, on balance, **refilled** faster than it was consumed. Liquidity is being absorbed and the level acts as **resistance to the trend**
 - **Negative DOM pressure** — the level was, on balance, **pulled**: more liquidity was withdrawn than replenished (requires **DOM pressure: track pulling**)
 
-![DOM pressure example — a refill signature shown as a triangle with its span band](./img/dom-pressure-example.png)
+<Image img={require('./img/dom-pressure-example.png')} alt="DOM pressure example — a refill signature shown as a triangle with its span band" />
 <!-- TODO(4.4.0): replace this placeholder with a real DOM pressure screenshot -->
 
 DOM pressure detection is **feed-time based and available on live data and Market Replay only** — it does not run on cold historical bars. It is not available in the free version.

@@ -60,6 +60,20 @@ const config: Config = {
 
   plugins: [
     [
+      '@docusaurus/plugin-ideal-image',
+      {
+        // These are PNG UI screenshots: intermediate widths resample into
+        // anti-aliased gradients that PNG compresses far worse than the crisp
+        // original, so every mid-size variant came out heavier than the source.
+        // Only two steps — a small mobile variant and a re-encoded full-detail
+        // one (needed anyway, chart screenshots get read zoomed-in).
+        min: 640,
+        max: 2500,
+        steps: 2,
+        disableInDev: false,
+      },
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'api',

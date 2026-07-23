@@ -4,6 +4,8 @@ title: "Order Flow"
 description: "Foundational concepts of order flow analysis — how trades are matched, classified, and visualized to reveal buying and selling pressure"
 ---
 
+import Image from '@theme/IdealImage';
+
 # Order Flow
 
 Order flow is the real-time stream of executed trades and pending orders flowing through an exchange. While a standard candlestick chart shows only open, high, low, and close, order flow analysis looks *inside* each bar to reveal the actual buying and selling activity at every price level. MZpack reconstructs this activity from tick-level data, giving you a detailed view of market microstructure.
@@ -60,7 +62,7 @@ MZpack processes historical data with NinjaTrader's **Tick Replay** option enabl
 
 ## Footprint (Cluster) Charts
 
-![Annotated footprint bar anatomy](./img/footprint-anatomy-annotated-chart.png)
+<Image img={require('./img/footprint-anatomy-annotated-chart.png')} alt="Annotated footprint bar anatomy" />
 
 The footprint chart is the primary order flow visualization. It breaks each price bar into individual price levels and shows the volume transacted at each level, split by buying and selling activity.
 
@@ -115,7 +117,7 @@ The threshold is a percentage ratio. For example, with a 300% threshold: if Ask 
 
 Consecutive imbalances stacked at adjacent price levels indicate strong directional conviction.
 
-![Diagonal imbalance explanation](./img/diagonal-imbalance-explanation-chart.png)
+<Image img={require('./img/diagonal-imbalance-explanation-chart.png')} alt="Diagonal imbalance explanation" />
 
 ## Absorption
 
@@ -141,7 +143,7 @@ Zone strength depends on:
 
 A zone is terminated when price crosses through it and closes beyond the zone (above a resistance zone or below a support zone), or at the end of a session if the **Break on session** option is enabled.
 
-![Imbalance-based support and resistance zones](./img/imbalance-sr-zones-chart.png)
+<Image img={require('./img/imbalance-sr-zones-chart.png')} alt="Imbalance-based support and resistance zones" />
 
 See [mzFootprint — Imbalance S/R Zones](../indicators/mzFootprint.md#imbalance-sr-zones) for configuration details.
 

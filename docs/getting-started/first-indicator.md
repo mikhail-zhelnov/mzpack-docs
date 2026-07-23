@@ -4,6 +4,8 @@ title: "Your First Indicator"
 description: "Quick start tutorial for adding your first MZpack indicator to a NinjaTrader 8 chart"
 ---
 
+import Image from '@theme/IdealImage';
+
 # Your First Indicator
 
 This guide walks you through adding and configuring an MZpack indicator on a NinjaTrader 8 chart. We'll use **mzFootprint** as the example, but the steps are the same for any MZpack indicator.
@@ -35,7 +37,7 @@ For your first experience, use a **Sim101** account with a liquid futures instru
 
 The footprint chart will begin rendering on your chart once enough data is loaded.
 
-![Indicators dialog with mzFootprint selected](./img/add-indicator-dialog-settings.png)
+<Image img={require('./img/add-indicator-dialog-settings.png')} alt="Indicators dialog with mzFootprint selected" />
 
 ## Step 3: Understand the Display
 
@@ -46,7 +48,7 @@ The mzFootprint indicator overlays order flow data directly on your price bars. 
 - **Imbalances** — highlighted cells where the bid/ask ratio exceeds a threshold, indicating aggressive buying or selling
 - **POC** — the price level with the highest volume within the bar (Point of Control)
 
-![mzFootprint first look on ES chart](./img/footprint-first-look-chart.png)
+<Image img={require('./img/footprint-first-look-chart.png')} alt="mzFootprint first look on ES chart" />
 
 ## Step 4: Configure Settings
 
@@ -56,7 +58,7 @@ The quickest way to adjust settings is through the **on-the-fly settings** avail
 For the full list of settings, right-click the chart, select **Indicators**, choose **mzFootprint** from the active indicators list, and adjust in the properties panel.
 :::
 
-![mzFootprint settings panel with categories](./img/footprint-settings-panel-settings.png)
+<Image img={require('./img/footprint-settings-panel-settings.png')} alt="mzFootprint settings panel with categories" />
 
 Key settings categories:
 
