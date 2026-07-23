@@ -35,8 +35,11 @@ The real-time DOM displays a colored histogram (ladders) of current bid and ask 
 |---|---|
 | **Solid** | Uniform selected color for all levels |
 | **Saturation** | Color intensity scales with volume — larger orders are more saturated. 4 presets available |
+| **Custom** | User-defined color function applied to the volume |
 | **Heatmap** | Multi-color gradient from cool to hot based on volume |
 | **GrayScaleHeatmap** | Monochrome intensity gradient |
+
+The **Color scale** setting selects the volume-to-color curve used by these modes — **Linear**, **Sqrt**, or **Log**. It applies to Saturation, Custom, Heatmap, and GrayScaleHeatmap; Solid ignores it. `Sqrt` (the default) and `Log` keep small sizes readable when much larger sizes are present on the ladder.
 
 ### Imbalance Detection
 
@@ -286,7 +289,7 @@ Four views working together: historical DOM heatmap reveals where large orders r
 
 | Setting | Default | Description |
 |---|---|---|
-| **Depth of market** | 10 | Number of DOM levels to display (range: 1–1000). Reflects the visible portion of the exchange order book |
+| **Depth of market** | 100 | Number of DOM levels to display (range: 1–1000). Reflects the visible portion of the exchange order book |
 | **Multiple Market Maker** | false | Enable for stock markets with multiple market makers. Do not enable for futures via IQFeed |
 | **Bid** | DodgerBlue | Color for buy-side limit orders |
 | **Offer** | SteelBlue | Color for sell-side limit orders |
@@ -309,11 +312,12 @@ Four views working together: historical DOM heatmap reveals where large orders r
 | **Volumes filter** | 0 | Hide levels with volume below this value |
 | **Volume font** | Montserrat, 12pt | Font for volume text |
 | **Code extremal** | false | Highlight extreme volumes with extreme colors |
-| **Color mode** | Solid | Color rendering — Solid, Saturation, Heatmap, or GrayScaleHeatmap |
+| **Color mode** | Solid | Color rendering — Solid, Saturation, Custom, Heatmap, or GrayScaleHeatmap. Changing it refreshes the property grid, so dependent settings appear and disappear immediately |
+| **Color scale** | Sqrt | Volume-to-color curve — Linear, Sqrt, or Log. Applied in the Saturation, Custom, Heatmap, and GrayScaleHeatmap modes; Log and Sqrt keep small sizes readable when large sizes are present |
 | **Saturation preset** | 3 | Saturation level (range: 1–4) |
 | **Imbalance: show** | false | Show imbalanced DOM levels |
 | **Imbalance: ratio** | 1.5 | Ratio threshold for imbalance detection (range: 0.01–100) |
-| **Imbalance: Bid color** | DarkGreen | Color for bid-side imbalance |
+| **Imbalance: Bid color** | #FF00B300 | Color for bid-side imbalance |
 | **Imbalance: Offer color** | Firebrick | Color for offer-side imbalance |
 | **Cumulative: show** | true | Show cumulative bid/offer depth lines |
 | **Cumulative: Bid color** | Green, 2px | Line style for cumulative bid depth |
@@ -331,12 +335,13 @@ Four views working together: historical DOM heatmap reveals where large orders r
 | **Show** | true | Show historical DOM on the chart |
 | **History depth, bars** | 2000 | Maximum bars for historical DOM display (range: 10–10000) |
 | **Filtering mode** | Percentage | Filtering mode — Percentage, Absolute, AdaptiveLess, or AdaptiveMore |
-| **Display volume, %** | 100 | Display levels above this percentage of the maximum order size (Percentage/Adaptive modes) |
-| **Extreme volume, %** | 20 | Top percentage of displayed volumes treated as extreme (Percentage/Adaptive modes) |
+| **Display volume, %** | 80 | Display levels above this percentage of the maximum order size (Percentage/Adaptive modes) |
+| **Extreme volume, %** | 10 | Top percentage of displayed volumes treated as extreme (Percentage/Adaptive modes) |
 | **Display volume** | 50 | Minimum volume in contracts to display (Absolute mode) |
 | **Extreme volume** | 500 | Volumes at or above this contract size are extreme (Absolute mode) |
 | **Code extremal** | false | Highlight extreme volumes with extreme colors |
-| **Color mode** | Saturation | Color rendering — Solid, Saturation, Heatmap, or GrayScaleHeatmap |
+| **Color mode** | Saturation | Color rendering — Solid, Saturation, Custom, Heatmap, or GrayScaleHeatmap |
+| **Color scale** | Sqrt | Volume-to-color curve — Linear, Sqrt, or Log. Applied in the Saturation, Custom, Heatmap, and GrayScaleHeatmap modes; Log and Sqrt keep small sizes readable when large sizes are present |
 | **Saturation preset** | 4 | Saturation level (range: 1–4) |
 | **Hold levels** | true | Continue displaying levels that move out of DOM scope |
 | **Extend levels, px** | 0 | Extend held levels onto the right margin by this many pixels (range: 0–10000) |

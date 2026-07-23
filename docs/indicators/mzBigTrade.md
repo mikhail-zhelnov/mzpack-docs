@@ -18,7 +18,7 @@ The mzBigTrade indicator detects and visualizes significant trades in the order 
 - **2 filter types** — Auto (statistical) and Manual (fine-grained)
 - **Iceberg order detection** — Hard/Soft algorithms (real-time only) and the Tape algorithm, which also works on historical bars
 - **Click to stack trades by time** — lay a bar's trades out as a time-ordered column
-- **DOM pressure analysis** — liquidity pushing/pulling on best bid/ask
+- **DOM pressure analysis** — refill-signature detection of defended (absorption) and pulled levels
 - **DOM support detection** — Market-Limit order identification
 - **Aggression (sweep) filter** — trades spanning multiple price levels
 - **Smart/Predatory trade filter** — trades consuming all available liquidity
@@ -149,14 +149,40 @@ The Tape algorithm is not available in the free version.
 
 ## DOM Pressure
 
-DOM pressure describes the behavior of liquidity on the best bid or ask at the time a trade is executed. Every trade in mzBigTrade is the result of matching a market order with a limit order resting in the order book. DOM pressure can be positive or negative:
+DOM pressure measures how aggressively a price level at the best bid or ask is **defended** — repeatedly consumed by same-side market orders and replenished within a short window. Instead of a single order-book snapshot at fill time, mzBigTrade tracks this behavior over time with a refill-signature engine that reads the Level 1 (best bid/ask) quote stream.
 
-- **Positive DOM pressure** — liquidity is being **added** at the best bid or ask upon execution of the order. This occurs at the opposite side of the trade and acts as **resistance to the trend**
-- **Negative DOM pressure** — liquidity is being **removed** from the best bid or ask. This occurs at the opposite side of the trade and means **resistance to the trend is weakening**
+A **signature** forms when a level is hit and refilled again and again. As long as the level keeps being replenished the signature stays open; it closes when refills stop (idle timeout) or price walks too far from the level. The net refilled volume becomes the trade's DOM pressure:
 
-**Example:** A buy trade with positive DOM pressure means liquidity is being added at the best Ask during execution. A buy trade with negative DOM pressure means liquidity is being pulled from the Ask side.
+- **Positive DOM pressure** — the level was, on balance, **refilled** faster than it was consumed. Liquidity is being absorbed and the level acts as **resistance to the trend**
+- **Negative DOM pressure** — the level was, on balance, **pulled**: more liquidity was withdrawn than replenished (requires **DOM pressure: track pulling**)
 
-When **Show DOM pressure** is enabled, DOM pressure is visualized with triangles. Positive DOM pressure is shown with a filled triangle. Negative DOM pressure (liquidity pulling) is shown with a triangle outline using the **Liquidity pulling line** style.
+![DOM pressure example — a refill signature shown as a triangle with its span band](./img/dom-pressure-example.png)
+<!-- TODO(4.4.0): replace this placeholder with a real DOM pressure screenshot -->
+
+DOM pressure detection is **feed-time based and available on live data and Market Replay only** — it does not run on cold historical bars. It is not available in the free version.
+
+### Detection vs. Display Filters
+
+The DOM pressure settings split into two groups:
+
+- **Detection** (refill window, idle timeout, min refills, min volume, track pulling, max deviation from level) shape which signatures are recognized. They take effect only on freshly processed data, so changing one on a running chart prompts a chart reload.
+- **Display filters** (min abs. volume, min traded sig volume, min hold duration, min/max intensity) decide which recognized signatures are shown. They apply **on the fly** with no reload. A trade shown only because of its DOM pressure disappears when it no longer passes; a trade that also passes the trade-volume filter keeps its marker but loses the triangle.
+
+### Visualization
+
+When **Show DOM pressure** is enabled, DOM pressure is drawn as a triangle in the Buy/Sell marker-border color, with the value printed inside it (auto-scaled). Negative DOM pressure (liquidity pulling) uses the **Liquidity pulling line** outline style.
+
+As a level keeps being defended, its signature **re-anchors onto newer trades** ("moves right"), so the marker rides forward to the trade where the defense finally broke instead of appearing on the first hit.
+
+Enable **Show DOM pressure span** to draw a 1-tick band at the level price spanning the signature's extent — from its first refill to the anchor trade — together with a proportion bar comparing the volume traded by the signature's refills against all volume traded at the level. Hovering the band shows that trade's pop-up.
+
+The pop-up reports the signature on its own line, for example:
+
+```
+DOM pressure: 250-Lot (12) @7510.5 3.4s 74/s traded 180/240/75%
+```
+
+This reads as a net +250 contracts refilled across 12 refills at price 7510.5, held for 3.4 seconds at 74 contracts/s, with 180 of the 240 contracts traded at the level (75%) coming from the signature. The lead value is signed — a negative number means the level was net pulled.
 
 **Note:** The DOM pressure filter uses the **absolute value** for comparison. For example, a trade with DOM pressure of -100 will pass a filter with min = 90 because abs(-100) > 90.
 
@@ -371,8 +397,18 @@ Default values apply to newly added indicator instances only. Saved templates an
 | **Iceberg: tape min clip** | 20 | Minimum identical-fill size to count as a clip (shown when Iceberg: tape is on) |
 | **Iceberg: tape min refills** | 3 | Minimum number of consecutive identical fills to qualify as a refilling iceberg (shown when Iceberg: tape is on) |
 | **DOM pressure: enable** | false | Enable DOM pressure filtering (Manual mode only) |
-| **DOM pressure: min abs.volume** | 5 | Minimum absolute DOM pressure volume (Manual mode only) |
-| **DOM pressure: max abs.volume** | -1 | Maximum absolute DOM pressure volume, -1 = unlimited (Manual mode only) |
+| **DOM pressure: min abs.volume** | 120 | Minimal DOM pressure size (absolute value) |
+| **DOM pressure: max abs.volume** | -1 | Maximal DOM pressure size, -1 = unlimited |
+| **DOM pressure: min traded sig volume** | 50 | Absorption: minimum volume traded at the level by the signature's committed refills (the "traded sig" value) for the DOM pressure to show. 1 disables. Applied on the fly |
+| **DOM pressure: min hold duration (s)** | 10 | Level survivability: minimum time from the first to the last refill for the DOM pressure to show. 0 disables. Applied on the fly |
+| **DOM pressure: min intensity (Σ/s)** | 3 | Replenisher reaction speed: minimum summed refill volume per second of hold for the DOM pressure to show. 0 disables. Applied on the fly |
+| **DOM pressure: max intensity (Σ/s)** | 10 | Replenisher reaction speed: maximum summed refill volume per second of hold. -1 = no upper bound. Applied on the fly |
+| **DOM pressure: refill window (ms)** | 150 | Detection: how long after a print a volume increase at that level still counts as a refill. Change prompts a chart reload |
+| **DOM pressure: refill idle timeout (s)** | 10 | Detection: seconds without a new refill before the level is abandoned and the signature closes. Change prompts a chart reload |
+| **DOM pressure: refill min refills** | 8 | Detection: minimum number of refills for a closed signature to count. 1 allows a single large refill. Change prompts a chart reload |
+| **DOM pressure: refill min volume** | 2 | Detection: minimum summed refill volume of an episode to count. 1 disables the size test. Change prompts a chart reload |
+| **DOM pressure: max deviation from level (ticks)** | 3 | Detection: close the signature once the near-side inside price is this many ticks from the level (a confirmed signature is kept, an in-process one discarded). OR'd with the idle timeout. -1 disables. Change prompts a chart reload |
+| **DOM pressure: track pulling** | true | Detection: count liquidity pulled from the level (an L1 decrease inside the refill window) as negative volume, so a net-pulled level produces negative DOM pressure. Change prompts a chart reload |
 | **DOM support: enable** | false | Enable DOM support filtering (Manual mode only) |
 | **DOM support: min volume** | 5 | Minimum DOM support volume (Manual mode only) |
 | **DOM support: max volume** | -1 | Maximum DOM support volume, -1 = unlimited (Manual mode only) |
@@ -427,8 +463,9 @@ Extra filters are applied on top of the main filters.
 | **Saturation** | 2 | Saturation preset level, range: 1–4 |
 | **Show DOM pressure** | true | Display DOM pressure with triangles |
 | **Show DOM support** | false | Display DOM support with triangles |
-| **Liquidity pushing/DOM support triangle thickness** | 2 | Triangle line thickness (5 preset levels) |
+| **DOM pressure/support triangle thickness** | 2 | Triangle line thickness (5 preset levels). Hidden unless a triangle is shown |
 | **Liquidity pulling line** | Gray, dotted, 2px | Line style for negative DOM pressure (liquidity pulling) triangles |
+| **Show DOM pressure span** | false | Draw the DOM pressure signature extent: a 1-tick band from the signature start to the anchor trade, plus a traded-sig/level proportion bar |
 | **Trade POC: show** | false | Show Point of Control line for each trade (non-Line markers) |
 | **Trade POC: line** | Orange, 3px | Trade POC line style |
 | **Volume text: position** | Inside | Volume label placement — Inside, OutsideLeft, OutsideRight, or Off |
@@ -485,7 +522,7 @@ The MZpack order flow core reconstructs individual tick trades into aggregated t
 | **Reconstruct tape: timestamps only** | false | Use only timestamps for reconstruction — Level 1 (best bid/ask) events are ignored, including for live data, and trades with equal timestamps are merged. Enable to get an exact match between reconstructed historical and reconstructed live data — recommended for [backtesting](../strategies/backtesting.md#4-tape-reconstruction-matching-historical-to-live). Hard/Soft iceberg detection, DOM pressure, and DOM support are unavailable when enabled; the **Tape** iceberg algorithm still works |
 | **'Reconstruct tape' apply** | ChartReload | `ChartReload` — reload the chart to apply changes (minimizes memory). `OnTheFly` — apply changes without reloading (requires more memory). mzBigTrade only |
 
-**Note:** Disabling Reconstruct tape or using the OnTheFly method significantly increases memory consumption. Hard/Soft iceberg detection, DOM pressure, and DOM support require Reconstruct tape to be enabled **with timestamps-only mode disabled**. The [Tape iceberg algorithm](#tape-algorithm) only requires Reconstruct tape — it works in timestamps-only mode as well.
+**Note:** Disabling Reconstruct tape or using the OnTheFly method significantly increases memory consumption. Hard/Soft iceberg detection, DOM pressure, and DOM support require Reconstruct tape to be enabled **with timestamps-only mode disabled** (they need the Level 1 events). DOM pressure detection additionally runs on **live data and Market Replay only**, not on cold historical bars. The [Tape iceberg algorithm](#tape-algorithm) only requires Reconstruct tape — it works in timestamps-only mode as well.
 
 ## Non-Bid/Ask Data Support
 

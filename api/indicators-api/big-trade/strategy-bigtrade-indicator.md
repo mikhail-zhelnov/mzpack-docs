@@ -76,6 +76,37 @@ protected override void OnBarUpdate()
 }
 ```
 
+## Methods
+
+| Method | Returns | Description |
+|---|---|---|
+| `DomPressureSignaturePassesFilter(ITrade trade)` | `bool` | Whether the trade's DOM pressure signature passes the current DOM pressure filters — enable, min/max absolute volume, min traded-sig volume, min hold duration, and min/max intensity. Returns `false` when the DOM pressure filter is disabled or the trade carries no DOM pressure |
+
+Use it to gate strategy logic on DOM-pressure-confirmed trades without re-implementing the filter thresholds:
+
+```csharp
+protected override void OnBarUpdate()
+{
+    if (CurrentBar < 1) return;
+
+    List<ITrade> trades = btIndicator.Trades;
+    if (trades.Count == 0) return;
+
+    ITrade lastTrade = trades[trades.Count - 1];
+
+    // Act only on trades whose DOM pressure signature passes the configured filters
+    if (btIndicator.DomPressureSignaturePassesFilter(lastTrade))
+    {
+        // e.g. absorption at the level — DomPressureVolume > 0 means liquidity was refilled
+        double pressure = lastTrade.DomPressureVolume;
+    }
+}
+```
+
+:::note
+DOM pressure detection is feed-time based and runs on live data and Market Replay only. Requires MZpack API 2.4.18+.
+:::
+
 ## Exported Values
 
 | Category | Values |
@@ -83,7 +114,7 @@ protected override void OnBarUpdate()
 | **Price** | Open (StartPrice), Close (StopPrice), High, Low, RangeTicks |
 | **Volume** | Volume, IcebergVolume |
 | **POC** | POC, POCVolume |
-| **DOM** | DomSupportVolume, DomPressureVolume |
+| **DOM** | DomSupportVolume, DomPressureVolume, DomPressurePassesFilter |
 | **Characteristics** | Side, Smart, TicksNumber |
 
 ## See Also

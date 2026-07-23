@@ -194,6 +194,7 @@ Built-in indicator value identifiers. Used to specify which indicator metric to 
 | `TicksNumber` | Number of ticks |
 | `DomPressureVolume` | DOM pressure volume |
 | `DomSupportVolume` | DOM support volume |
+| `DomPressurePassesFilter` | `1.0` if the trade's DOM pressure signature passes the current DOM pressure filters, otherwise `0.0` |
 | `Smart` | Smart order flag |
 
 ### Market Depth
