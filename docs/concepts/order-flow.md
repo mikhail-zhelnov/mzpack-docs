@@ -55,7 +55,7 @@ MZpack indicators work with two types of market data:
 **CME MDP 3.0** is the CME Group's market data protocol, which provides high-resolution Level 1 and Level 2 data used by MZpack.
 
 :::info Tick Replay
-MZpack processes historical data with NinjaTrader's **Tick Replay** option enabled. Without Tick Replay, historical bars lack the tick-by-tick detail needed for order flow reconstruction. Some features (DOM pressure, the Hard/Soft iceberg algorithms) require live data because NinjaTrader does not provide historical Level 2 data. mzBigTrade's [Tape iceberg algorithm](../indicators/mzBigTrade.md#tape-algorithm) derives hidden volume from the trade's fill composition instead of the order book, so it also works on historical bars.
+MZpack processes historical data with NinjaTrader's **Tick Replay** option enabled. Without Tick Replay, historical bars lack the tick-by-tick detail needed for order flow reconstruction. Some features require live or Market Replay data: DOM pressure and DOM support need the **volumes** resting at the best bid/ask, which Tick Replay does not reconstruct, and the Hard/Soft iceberg algorithms need the order book, which NinjaTrader does not provide historically. mzBigTrade's [Tape iceberg algorithm](../indicators/mzBigTrade.md#tape-algorithm) derives hidden volume from the trade's fill composition instead of the order book, so it also works on historical bars.
 :::
 
 ## Footprint (Cluster) Charts
