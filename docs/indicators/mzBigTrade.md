@@ -151,7 +151,7 @@ The Tape algorithm is not available in the free version.
 
 ## DOM Pressure
 
-DOM pressure measures how aggressively a price level at the best bid or ask is **defended** — repeatedly consumed by same-side market orders and replenished within a short window. Instead of a single order-book snapshot at fill time, mzBigTrade tracks this behavior over time with a refill-signature engine that reads the Level 1 (best bid/ask) quote stream.
+DOM pressure measures how aggressively a price level at the best bid or ask is **defended** — repeatedly consumed by same-side market orders and replenished within a short window. It is derived from the Level 1 quote stream (the volumes resting at the best bid/ask). Rather than measuring the liquidity change at the moment a single trade executes, mzBigTrade now follows a price level across trades with a refill-signature engine.
 
 A **signature** forms when a level is hit and refilled again and again. As long as the level keeps being replenished the signature stays open; it closes when refills stop (idle timeout) or price walks too far from the level. The net refilled volume becomes the trade's DOM pressure:
 
@@ -524,7 +524,7 @@ The MZpack order flow core reconstructs individual tick trades into aggregated t
 | **Reconstruct tape: timestamps only** | false | Use only timestamps for reconstruction — Level 1 (best bid/ask) events are ignored, including for live data, and trades with equal timestamps are merged. Enable to get an exact match between reconstructed historical and reconstructed live data — recommended for [backtesting](../strategies/backtesting.md#4-tape-reconstruction-matching-historical-to-live). Hard/Soft iceberg detection, DOM pressure, and DOM support are unavailable when enabled; the **Tape** iceberg algorithm still works |
 | **'Reconstruct tape' apply** | ChartReload | `ChartReload` — reload the chart to apply changes (minimizes memory). `OnTheFly` — apply changes without reloading (requires more memory). mzBigTrade only |
 
-**Note:** Disabling Reconstruct tape or using the OnTheFly method significantly increases memory consumption. Hard/Soft iceberg detection, DOM pressure, and DOM support require Reconstruct tape to be enabled **with timestamps-only mode disabled** (they need the Level 1 events). DOM pressure detection additionally runs on **live data and Market Replay only**, not on cold historical bars. The [Tape iceberg algorithm](#tape-algorithm) only requires Reconstruct tape — it works in timestamps-only mode as well.
+**Note:** Disabling Reconstruct tape or using the OnTheFly method significantly increases memory consumption. Hard/Soft iceberg detection, DOM pressure, and DOM support require Reconstruct tape to be enabled **with timestamps-only mode disabled**, because they all rely on the Level 1 events that this mode discards. DOM pressure and DOM support additionally need the **volumes** resting at the best bid/ask, which Tick Replay does not reconstruct, so they run on **live data and Market Replay only**. The [Tape iceberg algorithm](#tape-algorithm) only requires Reconstruct tape — it works in timestamps-only mode as well.
 
 ## Non-Bid/Ask Data Support
 

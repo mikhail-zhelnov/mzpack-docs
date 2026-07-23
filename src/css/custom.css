@@ -31,6 +31,22 @@ article img {
   cursor: zoom-in;
 }
 
+/* IdealImage renders <img position:absolute; left:0; width:100%> inside a
+   position:relative wrapper. The `article img` margins above would shift that
+   absolute image 10% right while it stays 100% wide, so it overflowed the
+   content column and rode over the right-hand TOC. The sizing and centering
+   belong on the wrapper instead; the image just fills it. */
+article .markdown > div[style*='position:relative'] {
+  max-width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+article .markdown > div[style*='position:relative'] img {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .medium-zoom-overlay {
   z-index: 999;
 }
