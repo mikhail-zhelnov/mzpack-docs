@@ -378,6 +378,10 @@ Auto mode statistically selects the 75 largest trades (5 days × 15/day). Zoom i
 ## Settings Reference
 
 :::note
+**General**, **Orderflow**, and **Levels** settings are shared by all MZpack indicators and are documented in [Common Settings](./common-settings.md).
+:::
+
+:::note
 Default values apply to newly added indicator instances only. Saved templates and workspaces keep the values stored in them, so a setting whose default changed in a new release keeps its old value until you re-add the indicator or change the setting by hand.
 :::
 
@@ -442,7 +446,7 @@ Extra filters are applied on top of the main filters.
 | **Tape: position** | ChartAndRightMargin | Tape placement — Chart, RightMargin, or ChartAndRightMargin (Tape mode only) |
 | **Tape: position offset, px** | -20 | Tape horizontal offset in pixels; negative values shift left (Tape mode only) |
 | **Tape: speed** | 10 | Tape visual scrolling speed, range: 10–50 (Tape mode only) |
-| **Tape: refresh, ms** | 500 | Tape refresh interval in milliseconds, range: 200–500 (Tape mode only) |
+| **Tape: refresh, ms (200..500)** | 500 | Tape refresh interval in milliseconds, range: 200–500 (Tape mode only) |
 | **Tape: min marker size, px** | 6 | Minimum marker size in Tape mode, range: 4–20 (Tape mode only) |
 | **Tape: max marker size, px** | 80 | Maximum marker size in Tape mode, range: 20–150 (Tape mode only) |
 | **Marker size relative to** | Volume | What value determines marker size — Volume, Iceberg, DOMpressure, or DOMsupport (Default mode only) |
@@ -455,6 +459,7 @@ Extra filters are applied on top of the main filters.
 | **Sell line** | Red, 6px | Sell-side line style (Line marker only) |
 | **Max line length** | 300 | Maximum line length in chart bars (Line marker only) |
 | **Scale line thickness** | true | Scale line thickness proportionally to trade volume (Line marker only) |
+| **Min shape extent** | 0.5 | Minimum bubble/box extent in bar spaces; clamped to at least 0.1 and never above **Max shape extent** (Default mode only, Bubble/Box markers) |
 | **Max shape extent** | 5 | Maximum bubble/box extent in bar spaces (Default mode only, Bubble/Box markers) |
 | **Buy shape color** | LimeGreen | Buy-side marker fill color (Bubble/Box/Bar markers) |
 | **Buy shape border** | LimeGreen, 1px | Buy-side marker border style (Bubble/Box/Bar markers) |
@@ -500,6 +505,13 @@ Extra filters are applied on top of the main filters.
 | **Pop-up info font** | Montserrat, 12pt | Font for the pop-up window |
 | **Volumes font** | Montserrat, 12pt | Font for volume profile text |
 
+### General
+
+| Setting | Default | Description |
+|---|---|---|
+| **Optimize render performance** | true | Limit rendering time to free CPU/GPU resources |
+| **Maximal render time, ms** | 100 | Maximum rendering time before frames are skipped. The chart may flash — adjust for a balance between performance and visual comfort |
+
 ### Notifications
 
 | Setting | Default | Description |
@@ -520,7 +532,7 @@ The MZpack order flow core reconstructs individual tick trades into aggregated t
 
 | Setting | Default | Description |
 |---|---|---|
-| **Reconstruct tape** | true | Reconstruct tape using timestamps and Level 1 (best bid/ask) events. Required for Iceberg detection, DOM pressure, and DOM support |
+| **Reconstruct tape: enable** | true | Reconstruct tape using timestamps and Level 1 (best bid/ask) events. Required for Iceberg detection, DOM pressure, and DOM support |
 | **Reconstruct tape: timestamps only** | false | Use only timestamps for reconstruction — Level 1 (best bid/ask) events are ignored, including for live data, and trades with equal timestamps are merged. Enable to get an exact match between reconstructed historical and reconstructed live data — recommended for [backtesting](../strategies/backtesting.md#4-tape-reconstruction-matching-historical-to-live). Hard/Soft iceberg detection, DOM pressure, and DOM support are unavailable when enabled; the **Tape** iceberg algorithm still works |
 | **'Reconstruct tape' apply** | ChartReload | `ChartReload` — reload the chart to apply changes (minimizes memory). `OnTheFly` — apply changes without reloading (requires more memory). mzBigTrade only |
 

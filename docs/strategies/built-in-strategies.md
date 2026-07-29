@@ -14,59 +14,71 @@ Footprint Action is an order flow strategy built entirely on the [mzFootprint](.
 
 ### Signals
 
-Each signal can be individually enabled or disabled. Every signal has its own bar filter overrides (Min bar Volume, Min bar Delta, Min bar Delta %) and can be marked as **Mandatory** (always required regardless of the tree logic).
+Each signal has its own category in the strategy properties, named after the signal. The first setting in that category is the toggle that enables it and carries the signal's name.
 
-| Signal | Description |
-|---|---|
-| **Delta Divergence** | Trend reversal signal — price makes a new extreme while delta moves in the opposite direction |
-| **Delta Tail** | Bar has negative delta across all levels except the bottom (or vice versa), indicating absorption at the extreme |
-| **Delta Surge/Drop** | 4-bar signal tracking consecutive increasing or decreasing delta, indicating momentum buildup |
-| **Delta Flip** | 2-bar reversal signal showing a sudden delta shift from positive to negative (or vice versa) |
-| **Delta Trap** | 3-bar signal identifying a delta reversal followed by renewed strength in the original direction |
-| **Delta Slingshot** | Trend reversal when an extreme delta reading gets overrun by the opposite extreme delta within a lookback range |
-| **Above/Below POC** | Trade when a bar opens and closes on the same side of its Point of Control |
-| **Stacked Imbalances** | Multiple imbalances stacked at consecutive price levels (configurable number and direction) |
-| **Volume Sequencing** | Multiple price levels with increasing volume, indicating large trader activity |
-| **Hammer with Absorption** | Absorption (trapped sellers/buyers) detected in the wick of a hammer candle pattern |
+| Setting | Default | Description |
+|---|---|---|
+| **Delta Divergence** | true | Trend reversal signal — price makes a new extreme while delta moves in the opposite direction |
+| **Delta Tail** | true | Bar has negative delta across all levels except the bottom (or vice versa), indicating absorption at the extreme |
+| **Delta Surge/Drop** | true | 4-bar signal tracking consecutive increasing or decreasing delta, indicating momentum buildup |
+| **Delta Flip** | true | 2-bar reversal signal showing a sudden delta shift from positive to negative (or vice versa) |
+| **Delta Trap** | false | 3-bar signal identifying a delta reversal followed by renewed strength in the original direction |
+| **Delta Slingshot** | false | Trend reversal when an extreme delta reading gets overrun by the opposite extreme delta within a lookback range |
+| **Above/Below POC** | false | Trade when a bar opens and closes on the same side of its Point of Control |
+| **Stacked Imbalances** | false | Multiple imbalances stacked at consecutive price levels (configurable number and direction) |
+| **Volume Sequencing** | false | Multiple price levels with increasing volume, indicating large trader activity |
+| **Hammer with Absorption** | false | Absorption (trapped sellers/buyers) detected in the wick of a hammer candle pattern |
 
-### Signal-specific parameters
+### Common Signal Controls
 
-Every signal exposes the same **common controls** — Enable, Mandatory, Override filters, Min bar Volume, Min bar Delta, Min bar Delta % — so the tables below list only the extras specific to each signal. Delta Divergence, Delta Tail, Delta Surge/Drop, Delta Trap, and Above/Below POC have no extras and are configured entirely with the common controls.
+Every signal category repeats the same five settings below the enable toggle. They are documented once here.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Mandatory** | false | The signal must validate for the pattern to validate, regardless of the tree logic. In OR mode a mandatory signal is still always required |
+| **Override filters** | false | Use this signal's own bar filters instead of the global ones in the Strategy category |
+| **Min bar Volume** | 0 | Per-signal minimum bar volume. Applied when Override filters is on |
+| **Min bar Delta** | 0 | Per-signal minimum absolute bar delta. Applied when Override filters is on |
+| **Min bar Delta %** | 0 | Per-signal minimum bar delta as a percentage of bar volume. Applied when Override filters is on |
+
+### Signal-specific Parameters
+
+Delta Divergence, Delta Tail, Delta Surge/Drop, Delta Trap, and Above/Below POC have no extra settings — they are configured entirely with the common controls above.
 
 #### Delta Flip
 
-| Setting | Description | Range | Default |
-|---|---|---|---|
-| Precision | Sensitivity of the delta-flip detection | 1–100 | 40 |
+| Setting | Default | Description |
+|---|---|---|
+| **Precision** | 40 | Sensitivity of the delta-flip detection — higher values require a sharper flip, range: 1–100 |
 
 #### Delta Slingshot
 
-| Setting | Description | Range | Default |
-|---|---|---|---|
-| Lookback bars | Number of prior bars compared to the closed bar (closed bar excluded) | 1–100 | 3 |
+| Setting | Default | Description |
+|---|---|---|
+| **Lookback bars** | 3 | Number of prior bars compared with the closed bar; the closed bar itself is not included. Example: value = 2 compares the two bars before the closed bar with the closed bar, range: 1–100 |
 
 #### Stacked Imbalances
 
-| Setting | Description | Range | Default |
-|---|---|---|---|
-| Stacked Imbalances: reverse | Reverse the direction of the signal | bool | Off |
-| Imbalances: % | Imbalance percentage threshold | ≥ 0.01 | 68 |
-| Number | Minimum number of imbalances in the stack (1 = single imbalance) | ≥ 1 | 3 |
-| Volume filter | Minimum total volume in the imbalance S/R zone | ≥ 0 | 0 |
-| Above/below POC | Require the stack to be on the correct side of the POC | bool | On |
+| Setting | Default | Description |
+|---|---|---|
+| **Stacked Imbalances: reverse** | false | Reverse the direction the signal returns |
+| **Imbalances: %** | 68 | Imbalance percentage threshold — the diagonal bid/ask ratio a level must exceed to count as an imbalance, range: 0.01–∞ |
+| **Number** | 3 | Minimum number of imbalances in the stack. Set 1 to accept a single imbalance, range: 1–∞ |
+| **Volume filter** | 0 | Minimum total volume in the imbalance S/R zone; 0 disables the filter, range: 0–∞ |
+| **Above/below POC** | true | Require the stack to be on the correct side of the bar POC — buy stacks below it, sell stacks above it |
 
 #### Volume Sequencing
 
-| Setting | Description | Range | Default |
-|---|---|---|---|
-| Levels | Number of consecutive price levels with increasing volume required | 2–5 | 4 |
+| Setting | Default | Description |
+|---|---|---|
+| **Levels** | 4 | Number of consecutive price levels with increasing volume required, range: 2–5 |
 
 #### Hammer with Absorption
 
-| Setting | Description | Range | Default |
-|---|---|---|---|
-| Wick % | Minimum wick size as percentage of bar range | 1–100 | 35 |
-| POC | Require absorption to be at/above/below the POC accordingly | bool | On |
+| Setting | Default | Description |
+|---|---|---|
+| **Wick %** | 35 | Minimum wick size as a percentage of the bar range, range: 1–100 |
+| **POC** | true | Require the absorption to be below the POC for a long signal and above it for a short signal |
 
 ### Bar Filters
 
@@ -96,29 +108,95 @@ Each signal also has an **Override filters** option that lets it bypass the glob
 
 ### Strategy Settings
 
-| Setting | Description | Default |
+| Setting | Default | Description |
 |---|---|---|
-| Logic of signals | AND or OR combination of enabled signals | OR |
-| Min bar Volume | Global minimum bar volume filter | 100 |
-| Min bar Delta | Global minimum absolute bar delta filter | 100 |
-| Min bar Delta % | Global minimum bar delta percentage filter | 0 |
-| Min # validated signals | Minimum signals that must validate (OR mode only) | 0 |
-| Opposite Pattern Action | What to do when an opposite signal occurs while in a position: None, Close, or Reverse | None |
-| Suspend after trade | Pause trading after a position is closed until manually re-enabled | Off |
+| **Action** | Trade | What the strategy does — Trade (evaluate patterns and submit orders) or Export (evaluate patterns and write them to CSV without trading, see [Export Settings](#export-settings)) |
+| **Trading: ON** | true | Master switch for opening positions. Turn it off to keep signals calculating and drawing without entering the market |
+| **Opposite Pattern Action** | None | What to do when the pattern validates in the opposite direction while a position is open — None, Close, Reverse, or Unmanaged. See [Opposite Pattern Action](strategy-framework.md#opposite-pattern-action) |
+| **Suspend after trade** | false | Stop opening new positions once the current trade closes, until trading is switched back on from the Control Panel |
+| **Logic of signals** | Or | How enabled signals are combined — And (all must agree on direction), Or (any one is enough), or Conjunction |
+| **Min bar Volume** | 100 | Global minimum bar volume; bars below it are ignored by all signals that do not override filters |
+| **Min bar Delta** | 100 | Global minimum absolute bar delta |
+| **Min bar Delta %** | 0 | Global minimum bar delta as a percentage of bar volume |
+| **Min # validated signals** | 0 | Minimum number of validated signals for an OR tree; 0 means a single signal is enough, range: 0–∞ |
 
 ### Position Settings
 
-| Setting | Description | Default |
+Up to three entries can be configured for position scaling, each with its own quantity, profit target, and stop loss. Set a quantity to 0 to disable that entry.
+
+| Setting | Default | Description |
 |---|---|---|
-| Direction | Allowed trading direction: Long, Short, or Any | Any |
-| Quantity (entries 1-3) | Number of contracts per entry (up to 3 entries for scaling) | 1 |
-| Stop Loss (entries 1-3) | Stop loss in ticks per entry | 20 |
-| Profit Target (entries 1-3) | Profit target in ticks per entry | 40 |
-| Break-even after | Move stop to entry price after this many ticks of profit | 10 |
-| Break-even shift | Ticks added to break-even stop (positive = additional profit) | 1 |
-| Trail | Enable trailing stop | Off |
-| Trail after / distance / step | Trail activation threshold, trailing distance, and step size in ticks | 15 / 10 / 1 |
-| Enter by limit order | Use limit orders instead of market orders for entries | Off |
+| **Direction** | Any | Allowed trading direction — Long, Short, or Any |
+| **Trading Instrument: enable** | false | Submit orders on a data series other than the chart series. Patterns are still evaluated on the chart series |
+| **Trading Instrument: name** | MES 12-24 | Instrument of the trading data series |
+| **Trading Instrument: period** | Minute | Bars period type of the trading data series |
+| **Trading Instrument: value** | 1 | Bars period value of the trading data series, range: 1–∞ |
+| **Quantity 1** | 1 | Contracts for the first entry, range: 1–∞ |
+| **Profit target 1, ticks** | 20 | Profit target of the first entry in ticks, range: 1–∞ |
+| **Stop loss 1, ticks** | 10 | Stop loss of the first entry in ticks, range: 1–∞ |
+| **Quantity 2** | 2 | Contracts for the second entry; 0 disables it, range: 0–∞ |
+| **Profit target 2, ticks** | 30 | Profit target of the second entry in ticks, range: 1–∞ |
+| **Stop loss 2, ticks** | 10 | Stop loss of the second entry in ticks, range: 1–∞ |
+| **Quantity 3** | 0 | Contracts for the third entry; 0 disables it, range: 0–∞ |
+| **Profit target 3, ticks** | 40 | Profit target of the third entry in ticks, range: 1–∞ |
+| **Stop loss 3, ticks** | 10 | Stop loss of the third entry in ticks, range: 1–∞ |
+| **Breakeven** | false | Move the stop loss to the entry price once the position gains **Breakeven after, ticks** |
+| **Breakeven after, ticks** | 10 | Profit in ticks that triggers the break-even move, range: 1–∞ |
+| **Breakeven shift, ticks** | 1 | Ticks added to the break-even stop beyond the entry price; a positive value locks in that many ticks of profit |
+| **Trail** | false | Enable the trailing stop |
+| **Trail after, ticks** | 15 | Profit in ticks that activates the trail, range: 1–∞ |
+| **Trail distance, ticks** | 10 | Distance the trailing stop keeps behind price, in ticks, range: 1–∞ |
+| **Trail step, ticks** | 1 | Minimum price movement in ticks before the trailing stop is moved again, range: 1–∞ |
+
+### Trading Time Settings
+
+Two independent intraday windows can be defined. Times use the chart's time zone. Leave both disabled to trade the whole session.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Trading time #1: enable** | false | Enable the first trading window |
+| **Trading time #1: begin** | 08:30:00 | Start of the first window |
+| **Trading time #1: end** | 15:15:00 | End of the first window |
+| **Trading time #2: enable** | false | Enable the second trading window |
+| **Trading time #2: begin** | 15:30:00 | Start of the second window |
+| **Trading time #2: end** | 17:00:00 | End of the second window |
+
+### Risk Management Settings
+
+Limits apply at the account level and reset overnight. See [Risk Management](strategy-framework.md#risk-management) for how they are evaluated.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Daily loss limit: enable** | false | Enable the daily loss limit |
+| **Daily loss limit** | 500 | Maximum loss for the day in account currency |
+| **Daily profit limit: enable** | false | Enable the daily profit limit |
+| **Daily profit limit** | 2500 | Profit target for the day in account currency |
+| **Daily max drawdown: enable** | false | Enable the trailing daily drawdown limit |
+| **Daily max drawdown** | 1500 | Maximum drop from the day's peak account value, in account currency |
+| **Daily trades limit: enable** | false | Enable the daily trades limit |
+| **Daily trades limit** | 5 | Maximum number of filled entries per day |
+
+### Export Settings
+
+When **Action** is set to Export, the strategy writes each validated pattern to a CSV file instead of trading.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Header** | true | Write the column header row at the top of the file |
+| **Batch** | false | Accumulate records in memory and write them in one pass instead of after each pattern |
+| **File** | footprint_action.csv | Output file name |
+| **NinjaScript Output** | false | Mirror each exported record to the NinjaTrader Output window |
+
+### Control Panel and Dashboard Defaults
+
+Footprint Action re-exposes four inherited [strategy framework](strategy-framework.md) settings on the MZpack [Control Panel](strategy-framework.md#control-panel) so they can be changed at runtime, and ships different defaults for them.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Entry/Exit: markup** | MarkerAndText | Marker style drawn at the entry and exit price — None, Marker, or MarkerAndText |
+| **Pattern dashboard: show** | true | Show the decision-tree dashboard on the chart |
+| **Pattern dashboard: legend** | true | Show the legend that names the signal in each dashboard row |
+| **Pattern dashboard: position** | Top | Edge of the chart panel the dashboard is anchored to — Top or Bottom |
 
 ### Source Code
 
@@ -149,61 +227,71 @@ GhostResistance uses AND logic — all enabled signal groups must confirm before
 | **Big Trade** | Significant trades detected by [mzBigTrade](../indicators/mzBigTrade.md) — configurable minimum size, iceberg detection, and aggression (sweep) filter |
 | **Profile Levels** | Price must be approaching a volume profile level (session or weekly) from [mzVolumeProfile](../indicators/mzVolumeProfile.md) — optional, can be disabled for pure order flow mode |
 
+### Strategy Settings
+
+| Setting | Default | Description |
+|---|---|---|
+| **Action** | Trade | What the strategy does — Trade (evaluate patterns and submit orders) or Export (write validated patterns to CSV without trading) |
+| **Trading: ON** | true | Master switch for opening positions. Turn it off to keep signals calculating and drawing without entering the market |
+| **Opposite Pattern Action** | None | What to do when the pattern validates in the opposite direction while a position is open — None, Close, Reverse, or Unmanaged. See [Opposite Pattern Action](strategy-framework.md#opposite-pattern-action) |
+| **Suspend after trade** | false | Stop opening new positions once the current trade closes, until trading is switched back on from the Control Panel |
+| **Wait for bar close** | false | Validate the pattern only on bar close instead of on each tick. Fewer, later, but more reliable entries |
+| **Short circuit** | true | Stop evaluating the signal tree as soon as a signal returns None. Read-only |
+
 ### Bar Metrics Settings
 
-| Setting | Description | Default |
+| Setting | Default | Description |
 |---|---|---|
-| Min bar Volume | Minimum bar volume | 500 |
-| Min bar Delta | Minimum absolute bar delta | 20 |
-| Min bar Delta % | Minimum bar delta percentage | 10 |
-| Min wick % | Minimum wick size as percentage of bar range | 30 |
-| Hammer | Require hammer candle pattern | On |
+| **Enable** | true | Include the bar metrics signal in the pattern |
+| **Min bar Volume** | 100 | Minimum bar volume |
+| **Min bar Delta** | 100 | Minimum absolute bar delta |
+| **Min bar Delta %** | 10 | Minimum bar delta as a percentage of bar volume |
+| **Min wick %** | 30 | Minimum wick size as a percentage of the bar range, range: 0–100 |
+| **Hammer** | true | Require a hammer candle — the wick must be on the side the reversal is expected from |
 
 ### Absorption Settings
 
-| Setting | Description | Default |
+| Setting | Default | Description |
 |---|---|---|
-| Absorption % | Minimum absorption percentage threshold | 200 |
-| Absorption depth | Number of price levels to check for absorption | 2 |
-| Consecutive | Minimum consecutive absorption levels required | 2 |
-| Zone volume | Minimum volume in the absorption S/R zone | 50 |
+| **Enable** | true | Include the absorption signal in the pattern. Read-only — absorption is always required |
+| **Absorption %** | 200 | Minimum absorption percentage — how far the absorbing side's volume must exceed the aggressing side's |
+| **Absorption depth** | 2 | How far price must bounce from the absorption level to qualify, in ticks |
+| **Consecutive** | 2 | Minimum number of consecutive absorption levels forming the S/R zone |
+| **Zone volume** | 50 | Minimum total volume in the absorption S/R zone |
 
 ### Big Trade Settings
 
-| Setting | Description | Default |
+| Setting | Default | Description |
 |---|---|---|
-| Trade filter | Minimum trade size (contracts) | 200 |
-| Iceberg filter: enable | Detect iceberg orders | On |
-| Iceberg filter | Minimum iceberg volume | 20 |
-| Aggression filter: enable | Require aggressive (sweep) trades | On |
-| Aggression filter, ticks | Minimum sweep range in ticks | 3 |
+| **Enable** | true | Include the big trade signal in the pattern. Read-only — a big trade is always required |
+| **Trade filter** | 200 | Minimum trade size in contracts for a trade to count |
+| **Iceberg filter: enable** | true | Require iceberg volume in the trade |
+| **Iceberg filter** | 20 | Minimum iceberg volume, applied when the iceberg filter is enabled |
+| **Aggression filter: enable** | true | Require the trade to be aggressive — a sweep across several price levels |
+| **Aggression filter, ticks** | 3 | Minimum sweep range in ticks, applied when the aggression filter is enabled |
 
 ### Profile Levels Settings
 
-When enabled, the strategy only takes trades near selected volume profile levels. Price must be within the **approaching distance** (in ticks) of a selected level.
+When enabled, the strategy only takes trades near selected volume profile levels. The bar high or low must come within the approaching distance (in ticks) of a selected level.
 
-**Session levels** (overnight and RTH):
-
-| Setting | Default |
-|---|---|
-| Overnight POC | On |
-| Overnight VAH/VAL | On |
-| Overnight High/Low | On |
-| RTH POC | On |
-| RTH VAH/VAL | On |
-| RTH High/Low | On |
-| Approaching distance | 8 ticks |
-
-**Weekly levels:**
-
-| Setting | Default |
-|---|---|
-| Weekly POC | On |
-| Weekly VAH/VAL | On |
-| Weekly High/Low | On |
-| Approaching distance | 20 ticks |
-
-RTH/ETH session times are configurable (default RTH: 08:30–15:15, ETH: 17:30–08:30).
+| Setting | Default | Description |
+|---|---|---|
+| **Enable** | true | Require price to be approaching a selected profile level. Disable for pure order flow mode |
+| **RTH begin** | 08:30:00 | Start of the regular trading hours session used to build the RTH profile |
+| **RTH end** | 15:15:00 | End of the regular trading hours session |
+| **ETH begin** | 17:30:00 | Start of the overnight (extended hours) session. Clamped to be no earlier than RTH end |
+| **ETH end** | 08:30:00 | End of the overnight session. Clamped to be no later than ETH begin |
+| **Overnight POC** | true | Use the overnight session Point of Control as a level |
+| **Overnight VAH/VAL** | true | Use the overnight session value area high and low as levels |
+| **Overnight High/Low** | true | Use the overnight session high and low as levels |
+| **RTH POC** | true | Use the RTH session Point of Control as a level |
+| **RTH VAH/VAL** | true | Use the RTH session value area high and low as levels |
+| **RTH High/Low** | true | Use the RTH session high and low as levels |
+| **Overnight/RTH level approaching, ticks** | 8 | How close the bar high/low must come to an overnight or RTH level, in ticks |
+| **Weekly POC** | true | Use the weekly Point of Control as a level |
+| **Weekly VAH/VAL** | true | Use the weekly value area high and low as levels |
+| **Weekly High/Low** | true | Use the weekly high and low as levels |
+| **Weekly level approaching, ticks** | 20 | How close the bar high/low must come to a weekly level, in ticks |
 
 ### Operating Modes
 
@@ -215,13 +303,36 @@ GhostResistance can be configured for different trading styles:
 
 ### Position Settings
 
-GhostResistance supports up to 3 entries for position scaling, each with independent quantity, stop loss, and profit target. The same break-even and trail settings apply to all entries.
+GhostResistance supports up to 3 entries for position scaling, each with independent quantity, stop loss, and profit target. The same break-even and trail settings apply to all entries. Set a quantity to 0 to disable that entry.
 
-| Setting | Entry 1 | Entry 2 | Entry 3 |
-|---|---|---|---|
-| Quantity | 1 | 2 | 0 (disabled) |
-| Stop Loss | 20 ticks | 20 ticks | 20 ticks |
-| Profit Target | 40 ticks | 60 ticks | 80 ticks |
+| Setting | Default | Description |
+|---|---|---|
+| **Direction** | Any | Allowed trading direction — Long, Short, or Any |
+| **Trading Instrument: enable** | false | Submit orders on a data series other than the chart series. Patterns are still evaluated on the chart series |
+| **Trading Instrument: name** | MES 12-24 | Instrument of the trading data series |
+| **Trading Instrument: period** | Minute | Bars period type of the trading data series |
+| **Trading Instrument: value** | 1 | Bars period value of the trading data series, range: 1–∞ |
+| **Enter by limit order** | false | Enter with a limit order at the big trade POC instead of a market order |
+| **Cancel limit order type** | Bars | What measures the life of an unfilled limit order — None, Ticks, Bars, or Milliseconds |
+| **Cancel limit order value** | 3 | How many ticks, bars, or milliseconds an unfilled limit order is left working before it is cancelled |
+| **Quantity 1** | 1 | Contracts for the first entry, range: 1–∞ |
+| **Profit target 1, ticks** | 40 | Profit target of the first entry in ticks, range: 1–∞ |
+| **Stop loss 1, ticks** | 20 | Stop loss of the first entry in ticks, range: 1–∞ |
+| **Quantity 2** | 2 | Contracts for the second entry; 0 disables it, range: 0–∞ |
+| **Profit target 2, ticks** | 60 | Profit target of the second entry in ticks, range: 1–∞ |
+| **Stop loss 2, ticks** | 20 | Stop loss of the second entry in ticks, range: 1–∞ |
+| **Quantity 3** | 0 | Contracts for the third entry; 0 disables it, range: 0–∞ |
+| **Profit target 3, ticks** | 80 | Profit target of the third entry in ticks, range: 1–∞ |
+| **Stop loss 3, ticks** | 20 | Stop loss of the third entry in ticks, range: 1–∞ |
+| **Breakeven** | false | Move the stop loss to the entry price once the position gains **Breakeven after, ticks** |
+| **Breakeven after, ticks** | 10 | Profit in ticks that triggers the break-even move, range: 1–∞ |
+| **Breakeven shift, ticks** | 1 | Ticks added to the break-even stop beyond the entry price; a positive value locks in that many ticks of profit |
+| **Trail** | false | Enable the trailing stop |
+| **Trail after, ticks** | 15 | Profit in ticks that activates the trail, range: 1–∞ |
+| **Trail distance, ticks** | 10 | Distance the trailing stop keeps behind price, in ticks, range: 1–∞ |
+| **Trail step, ticks** | 1 | Minimum price movement in ticks before the trailing stop is moved again, range: 1–∞ |
+
+GhostResistance uses the same [trading time](#trading-time-settings) and [risk management](#risk-management-settings) settings as Footprint Action, and re-exposes the same four [Control Panel and dashboard](#control-panel-and-dashboard-defaults) settings with the same defaults.
 
 ### Control Panel
 
@@ -262,37 +373,175 @@ The Data Export strategy is a utility that exports indicator data to CSV files. 
 
 Each indicator can be independently enabled or disabled for export.
 
-### Footprint Export Values
+### Common Export Settings
 
-| Value | Description |
-|---|---|
-| Open, Close, High, Low | Bar OHLC prices |
-| RangeTicks, RangeLevels | Bar range in ticks and price levels |
-| Direction | Bar direction (up/down) |
-| DurationMs | Bar duration in milliseconds |
-| Volumes, Bids, Asks, Deltas | Price ladders (per-level data) |
-| TradesNumbers | Per-level trades count ladder |
-| TradesNumber | Total trades count in the bar |
-| Volume, BuyVolume, SellVolume | Bar total, buy, and sell volumes |
-| Delta, DeltaPercentage | Bar delta and delta percentage |
-| MinDelta, MaxDelta | Intra-bar delta extremes |
-| DeltaChange, DeltaCumulative | Delta change and session cumulative delta |
-| DeltaRate, DeltaRateHigh, DeltaRateLow | Delta rate and its extremes |
-| AbsoluteDeltaAverage, AbsoluteDeltaTotal | Absolute delta statistics |
-| VAH, VAL, POC, POCVolume | Bar value area high/low, POC price and volume |
-| BuyPercentage, SellPercentage | Buy/sell volume percentages |
-| COTHigh, COTLow | Commitment of Traders high/low |
+The **Export** category applies to all four exports.
 
-### Export Settings
-
-| Setting | Description | Default |
+| Setting | Default | Description |
 |---|---|---|
-| Header | Include column headers in the CSV file | On |
-| Time | Include timestamp column | On |
-| Batch | Batch write mode (writes accumulated data at once) | Off |
-| Signed volume | Prefix volumes with +/- for buy/sell direction | Off |
-| Delimiter | Column separator character | `;` |
-| File | Custom file path (optional) | Auto-generated |
+| **Header** | true | Write the column header row at the top of each file |
+| **Time** | true | Write a timestamp column as the first column |
+| **Batch** | false | Accumulate records in memory and write them in one pass instead of after each record |
+| **Signed volume** | false | Give volumes a sign — `+` for buy, `-` for sell |
+| **Delimiter** | `;` | Column separator character |
+
+Every setting in the four sections below is a column toggle unless noted otherwise: enabling it adds that column to the file, in the order the settings appear. All columns are off by default except the ones listed with default `true`.
+
+### Footprint Export
+
+Exported once per closed bar. Values not calculated by mzFootprint are written as empty strings or zeros — enable the corresponding indicator feature first.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Export** | true | Enable the footprint export |
+| **Temporality** | Historical | When data is collected — Historical or Realtime. See [Temporality](#temporality) |
+| **File** | `footprint\` | Output folder, relative to the strategy data folder |
+| **Open** | true | Bar open price |
+| **Close** | true | Bar close price |
+| **High** | false | Bar high price |
+| **Low** | false | Bar low price |
+| **RangeTicks** | false | Bar range in ticks |
+| **RangeLevels** | false | Bar range in price levels (clusters) |
+| **Direction** | false | Bar direction — up or down |
+| **DurationMs** | false | Bar duration in milliseconds |
+| **Volumes** | false | Per-level total volume ladder |
+| **Bids** | false | Per-level bid (sell) volume ladder |
+| **Asks** | false | Per-level ask (buy) volume ladder |
+| **Deltas** | false | Per-level delta ladder |
+| **TradesNumbers** | false | Per-level trades count ladder |
+| **TradesNumber** | false | Total number of trades in the bar |
+| **Volume** | true | Bar total volume |
+| **BuyVolume** | false | Bar ask-side volume |
+| **SellVolume** | false | Bar bid-side volume |
+| **Delta** | true | Bar delta — buy volume minus sell volume |
+| **VAH** | false | Bar value area high price |
+| **VAL** | false | Bar value area low price |
+| **POC** | false | Bar Point of Control price |
+| **POCVolume** | false | Volume at the bar POC |
+| **BuyPercentage** | false | Buy volume as a percentage of bar volume |
+| **SellPercentage** | false | Sell volume as a percentage of bar volume |
+| **DeltaPercentage** | false | Delta as a percentage of bar volume |
+| **MinDelta** | false | Lowest intra-bar cumulative delta reading |
+| **MaxDelta** | false | Highest intra-bar cumulative delta reading |
+| **DeltaChange** | false | Change in delta from the previous bar |
+| **DeltaCumulative** | false | Session cumulative delta at bar close |
+| **DeltaRate** | false | Delta rate — delta per unit of time |
+| **DeltaRateHigh** | false | Highest intra-bar delta rate |
+| **DeltaRateLow** | false | Lowest intra-bar delta rate |
+| **AbsoluteDeltaAverage** | false | Average absolute per-level delta in the bar |
+| **AbsoluteDeltaTotal** | false | Sum of absolute per-level deltas in the bar |
+| **COTHigh** | false | Commitment of Traders high |
+| **COTLow** | false | Commitment of Traders low |
+| **RatioNumbers** | false | Ratio Numbers metric — volume of the level adjacent to the highest-volume level divided by that level's volume, an exhaustion measure |
+| **VolumePerSecond** | false | Bar volume divided by bar duration in seconds |
+| **UnfinishedAuctionHigh** | false | Price of an unfinished auction at the bar high, 0 if none |
+| **UnfinishedAuctionLow** | false | Price of an unfinished auction at the bar low, 0 if none |
+| **BuyImbalanceCount** | false | Number of buy imbalances in the bar |
+| **SellImbalanceCount** | false | Number of sell imbalances in the bar |
+| **BuyAbsorptionCount** | false | Number of buy absorptions in the bar |
+| **SellAbsorptionCount** | false | Number of sell absorptions in the bar |
+| **BuyStackedImbalanceCount** | false | Number of buy imbalances that belong to a stack |
+| **SellStackedImbalanceCount** | false | Number of sell imbalances that belong to a stack |
+| **BuyStackedAbsorptionCount** | false | Number of buy absorptions that belong to a stack |
+| **SellStackedAbsorptionCount** | false | Number of sell absorptions that belong to a stack |
+| **BuyStackedImbalanceMaxConsec** | false | Longest run of consecutive buy imbalances in the bar |
+| **SellStackedImbalanceMaxConsec** | false | Longest run of consecutive sell imbalances in the bar |
+| **BuyStackedAbsorptionMaxConsec** | false | Longest run of consecutive buy absorptions in the bar |
+| **SellStackedAbsorptionMaxConsec** | false | Longest run of consecutive sell absorptions in the bar |
+| **DeltaDivergence** | false | Delta divergence on the bar — 1 for buy divergence, -1 for sell divergence, 0 for none |
+| **SessionOpen** | false | Session open price |
+| **SessionClose** | false | Session close price |
+| **SessionHigh** | false | Session high price |
+| **SessionLow** | false | Session low price |
+| **SeesionVAH** | false | Session value area high price |
+| **SeesionVAL** | false | Session value area low price |
+| **SessionPOC** | false | Session Point of Control price |
+
+:::note
+**SeesionVAH** and **SeesionVAL** are spelled that way in the NinjaTrader property grid.
+:::
+
+### Volume Profile Export
+
+| Setting | Default | Description |
+|---|---|---|
+| **Export** | false | Enable the volume profile export |
+| **Granularity** | Bar | One record per Bar or per Tick |
+| **Temporality** | Historical | When data is collected — Historical or Realtime |
+| **File** | `volumeprofile\` | Output folder, relative to the strategy data folder |
+| **Open** | false | Profile open price |
+| **Close** | false | Profile close price |
+| **High** | false | Profile high price |
+| **Low** | false | Profile low price |
+| **RangeTicks** | false | Profile range in ticks |
+| **MID** | false | Midpoint between the profile high and low |
+| **DurationMs** | false | Profile duration in milliseconds |
+| **TradesNumber** | false | Total number of trades in the profile |
+| **Volume** | false | Profile total volume |
+| **BuyVolume** | false | Profile ask-side volume |
+| **SellVolume** | false | Profile bid-side volume |
+| **Delta** | false | Profile delta |
+| **VAH** | false | Value area high price |
+| **VAL** | false | Value area low price |
+| **POC** | false | Point of Control price |
+| **POCVolume** | false | Volume at the POC |
+| **TickPOC** | false | Tick POC price — the POC computed at single-tick resolution |
+| **TickPOCVolume** | false | Volume at the tick POC |
+| **VWAP** | false | Volume weighted average price |
+| **_1StdDeviationPos** | false | VWAP plus one standard deviation |
+| **_1StdDeviationNeg** | false | VWAP minus one standard deviation |
+| **_2StdDeviationPos** | false | VWAP plus two standard deviations |
+| **_2StdDeviationNeg** | false | VWAP minus two standard deviations |
+| **DeltaPercentage** | false | Delta as a percentage of profile volume |
+| **BuyPOCVolume** | false | Ask-side volume at the POC |
+| **SellPOCVolume** | false | Bid-side volume at the POC |
+| **VAVolume** | false | Total volume inside the value area |
+| **TPO_POC** | false | TPO Point of Control price |
+| **TPO_VAH** | false | TPO value area high price |
+| **TPO_VAL** | false | TPO value area low price |
+| **TPOLettersCount** | false | Number of TPO letters in the profile |
+
+### Big Trade Export
+
+Exported once per detected trade.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Export** | false | Enable the big trade export |
+| **Temporality** | Historical | When data is collected — Historical or Realtime |
+| **File** | `bigtrade\` | Output folder, relative to the strategy data folder |
+| **High** | false | Highest price of the trade |
+| **Low** | false | Lowest price of the trade |
+| **Volume** | false | Trade volume |
+| **IcebergVolume** | false | Iceberg volume within the trade |
+| **Direction** | false | Trade side — 1 for buy, -1 for sell |
+| **RangeTicks** | false | Price range swept by the trade, in ticks |
+| **POC** | false | Price level of the trade that took the most volume |
+| **POCVolume** | false | Volume at the trade POC |
+| **DomPressureVolume** | false | DOM pressure volume associated with the trade |
+| **DomSupportVolume** | false | DOM support volume associated with the trade |
+| **Smart/Predatory** | false | Whether the trade was classified as smart/predatory — 1 or 0 |
+| **TicksNumber** | false | Number of ticks the trade consists of; greater than 1 for a reconstructed trade |
+| **Ticks** | false | The individual ticks of the trade |
+
+### Market Depth Export
+
+Exported on each order book update. Market depth has no Temporality setting — it is real time only.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Export** | false | Enable the market depth export |
+| **File** | `orderbook\` | Output folder, relative to the strategy data folder |
+| **MarketDepth** | false | Configured depth of the order book |
+| **RealMarketDepth** | false | Actual number of levels the data feed delivered |
+| **BestBid** | false | Best bid price |
+| **BestOffer** | false | Best offer price |
+| **RealtimeBids** | false | Bid sizes per level |
+| **RealtimeOffers** | false | Offer sizes per level |
+| **RealtimeBidsWithPrices** | false | Bid sizes paired with their price levels |
+| **RealtimeOffersWithPrices** | false | Offer sizes paired with their price levels |
+| **RealtimeBidVolume** | false | Total bid volume across the book |
+| **RealtimeOfferVolume** | false | Total offer volume across the book |
 
 ### Output File Location
 

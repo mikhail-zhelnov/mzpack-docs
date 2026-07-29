@@ -8,6 +8,27 @@ description: "Architecture and usage of the MZpack strategy framework with patte
 
 The MZpack strategy framework organizes trading logic into a structured pipeline: **patterns** define trading conditions through **decision trees** of **signals** and **filters**, which trigger **entries** with protective orders, managed by **position management** and **risk management** rules. This page covers each component in detail.
 
+:::note
+Every MZpack strategy inherits the settings documented on this page. In the NinjaTrader strategy properties they all appear under the **MZpack** category; the tables below are grouped by topic and follow the order of that category. Settings specific to an individual strategy are documented in [Built-in Strategies](./built-in-strategies.md).
+:::
+
+## Strategy Settings
+
+| Setting | Default | Description |
+|---|---|---|
+| **Settings preset** | *(empty)* | Name that gives this strategy instance its own indicator and pattern template files. Empty means all instances share one set of templates in `Documents\NinjaTrader 8\mzpack\strategy\<namespace>\<strategy>\templates`; entering a name appends it to each file (`VP.ES.xml` instead of `VP.xml`) |
+| **Backtesting** | false | Run the strategy in the historical state for the Strategy Analyzer. Increases loading time — do not enable it for chart trading. See [Backtesting](#backtesting) |
+| **Operating** | Auto | Operating mode — Auto or Manual. See [Operating Modes](#operating-modes) |
+| **Handle order errors** | true | Ignore real-time order errors instead of stopping the strategy, and handle protective orders moved on the chart. Resolves a Rithmic execution issue. Read-only |
+| **Trace orders** | false | Write NinjaScript order tracing to the Output window (sets NinjaTrader's `TraceOrders`). Useful for diagnosing order submission |
+
+### Operating Modes
+
+| Mode | Description |
+|---|---|
+| **Auto** | Entries are submitted automatically when a pattern validates |
+| **Manual** | Entries are not submitted — patterns and signals are only displayed on the chart, and positions are opened by hand from Chart Trader |
+
 ## Patterns
 
 A pattern is a set of conditions that, when satisfied, produce a determined trading direction (Long or Short). Patterns are the central organizing unit of any MZpack strategy.
@@ -190,7 +211,11 @@ MZpack strategies support two ATM (Advanced Trade Management) approaches:
 | **MZpack ATM** | Uses MZpack's built-in order management with Entry, Trail, and Break-even classes |
 | **NinjaTrader ATM** | Delegates order management to a NinjaTrader ATM strategy template |
 
-The ATM mode is configured via the strategy's PositionManagement property.
+| Setting | Default | Description |
+|---|---|---|
+| **Position management** | MZpack | Which layer manages the position — MZpack (built-in Entry, Trail, and Break-even classes) or NinjaTraderATM (a NinjaTrader ATM strategy template) |
+| **NinjaTrader ATM: template** | *(none)* | Name of the NinjaTrader ATM template to apply. The drop-down lists the ATM templates installed in NinjaTrader. Applies when Position management = NinjaTraderATM |
+| **NinjaTrader ATM: entry method** | Market | Order type used to open the ATM position — Market, Limit, or StopLimit. Applies when Position management = NinjaTraderATM |
 
 ### Opposite Pattern Action
 
@@ -249,17 +274,46 @@ See **[Backtesting](./backtesting.md)** for the full workflow, Tick Replay prere
 
 The strategy framework provides several visualization options, configured in the **Visual** category of the strategy properties.
 
-### Pattern Background
+### Pattern on Chart
 
-Enable **Pattern: background** to display a colored vertical area on the chart when an Entry pattern validates. Separate colors can be assigned for Long and Short directions, and for the signals and filters portions of the pattern.
+Enable **Pattern on chart: show** to display a colored area on the chart when a pattern validates. The area is drawn over the bar/price range in which the pattern was found, with separate strokes for the signals portion and the filters portion, and for Long and Short directions.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Pattern on chart: show** | true | Draw the validated pattern's area on the chart |
+| **Pattern on chart: Buy signal(s)** | Green, solid, 3 px, 25 % opacity | Stroke of the area covering the signals of a Long pattern |
+| **Pattern on chart: Sell signal(s)** | Red, solid, 3 px, 25 % opacity | Stroke of the area covering the signals of a Short pattern |
+| **Pattern on chart: Buy filter(s)** | Green, solid, 3 px, 10 % opacity | Stroke of the area covering the filters of a Long pattern |
+| **Pattern on chart: Sell filter(s)** | Red, solid, 3 px, 10 % opacity | Stroke of the area covering the filters of a Short pattern |
 
 ### Entry/Exit Markup
 
-In **Manual** operating mode, enable **Entry/Exit: markup** to display entry and exit markers on the chart. Options include Marker only, or Marker and Text.
+Enable **Entry/Exit: markup** to display entry and exit markers on the chart. This is most useful in **Manual** operating mode, where it shows where the strategy would have entered and exited.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Entry/Exit: markup** | None | Marker style drawn at the entry and exit price — None, Marker (triangle only), or MarkerAndText (triangle plus the entry/exit label) |
+| **Entry/Exit: Buy marker** | Lime | Marker color for Long entries and exits |
+| **Entry/Exit: Sell marker** | Red | Marker color for Short entries and exits |
 
 ### Pattern Dashboard
 
 Enable **Pattern dashboard: show** to display a real-time view of the decision tree on the chart, showing the current state (direction) of each signal and filter on every bar. This is particularly useful in Manual mode for discretionary trading.
+
+The dashboard is a grid: one row per signal or filter node, one column per bar. Each cell is stroked with the color of the direction that node returned on that bar.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Pattern dashboard: show** | false | Show the decision-tree dashboard on the chart |
+| **Pattern dashboard: LONG** | Green | Cell stroke when the node returned Long |
+| **Pattern dashboard: SHORT** | Red | Cell stroke when the node returned Short |
+| **Pattern dashboard: ANY** | RoyalBlue | Cell stroke when the node returned Any (both directions) |
+| **Pattern dashboard: NONE** | DimGray | Cell stroke when the node returned None (no direction) |
+| **Pattern dashboard: legend** | false | Show the legend that names the signal or filter in each row |
+| **Pattern dashboard: position** | Bottom | Edge of the chart panel the grid is anchored to — Top or Bottom |
+| **Pattern dashboard: offset, px** | 0 | Vertical offset from the anchor edge in pixels; positive values move the grid up, negative values move it down |
+| **Pattern dashboard: row height, px** | 28 | Height of one dashboard row in pixels, range: 10–100 |
+| **Pattern dashboard: font** | Arial 12 | Font of the dashboard cell and legend text |
 
 ### Partially Visible Mode
 
@@ -296,13 +350,56 @@ Log level is a bitmask — multiple levels can be combined:
 
 | Target | Description |
 |---|---|
+| **None** | Logging disabled |
 | **NinjaScriptOutput** | NinjaTrader Output window |
 | **File** | Text file in `Documents\NinjaTrader 8\mzpacklog\` |
 | **All** | Both Output window and file |
 
+### Logging Settings
+
+Each **Log:** toggle sets one bit of the log level bitmask described above.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Log: target** | NinjaScriptOutput | Where log records are written — None, File, NinjaScriptOutput, or All |
+| **Log: Validated PATTERN** | true | Log each pattern when it validates (`V_PATTERN`) |
+| **Log: not Validated PATTERN on Bar Close** | false | Log the state of patterns that did *not* validate, on each bar close (`NV_PATTERN_OBC`). Verbose — intended for debugging a pattern that never fires |
+| **Log: ORDER** | false | Log order events: submitted, working, filled, partially filled, cancelled, rejected (`ORDER`) |
+| **Log: ENTRY** | true | Log entry details (`ENTRY`) |
+| **Log: POSITION** | true | Log position state changes (`POSITION`) |
+| **Log: PROPERTIES** | true | Log the strategy properties on initialization (`PROPERTIES`) |
+| **Log: time** | true | Prefix each log record with a timestamp |
+
+:::note
+Logging is disabled automatically in the Strategy Analyzer — the log target and level are forced to None while the strategy runs there.
+:::
+
+## Alerts
+
+The strategy can play a sound when a signal or a pattern validates. Alerts fire in real time only.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Signal alert: enable** | false | Play a sound whenever an individual signal validates |
+| **Signal alert: sound** | mzpack_alert1.wav | Sound file for the signal alert |
+| **Entry pattern alert: enable** | false | Play a sound when an Entry pattern validates |
+| **Entry pattern alert: sound** | mzpack_alert5.wav | Sound file for the entry pattern alert |
+| **Exit pattern alert: enable** | false | Play a sound when an Exit pattern validates |
+| **Exit pattern alert: sound** | mzpack_alert6.wav | Sound file for the exit pattern alert |
+
+:::tip
+See [Sound Files](/docs/getting-started/sound-files) for the full list of pre-installed sounds and how to add custom WAV files.
+:::
+
 ## Control Panel
 
-The optional **Control Panel** is a panel on the right side of the chart that provides runtime controls for the strategy. It can display operating mode switches, direction selectors, and other configurable properties. Enable it with the **ControlPanelShow** option. The panel is disabled while historical data is loading.
+The optional **Control Panel** is a panel on the right side of the chart that provides runtime controls for the strategy. It has two tabs: **Properties**, a property grid for the strategy's settings, and a tab named after the strategy holding its custom controls — operating mode switches, direction selectors, and any control the strategy adds. The panel is disabled while historical data is loading.
+
+| Setting | Default | Description |
+|---|---|---|
+| **Control Panel: show** | false | Show the control panel on the right side of the chart |
+| **Control Panel: width** | 300 | Panel width in pixels |
+| **Control Panel: show properties** | true | Include the **Properties** tab with the strategy property grid. Disable to show only the strategy's own controls |
 
 ## Multi-Data Series
 

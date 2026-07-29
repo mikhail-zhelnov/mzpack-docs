@@ -118,6 +118,10 @@ When Color mode is set to **Custom**, bars are colored based on 4 value threshol
 
 ## Settings Reference
 
+:::note
+**General**, **Orderflow**, and **Levels** settings are shared by all MZpack indicators and are documented in [Common Settings](./common-settings.md).
+:::
+
 ### Common
 
 | Setting | Default | Description |
@@ -147,10 +151,10 @@ When Color mode is set to **Custom**, bars are colored based on 4 value threshol
 | **Color mode** | Solid | Color rendering mode — Solid, Saturation, Heatmap, GrayScaleHeatmap, or Custom |
 | **Buy volume/Positive delta** | Green | Color for buy volume or positive delta |
 | **Sell volume/Negative delta** | Red | Color for sell volume or negative delta |
-| **Custom 'less' filter #0** | 1000 | Upper bound for the lowest custom color tier |
-| **Custom 'gte' filter #1** | 1000 | First custom threshold |
-| **Custom 'gte' filter #2** | 7000 | Second custom threshold |
-| **Custom 'gte' filter #3** | 10000 | Third custom threshold |
+| **Custom '&lt;' filter #0** | 1000 | Bars below this value use the `#0` color |
+| **Custom '&gt;=' filter #1** | 1000 | Bars at or above this value use the `#1` color |
+| **Custom '&gt;=' filter #2** | 7000 | Bars at or above this value use the `#2` color |
+| **Custom '&gt;=' filter #3** | 10000 | Bars at or above this value use the `#3` color |
 | **Buy/Positive color #0** | Gray | Buy/positive color for values below filter #0 |
 | **Buy/Positive color #1** | Green | Buy/positive color for values at or above filter #1 |
 | **Buy/Positive color #2** | Lime | Buy/positive color for values at or above filter #2 |
@@ -218,7 +222,7 @@ The MZpack order flow core reconstructs individual tick trades into aggregated t
 
 | Setting | Default | Description |
 |---|---|---|
-| **Reconstruct tape** | true | Reconstruct tape using timestamps and Level 1 (best bid/ask) events. Required for Iceberg detection, DOM pressure, and DOM support |
+| **Reconstruct tape: enable** | true | Reconstruct tape using timestamps and Level 1 (best bid/ask) events. Required for Iceberg detection, DOM pressure, and DOM support |
 | **Reconstruct tape: timestamps only** | false | Use only timestamps for reconstruction — Level 1 (best bid/ask) events are ignored, including for live data, and trades with equal timestamps are merged. Enable to get an exact match between reconstructed historical and reconstructed live data. Iceberg detection, DOM pressure, and DOM support are unavailable when enabled |
 
 **Note:** Iceberg detection requires Reconstruct tape to be enabled **with timestamps-only mode disabled**.

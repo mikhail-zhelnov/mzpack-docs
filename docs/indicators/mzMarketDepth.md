@@ -285,6 +285,10 @@ Four views working together: historical DOM heatmap reveals where large orders r
 
 ## Settings Reference
 
+:::note
+**General**, **Orderflow**, and **Levels** settings are shared by all MZpack indicators and are documented in [Common Settings](./common-settings.md).
+:::
+
 ### Common
 
 | Setting | Default | Description |
@@ -428,7 +432,7 @@ See [Sound Files](/docs/getting-started/sound-files) for the full list of pre-in
 |---|---|---|
 | **Optimize render performance** | true | Limit rendering time to free CPU/GPU resources |
 | **Maximal render time, ms** | 100 | Maximum rendering time before frame skip. Chart may flash — adjust for balance between performance and visual comfort |
-| **Refresh delay** | 250 | Refresh delay in milliseconds |
+| **Refresh delay, ms** | 250 | Refresh delay in milliseconds |
 
 ## Performance Tips
 

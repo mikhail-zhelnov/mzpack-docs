@@ -208,6 +208,10 @@ PriceOrDelta logic means a divergence qualifies if **either** the price deviatio
 
 ## Settings Reference
 
+:::note
+**General**, **Orderflow**, and **Levels** settings are shared by all MZpack indicators and are documented in [Common Settings](./common-settings.md).
+:::
+
 ### Divergence
 
 | Setting | Default | Description |
@@ -215,7 +219,6 @@ PriceOrDelta logic means a divergence qualifies if **either** the price deviatio
 | **Zigzag: deviation type** | Value | Value (ticks) or Percent (within session) |
 | **Zigzag: deviation threshold** | 1 | Minimum deviation to confirm a ZigZag breakpoint (range: 1–∞) |
 | **Zigzag: use High-Low** | true | Use High/Low prices for ZigZag. When false, uses Close |
-| **Breakpoints lookback** | 2 | Number of breakpoints kept in queue for comparison (range: 2–∞) |
 | **Price deviation: type** | Value | Value (ticks) or Percent (within session) |
 | **Price deviation: min** | 2 | Minimum price deviation to qualify |
 | **Price deviation: max** | -1 | Maximum price deviation, -1 = unlimited |

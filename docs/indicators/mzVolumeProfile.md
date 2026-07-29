@@ -85,32 +85,43 @@ The mzVolumeProfile indicator displays horizontal volume distribution across pri
 
 When Color mode is set to **Custom**, you choose between two sub-modes:
 
-**Percent** — 10 percentage-based tiers, each with its own color. Each ladder is colored based on its value as a percentage of the profile's maximum:
+The sub-mode is selected with **Custom color mode** (default `Percent`).
 
-| Tier | Default Color |
-|---|---|
-| 0–10% | DarkRed |
-| 10–20% | Red |
-| 20–30% | Chocolate |
-| 30–40% | DarkOrange |
-| 40–50% | Orange |
-| 50–60% | Yellow |
-| 60–70% | Green |
-| 70–80% | LightGreen |
-| 80–90% | Teal |
-| 90–100% | DodgerBlue |
+**Percent** — 10 percentage-based tiers, each with its own color. Each ladder is colored by its value as a percentage of the profile's maximum:
 
-**Value** — 5 absolute value thresholds:
+| Setting | Default | Description |
+|---|---|---|
+| **0-10 %** | DarkRed | Color for ladders up to 10% of the profile maximum |
+| **10-20 %** | Red | Color for ladders from 10% to 20% |
+| **20-30 %** | Chocolate | Color for ladders from 20% to 30% |
+| **30-40 %** | DarkOrange | Color for ladders from 30% to 40% |
+| **40-50 %** | Orange | Color for ladders from 40% to 50% |
+| **50-60 %** | Yellow | Color for ladders from 50% to 60% |
+| **60-70 %** | Green | Color for ladders from 60% to 70% |
+| **70-80 %** | LightGreen | Color for ladders from 70% to 80% |
+| **80-90 %** | Teal | Color for ladders from 80% to 90% |
+| **90-100 %** | DodgerBlue | Color for ladders from 90% to 100% |
 
-| Threshold | Default Color |
-|---|---|
-| >= 0 | DarkRed |
-| >= 1,000 | Red |
-| >= 10,000 | Orange |
-| >= 20,000 | Yellow |
-| >= 40,000 | DodgerBlue |
+**Value** — 5 absolute volume thresholds. The properties grid shows five consecutive **&gt;=** / **Color** pairs; a ladder takes the color of the highest threshold its volume reaches:
+
+| Setting | Default | Description |
+|---|---|---|
+| **&gt;=** | 0 | 1st pair — volume threshold for the first tier, range: 0–∞ |
+| **Color** | DarkRed | 1st pair — color applied at or above the first threshold |
+| **&gt;=** | 1000 | 2nd pair — volume threshold for the second tier |
+| **Color** | Red | 2nd pair — color applied at or above the second threshold |
+| **&gt;=** | 10000 | 3rd pair — volume threshold for the third tier |
+| **Color** | Orange | 3rd pair — color applied at or above the third threshold |
+| **&gt;=** | 20000 | 4th pair — volume threshold for the fourth tier |
+| **Color** | Yellow | 4th pair — color applied at or above the fourth threshold |
+| **&gt;=** | 40000 | 5th pair — volume threshold for the fifth tier |
+| **Color** | DodgerBlue | 5th pair — color applied at or above the fifth threshold |
 
 ## Settings Reference
+
+:::note
+**General**, **Orderflow**, and **Levels** settings are shared by all MZpack indicators and are documented in [Common Settings](./common-settings.md).
+:::
 
 ### Common
 
@@ -130,7 +141,7 @@ When Color mode is set to **Custom**, you choose between two sub-modes:
 | **Border** | true | Show profile border |
 | **Border** | Cyan, Dot, 1px | Border line style |
 | **Background** | false | Show profile background fill |
-| **Background** | DarkSlateBlue | Background color |
+| **Background** | DarkSlateBlue | Fill color used when the background is shown |
 | **Background opacity, %** | 10 | Background transparency |
 | **Buttons** | true | Show toolbar buttons |
 | **Buttons font** | Montserrat, 10pt | Toolbar button font |
@@ -264,7 +275,12 @@ TPO (Time Price Opportunity) displays the time distribution of price activity us
 | **Width, %** | 80 | Maximum TPO width as percentage (1–100) |
 | **Position** | Left | TPO placement — Left, Right, or RightOnChartMargin |
 | **Rotate colors** | false | Cycle through 6 colors for consecutive periods |
-| **Letter/block color 1–6** | Red, Orange, Yellow, LimeGreen, DodgerBlue, Sienna | Six rotating TPO colors |
+| **Letter/block color 1** | Red | First color in the rotation (**Rotate colors** only) |
+| **Letter/block color 2** | Orange | Second color in the rotation |
+| **Letter/block color 3** | Yellow | Third color in the rotation |
+| **Letter/block color 4** | LimeGreen | Fourth color in the rotation |
+| **Letter/block color 5** | DodgerBlue | Fifth color in the rotation |
+| **Letter/block color 6** | Sienna | Sixth color in the rotation; the cycle restarts from color 1 |
 | **Letters font** | Montserrat, 12pt | TPO letters font |
 | **Open: letter** | true | Highlight the opening letter |
 | **Close: letter** | true | Highlight the closing letter |
@@ -285,7 +301,7 @@ TPO (Time Price Opportunity) displays the time distribution of price activity us
 | **IB, min** | 60 | Initial Balance period in minutes |
 | **IB color** | Chocolate | Initial Balance highlight color |
 | **Show Halfback** | false | Show halfback (midpoint) level |
-| **Halfback color** | SaddleBrown | Halfback color |
+| **Halfback color** | SaddleBrown | Color of the halfback line — the midpoint between the session high and low |
 
 **Notes:**
 - TPO letters rotate through 6 colors when **Rotate colors** is enabled
@@ -313,9 +329,9 @@ Profiles are indexed using **T-index**: the most recent profile is T0, the one b
 | **End of Day** | true | Cancel naked levels at end of day |
 | **Value position** | None (#1), AboveRight (default) | Position of value labels on level lines |
 
-Each group has **10 level types**, each set to Disabled, Extended, or Naked:
+Each group has **10 level types**, each set to `Disabled`, `Extended`, or `Naked`. `Extended` draws the level forward from its profile; `Naked` draws it only until price trades through it.
 
-| Level Type | #1 Default | Description |
+| Setting | Default (#1) | Description |
 |---|---|---|
 | **Open** | Disabled | Session/profile open price |
 | **Close** | Disabled | Session/profile close price |
@@ -454,28 +470,14 @@ Filter when the indicator processes market data using General > **Working time f
 
 ## Levels (Licensed Builds)
 
-Custom support/resistance levels drawn on the chart with mouse interaction.
+Custom support/resistance levels drawn on the chart with mouse interaction. The **Levels** group is identical across all MZpack indicators — see [Common Settings › Levels](./common-settings.md#levels) for the full parameter reference, including the per-level dialog settings.
+
+## General
 
 | Setting | Default | Description |
 |---|---|---|
-| **Enable** | false | Enable custom S/R levels |
-| **Support level** | LightGreen, Opacity 25 | Support level line style |
-| **Resistance level** | Red, Opacity 25 | Resistance level line style |
-| **Value position** | AboveRight | Label placement on level lines |
-| **Value/Label color** | LightGray | Level label text color |
-| **Value/Label font** | Arial, 10pt | Level label font |
-| **Alert** | true | Enable sound alerts |
-| **Alert on** | LevelCross | Alert trigger event |
-| **Rearm** | true | Re-enable alert after firing |
-| **Rearm interval, sec** | 3 | Seconds before alert can fire again |
-| **Sound** | crossed.wav | Alert sound file |
-| **Add/remove: Mouse Left +** | LeftShift | Key modifier to add or remove a level |
-| **Modify: Mouse Left +** | LeftAlt | Key modifier to move a level |
-| **Drag with Mouse** | true | Enable drag-and-drop level repositioning |
-
-:::tip
-See [Sound Files](/docs/getting-started/sound-files) for the full list of pre-installed sounds and how to add custom WAV files.
-:::
+| **Optimize render performance** | true | Limit rendering time to free CPU/GPU resources |
+| **Maximal render time, ms** | 100 | Maximum rendering time before frames are skipped. The chart may flash — adjust for a balance between performance and visual comfort |
 
 ## Performance Tips
 
