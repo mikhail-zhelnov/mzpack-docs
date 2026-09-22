@@ -124,6 +124,7 @@ The value compared against the thresholds is the one selected by **Color source*
 | **Ask** | — | Color for ask-side background |
 | **Bid/Ask relative scaling** | true | Scale bid and ask sides relative to each other |
 | **Auto-scale values** | true | Automatically adjust font size to fit cells |
+| **Full top cluster values** | true | Print the values of the topmost cluster of a bar in full when **Ticks per level** is above 1 and that cluster is truncated by the bar high. Only the text reaches above the high — the cluster fill, the imbalance and absorption markers and the bar itself keep the truncated height, and bar statistics move up to make room |
 | **Bar border** | false | Show border around each footprint bar |
 | **Bar marker** | false | Show bar markers instead of candles |
 | **Bar space, px** | 100 | Vertical space between bars |

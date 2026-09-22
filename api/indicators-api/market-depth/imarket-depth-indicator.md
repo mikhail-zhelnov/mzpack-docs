@@ -22,7 +22,7 @@ Requires Level 2 data — live or replay only. Historical backtesting without Le
 | Property | Type | Description |
 |---|---|---|
 | `RealtimeOrderBook` | `IRealtimeOrderBook` | Current real-time DOM snapshot |
-| `Blocks` | `Dictionary<int, MarketDepthBlocks>` | Historical DOM blocks indexed by bar |
+| `Blocks` | `Dictionary<int, MarketDepthBlocks>` | Historical DOM blocks indexed by bar. Keyed by the aggregation zone when `TicksPerLevel` is above 1 — see [Price Level Aggregation](#price-level-aggregation) |
 | `OverallLiquidity` | `SortedDictionary<int, IBarLiquidity>` | Aggregated DOM liquidity per bar |
 | `OverallMigrations` | `SortedDictionary<int, IBarLiquidity>` | Liquidity migration per bar |
 | `OverallMigrationsClose` | `Series<double>` | Migration close values as a NinjaTrader Series |
@@ -54,11 +54,21 @@ The real-time order book interface exposes the current DOM state:
 
 | Property | Type | Description |
 |---|---|---|
-| `MaxMarketDepth` | `int` | Maximum supported DOM depth |
+| `MaxMarketDepth` | `int` | Maximum supported DOM depth, in ticks |
+| `TicksPerLevel` | `int` | Number of consecutive ticks merged into one DOM price zone. 1 means no aggregation |
 | `MultipleMarketMaker` | `bool` | Support for multiple market makers |
 | `ShowHistoricalDOM` | `bool` | Show historical DOM visualization |
 | `HistoryDepthBars` | `int` | Number of historical bars with DOM data |
 | `MarketDepthFilteringMode` | `MarketDepthFilteringMode` | Filtering mode for DOM display |
+
+## Price Level Aggregation
+
+`TicksPerLevel` merges N consecutive price ticks into one zone. The merge happens in the model, so everything fed by the order book — thresholds, color scales, historical blocks and migration markers — works on the merged zone volume.
+
+- `MaxMarketDepth` keeps counting **ticks**: depth is capped before the merge, so the side totals, the imbalance line and the quantitative depth metrics are identical at every setting.
+- `Blocks` is keyed by the zone — the **lowest** price of the zone for a Bid block, the **highest** one for an Ask block. The type and the shape of the dictionary are unchanged.
+- `MarketDepthBlockDescriptor` carries `ZoneLow` / `ZoneHigh`, and `GetZone(out double low, out double high)` reads both bounds as one consistent pair. `OrderBookPosition` exposes the same two properties. All of them equal `Price` when `TicksPerLevel` is 1.
+- The strategy values `RealtimeBids` and `RealtimeOffers` (and `AggregateCloneRows`) are deliberately left per tick.
 
 ## Volume Display Properties
 
@@ -67,8 +77,8 @@ The real-time order book interface exposes the current DOM state:
 | `CodeExtremeVolume` | `bool` | Highlight extreme volumes |
 | `DisplayVolume` | `double` | Display volume threshold |
 | `ExtremeVolume` | `double` | Extreme volume threshold |
-| `DisplayVolumePercentage` | `int` | Display volume as percentage |
-| `ExtremeVolumePercentage` | `int` | Extreme volume as percentage |
+| `DisplayVolumePercentage` | `int` | Display threshold as a % of the volume range, counted from a reference volume rather than from the single biggest level |
+| `ExtremeVolumePercentage` | `int` | Extremal threshold as a % of the displayed volume range, from the display threshold up to the biggest level on the chart |
 | `ShowVolumes` | `bool` | Show volume values |
 | `ShowMaxVolumes` | `bool` | Show maximum volumes |
 

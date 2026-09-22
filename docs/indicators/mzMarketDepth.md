@@ -14,6 +14,7 @@ The mzMarketDepth indicator visualizes limit orders resting in the order book (D
 
 - **Real-time DOM histogram** on the right chart margin with bid/ask ladders
 - **Historical DOM heatmap** on past chart bars with 4 filtering modes
+- **Price level aggregation** — merge several consecutive price ticks into one zone with **Ticks per level**
 - **4 color modes** — Solid, Saturation, Heatmap, GrayScaleHeatmap
 - **Hold levels** — extend significant DOM levels beyond their original scope
 - **Hold higher volume** — track maximum liquidity spikes per price level per bar
@@ -25,9 +26,22 @@ The mzMarketDepth indicator visualizes limit orders resting in the order book (D
 - **Cumulative depth lines** — running totals on each DOM side
 - **Pop-up info** — detailed level information on mouse hover
 
+## Price Level Aggregation
+
+On fast instruments price runs through several ticks in a single print, and liquidity read tick by tick is hard to follow. **Ticks per level** merges N consecutive price ticks into one zone. The default of 1 is the per-tick behavior; any higher value aggregates.
+
+Aggregation applies across the whole indicator — real-time DOM ladders, cumulative lines, per-level imbalance, historical DOM and liquidity migration — because levels are merged in the model and not at draw time. Everything fed by the order book keeps working on the merged zone volume: filters, color scales, extremal coding and migration markers.
+
+- **Zones sit on an absolute price grid** anchored at 0, not on the moving best bid/ask, so zone boundaries stay put when the book moves or the chart is scrolled and rescaled. A zone at the edge of the book is clipped to the depth window.
+- **Depth of market keeps counting ticks**, and depth is capped before the merge. Side totals therefore do not move with the setting — the Imbalance line, Overall liquidity, the Totals migration plot and the Quantitative Depth metrics are identical at any value. The ladder shows **Depth of market** / **Ticks per level** rows: at the default depth of 100 and 5 ticks per level, 20 zones per side.
+- **Absolute volume thresholds apply to the merged zone volume** — **Display volume** and **Extreme volume** in the Absolute filtering mode, **Volumes filter**, **Added volume filter** and **Removed volume filter**. They filter out less at a setting above 1; raising them roughly in proportion restores the previous density. The Percentage, AdaptiveLess and AdaptiveMore modes derive from the volume range and rescale by themselves.
+- **Liquidity migration is measured per zone** against the same zone one bar ago, so liquidity moved between ticks inside one zone produces no marker — only the net change of the zone does.
+- **Changing the setting clears the accumulated historical DOM**, which then rebuilds forward from the current order book: blocks collected on the previous grid cannot be re-aggregated. The liquidity and migration plots are aggregation-invariant and are kept.
+- The **pop-up** of an aggregated historical DOM level reports the price range of the zone instead of a single price.
+
 ## Real-time DOM
 
-The real-time DOM displays a colored histogram (ladders) of current bid and ask limit orders on the right chart margin. The number of visible levels is controlled by the **Depth of market** setting — this reflects the visible portion of the order book provided by the exchange (e.g., ES provides 10 levels nearest to the current price).
+The real-time DOM displays a colored histogram (ladders) of current bid and ask limit orders on the right chart margin. The number of visible levels is controlled by the **Depth of market** setting, counted in ticks — this reflects the visible portion of the order book provided by the exchange (e.g., ES provides 10 levels nearest to the current price).
 
 ### Color Modes
 
@@ -43,11 +57,11 @@ The **Color scale** setting selects the volume-to-color curve used by these mode
 
 ### Imbalance Detection
 
-When **Imbalance: show** is enabled, individual DOM levels where volume is disproportionate relative to the average volume on that side are highlighted. The **Imbalance: ratio** controls the threshold — for example, a ratio of 2 means all volumes that are two times greater than the average volume of the given DOM side will be marked as imbalanced.
+When **Imbalance: show** is enabled, individual DOM levels where volume is disproportionate relative to the average volume on that side are highlighted. The **Imbalance: ratio** controls the threshold — for example, a ratio of 2 means all volumes that are two times greater than the average volume of the given DOM side will be marked as imbalanced. With **Ticks per level** above 1 a zone is compared against the average zone of its side; the ratio keeps its meaning and needs no retuning.
 
 ### Extreme Volume Coding
 
-When **Code extremal** is enabled, DOM levels with volumes in the extreme range are rendered using the Extremal Bid / Extremal Offer colors and text colors, making large resting orders stand out visually.
+When **Code extremal** is enabled, DOM levels with volumes in the extreme range are rendered using the Extremal Bid / Extremal Offer colors and text colors, making large resting orders stand out visually. In the **Heatmap** and **GrayScaleHeatmap** color modes, levels at or above the extreme boundary are painted with the Extremal Bid / Extremal Offer color as well, instead of being distinguished only by sitting at the top of the color ramp.
 
 ### Cumulative Lines
 
@@ -61,9 +75,9 @@ The historical DOM renders order book snapshots on past chart bars as a colored 
 
 | Mode | Description |
 |---|---|
-| **Percentage** | Display only limit orders with volume above a given percentage of the maximum order size. For example, 60% with a 100-lot maximum displays only 41-lot orders or greater. If the maximum grows to 200-lot, the threshold adjusts to 81-lot |
+| **Percentage** | Display only the levels whose volume falls in the top given % of the volume range — a share of the range the volumes span, not of the number of levels. The top of that range is a reference volume: a high percentile of the level volumes rather than the single biggest level, so one outsized order does not hide the rest of the book. 80% shows every level above 20% of the reference; 100 shows them all, 0 shows none |
 | **Absolute** | Display only limit orders with volume greater than or equal to a fixed contract value |
-| **AdaptiveLess** | Uses the initial percentage as a starting point and slightly adjusts the minimum display threshold over time. Produces a moderately filtered view that adapts to changing order sizes |
+| **AdaptiveLess** | Uses the initial percentage as a starting point and slightly adjusts the minimum display threshold over time, reading the percentage back against the same reference volume. Produces a moderately filtered view that adapts to changing order sizes |
 | **AdaptiveMore** | Calculates the minimal DOM order size to display starting from DOM initialization and maintains it. Produces a strictly filtered view. Both adaptive modes provide a clear historical DOM picture that automatically adapts to future orders' sizes |
 
 ### Hold Levels
@@ -115,7 +129,7 @@ Liquidity Migration tracks the process of adding and removing limit orders in th
 | **Removed Offer** | Yellow | Limit orders removed from the ask side |
 | **Removed Bid** | Green | Limit orders removed from the bid side |
 
-Only events exceeding the **Added volume filter** or **Removed volume filter** thresholds are displayed.
+Only events exceeding the **Added volume filter** or **Removed volume filter** thresholds are displayed. With **Ticks per level** above 1 migration is measured per zone, and the thresholds apply to the zone volume. A marker is drawn even when the level itself is filtered out by the display threshold.
 
 ### Overall Migration Plots
 
@@ -293,7 +307,8 @@ Four views working together: historical DOM heatmap reveals where large orders r
 
 | Setting | Default | Description |
 |---|---|---|
-| **Depth of market** | 100 | Number of DOM levels to display (range: 1–1000). Reflects the visible portion of the exchange order book |
+| **Depth of market** | 100 | Depth of market in ticks (range: 1–1000). Reflects the visible portion of the exchange order book. Counted before aggregation, so side totals do not change with **Ticks per level** |
+| **Ticks per level** | 1 | Merge this many consecutive price ticks into one zone (range: 1–∞). 1 is the per-tick behavior. Changing it clears the accumulated historical DOM; absolute volume filters apply to the merged zone volume |
 | **Multiple Market Maker** | false | Enable for stock markets with multiple market makers. Do not enable for futures via IQFeed |
 | **Bid** | DodgerBlue | Color for buy-side limit orders |
 | **Offer** | SteelBlue | Color for sell-side limit orders |
@@ -313,14 +328,14 @@ Four views working together: historical DOM heatmap reveals where large orders r
 | **Histogram border** | Black | Border style for histogram bars |
 | **Show volumes** | true | Show volume numbers on DOM levels |
 | **Side total as %** | false | Show each side's total as a percentage |
-| **Volumes filter** | 0 | Hide levels with volume below this value |
+| **Volumes filter** | 0 | Hide levels with volume below this value. Applies to the merged zone volume |
 | **Volume font** | Montserrat, 12pt | Font for volume text |
 | **Code extremal** | false | Highlight extreme volumes with extreme colors |
 | **Color mode** | Solid | Color rendering — Solid, Saturation, Custom, Heatmap, or GrayScaleHeatmap. Changing it refreshes the property grid, so dependent settings appear and disappear immediately |
 | **Color scale** | Sqrt | Volume-to-color curve — Linear, Sqrt, or Log. Applied in the Saturation, Custom, Heatmap, and GrayScaleHeatmap modes; Log and Sqrt keep small sizes readable when large sizes are present |
 | **Saturation preset** | 3 | Saturation level (range: 1–4) |
 | **Imbalance: show** | false | Show imbalanced DOM levels |
-| **Imbalance: ratio** | 1.5 | Ratio threshold for imbalance detection (range: 0.01–100) |
+| **Imbalance: ratio** | 1.5 | Ratio threshold for imbalance detection (range: 0.01–100). Compares a level, or a zone, against the average one of its side |
 | **Imbalance: Bid color** | #FF00B300 | Color for bid-side imbalance |
 | **Imbalance: Offer color** | Firebrick | Color for offer-side imbalance |
 | **Cumulative: show** | true | Show cumulative bid/offer depth lines |
@@ -339,8 +354,8 @@ Four views working together: historical DOM heatmap reveals where large orders r
 | **Show** | true | Show historical DOM on the chart |
 | **History depth, bars** | 2000 | Maximum bars for historical DOM display (range: 10–10000) |
 | **Filtering mode** | Percentage | Filtering mode — Percentage, Absolute, AdaptiveLess, or AdaptiveMore |
-| **Display volume, %** | 80 | Display levels above this percentage of the maximum order size (Percentage/Adaptive modes) |
-| **Extreme volume, %** | 10 | Top percentage of displayed volumes treated as extreme (Percentage/Adaptive modes) |
+| **Display volume, %** | 80 | Show the levels whose volume falls in the top given % of the volume range (Percentage/Adaptive modes). The top of the range is a reference volume — a high percentile of the level volumes, not the single biggest level. 80% shows every level above 20% of the reference; 100 shows them all, 0 shows none |
+| **Extreme volume, %** | 10 | Treat as extremal the levels in the top given % of the displayed volume range — from the **Display volume, %** threshold up to the biggest level on the chart. 10% marks the top tenth of that range; 0 leaves nothing extremal |
 | **Display volume** | 50 | Minimum volume in contracts to display (Absolute mode) |
 | **Extreme volume** | 500 | Volumes at or above this contract size are extreme (Absolute mode) |
 | **Code extremal** | false | Highlight extreme volumes with extreme colors |
@@ -377,8 +392,8 @@ Four views working together: historical DOM heatmap reveals where large orders r
 | Setting | Default | Description |
 |---|---|---|
 | **Show** | false | Show liquidity migration markers |
-| **Added volume filter** | 20 | Minimum added volume to display a marker |
-| **Removed volume filter** | 20 | Minimum removed volume to display a marker |
+| **Added volume filter** | 20 | Minimum added volume to display a marker. Applies to the merged zone volume |
+| **Removed volume filter** | 20 | Minimum removed volume to display a marker. Applies to the merged zone volume |
 | **Added offer** | Fuchsia | Color for added ask-side orders |
 | **Added bid** | Aqua | Color for added bid-side orders |
 | **Removed offer** | Yellow | Color for removed ask-side orders |

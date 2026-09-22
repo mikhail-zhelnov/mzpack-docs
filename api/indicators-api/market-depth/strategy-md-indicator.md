@@ -85,6 +85,8 @@ protected override void OnBarUpdate()
 | **Totals** | RealtimeBidsTotal, RealtimeOffersTotal |
 | **Quantitative** | HQA, UQ, AC, UpdatesNumber |
 
+Real-time values are reported per price tick and are not affected by **Ticks per level**.
+
 ## See Also
 
 - [IMarketDepthIndicator](imarket-depth-indicator.md) — interface reference
