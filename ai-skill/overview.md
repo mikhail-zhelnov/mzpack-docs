@@ -69,8 +69,7 @@ I want to create a new NinjaTrader 8 strategy using MZpack. Start from `template
 | `templates/` | Three buildable templates: plain strategy, Pattern Dashboard, and Control Panel. |
 | `Directory.Build.props` | Central paths to NinjaTrader and MZpack; edit once or set environment variables. |
 
-<details>
-<summary>Build and Configuration</summary>
+## Build and Configuration
 
 MSBuild is required. It is already on `PATH` in Developer PowerShell for Visual Studio:
 
@@ -83,5 +82,3 @@ msbuild templates\StrategyTemplate\StrategyTemplate.csproj
 - Build the template, not the corpus root: `samples/` is intentionally not part of a project, and there is nothing to build at the root.
 - Close NinjaTrader before building. Otherwise it holds assemblies in `bin\Custom`, and a successful build will not add the strategy to the list.
 - For a standard installation, `Directory.Build.props` already contains the required paths. For custom paths, edit that file or set `NINJATRADER_INSTALL`, `NINJATRADER_USER`, and `MZPACK_DLL` as environment variables, then restart your shell or Visual Studio.
-
-</details>
