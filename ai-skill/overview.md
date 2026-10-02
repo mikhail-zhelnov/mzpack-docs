@@ -19,7 +19,6 @@ It includes the API surface, 16 worked examples, three buildable templates, and 
 
 | Component | Version or Requirement |
 | --- | --- |
-| MZpack AI Skill | 1.0.2 |
 | Strategies API | 2.4.17 |
 | Platform | NinjaTrader 8 |
 | Runtime | .NET Framework 4.8 |
@@ -28,40 +27,27 @@ It includes the API surface, 16 worked examples, three buildable templates, and 
 
 ## Installation
 
-Download the [MZpack AI Skill ZIP](https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip) and extract its contents into your agent's skill directory. After extraction, `SKILL.md` must be directly inside the `mzpack-strategies` directory.
+Download the [MZpack AI Skill ZIP](https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip). Open the downloaded ZIP, then open the `mzpack-ai-skill` folder inside it. Copy its contents — including `SKILL.md` — into your agent's `mzpack-strategies` directory. Do not copy the outer `mzpack-ai-skill` folder itself.
 
 <Tabs>
 <TabItem value="codex" label="Codex" default>
 
-```powershell
-$skillZip = Join-Path $env:TEMP 'mzpack-ai-skill.zip'
-Invoke-WebRequest -Uri 'https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip' -OutFile $skillZip
-New-Item -ItemType Directory -Force .codex\skills\mzpack-strategies | Out-Null
-Expand-Archive -Path $skillZip -DestinationPath .codex\skills\mzpack-strategies -Force
-```
+`<project>\.codex\skills\mzpack-strategies\`
 
 </TabItem>
 <TabItem value="claude-code" label="Claude Code">
 
-```powershell
-$skillZip = Join-Path $env:TEMP 'mzpack-ai-skill.zip'
-Invoke-WebRequest -Uri 'https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip' -OutFile $skillZip
-New-Item -ItemType Directory -Force .claude\skills\mzpack-strategies | Out-Null
-Expand-Archive -Path $skillZip -DestinationPath .claude\skills\mzpack-strategies -Force
-```
+`<project>\.claude\skills\mzpack-strategies\`
 
 </TabItem>
 <TabItem value="cursor" label="Cursor">
 
-```powershell
-$skillZip = Join-Path $env:TEMP 'mzpack-ai-skill.zip'
-Invoke-WebRequest -Uri 'https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip' -OutFile $skillZip
-New-Item -ItemType Directory -Force .cursor\skills\mzpack-strategies | Out-Null
-Expand-Archive -Path $skillZip -DestinationPath .cursor\skills\mzpack-strategies -Force
-```
+`<project>\.cursor\skills\mzpack-strategies\`
 
 </TabItem>
 </Tabs>
+
+After installation, `SKILL.md` must be directly inside the `mzpack-strategies` directory.
 
 ## First Step
 
@@ -97,7 +83,3 @@ msbuild templates\StrategyTemplate\StrategyTemplate.csproj
 - For a standard installation, `Directory.Build.props` already contains the required paths. For custom paths, edit that file or set `NINJATRADER_INSTALL`, `NINJATRADER_USER`, and `MZPACK_DLL` as environment variables, then restart your shell or Visual Studio.
 
 </details>
-
-## Links
-
-- [Download the latest MZpack AI Skill ZIP](https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip)
