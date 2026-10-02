@@ -51,10 +51,10 @@ After installation, `SKILL.md` must be directly inside the `mzpack-strategies` d
 
 ## First Step
 
-After installation, open your agent and give it this task:
+After installation, open your agent and start with this sample request:
 
 ```text
-add a delta divergence signal to this strategy, following AGENTS.md
+I want to create a new NinjaTrader 8 strategy using MZpack. Start from `templates/StrategyTemplate`. Before creating files, ask me for the strategy name and requirements. Then help me add an imbalance signal.
 ```
 
 ## What Is Included
