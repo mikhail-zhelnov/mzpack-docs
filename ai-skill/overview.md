@@ -28,29 +28,36 @@ It includes the API surface, 16 worked examples, three buildable templates, and 
 
 ## Installation
 
-From the root of your strategy project, install the fixed `skill-v1.0.2` release in your agent's skill directory.
+Download the [MZpack AI Skill ZIP](https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip) and extract its contents into your agent's skill directory. After extraction, `SKILL.md` must be directly inside the `mzpack-strategies` directory.
 
 <Tabs>
 <TabItem value="codex" label="Codex" default>
 
 ```powershell
-git clone --branch skill-v1.0.2 --depth 1 https://github.com/mikhail-zhelnov/mzpack-strategy-corpus.git .codex\skills\mzpack-strategies
+$skillZip = Join-Path $env:TEMP 'mzpack-ai-skill.zip'
+Invoke-WebRequest -Uri 'https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip' -OutFile $skillZip
+New-Item -ItemType Directory -Force .codex\skills\mzpack-strategies | Out-Null
+Expand-Archive -Path $skillZip -DestinationPath .codex\skills\mzpack-strategies -Force
 ```
 
 </TabItem>
 <TabItem value="claude-code" label="Claude Code">
 
 ```powershell
-New-Item -ItemType Directory -Force .claude\skills | Out-Null
-git clone --branch skill-v1.0.2 --depth 1 https://github.com/mikhail-zhelnov/mzpack-strategy-corpus.git .claude\skills\mzpack-strategies
+$skillZip = Join-Path $env:TEMP 'mzpack-ai-skill.zip'
+Invoke-WebRequest -Uri 'https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip' -OutFile $skillZip
+New-Item -ItemType Directory -Force .claude\skills\mzpack-strategies | Out-Null
+Expand-Archive -Path $skillZip -DestinationPath .claude\skills\mzpack-strategies -Force
 ```
 
 </TabItem>
 <TabItem value="cursor" label="Cursor">
 
 ```powershell
-New-Item -ItemType Directory -Force .cursor\skills | Out-Null
-git clone --branch skill-v1.0.2 --depth 1 https://github.com/mikhail-zhelnov/mzpack-strategy-corpus.git .cursor\skills\mzpack-strategies
+$skillZip = Join-Path $env:TEMP 'mzpack-ai-skill.zip'
+Invoke-WebRequest -Uri 'https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip' -OutFile $skillZip
+New-Item -ItemType Directory -Force .cursor\skills\mzpack-strategies | Out-Null
+Expand-Archive -Path $skillZip -DestinationPath .cursor\skills\mzpack-strategies -Force
 ```
 
 </TabItem>
@@ -93,5 +100,4 @@ msbuild templates\StrategyTemplate\StrategyTemplate.csproj
 
 ## Links
 
-- [Fixed-release source](https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/tree/skill-v1.0.2)
-- [Fixed-release ZIP](https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/archive/refs/tags/skill-v1.0.2.zip)
+- [Download the latest MZpack AI Skill ZIP](https://github.com/mikhail-zhelnov/mzpack-strategy-corpus/releases/latest/download/mzpack-ai-skill.zip)
