@@ -19,8 +19,8 @@ It includes the API surface, 16 worked examples, three buildable templates, and 
 
 | Component | Version or Requirement |
 | --- | --- |
-| Strategies API | 2.4.17+ |
-| Platform | NinjaTrader 8 |
+| Strategies API | 2.4.17 |
+| Platform | NinjaTrader 8.0.27+ |
 | Runtime | .NET Framework 4.8 |
 | Language | C# 7.3 |
 | Build | MSBuild |
@@ -73,6 +73,8 @@ I want to create a new NinjaTrader 8 strategy using MZpack. Start from `template
 <summary>Build and Configuration</summary>
 
 MSBuild is required. It is already on `PATH` in Developer PowerShell for Visual Studio:
+
+Run this command from the root directory of the extracted MZpack AI Skill:
 
 ```powershell
 msbuild templates\StrategyTemplate\StrategyTemplate.csproj
