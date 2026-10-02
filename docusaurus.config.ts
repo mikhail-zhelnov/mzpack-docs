@@ -83,6 +83,16 @@ const config: Config = {
         editUrl: 'https://github.com/mikhail-zhelnov/mzpack-docs/edit/main/',
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'ai-skill',
+        path: 'ai-skill',
+        routeBasePath: 'ai-skill',
+        sidebarPath: './sidebarsAiSkill.ts',
+        editUrl: 'https://github.com/mikhail-zhelnov/mzpack-docs/edit/main/',
+      },
+    ],
   ],
 
   themes: [
@@ -115,6 +125,12 @@ const config: Config = {
           sidebarId: 'userGuideSidebar',
           position: 'left',
           label: 'User Guide',
+        },
+        {
+          to: '/ai-skill/overview',
+          label: 'AI Skill Reference',
+          position: 'left',
+          activeBaseRegex: '/ai-skill/',
         },
         {
           to: '/api/getting-started/overview',

@@ -25,6 +25,12 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--outline button--lg"
             style={{marginLeft: '1rem'}}
+            to="/ai-skill/overview">
+            AI Skill Reference
+          </Link>
+          <Link
+            className="button button--secondary button--outline button--lg"
+            style={{marginLeft: '1rem'}}
             to="/api/getting-started/overview">
             API Reference
           </Link>
@@ -76,6 +82,9 @@ const FeatureList: FeatureItem[] = [
       <>
         Build automated strategies with the MZpack strategy pipeline.
         Entry, exit, trail, and filter components with built-in risk management.
+        {' '}
+        Use the <Link to="/ai-skill/overview">MZpack AI Skill</Link> to give
+        coding agents API context, worked examples, buildable templates, and known pitfalls.
       </>
     ),
   },
