@@ -19,7 +19,7 @@ It includes the API surface, 16 worked examples, three buildable templates, and 
 
 | Component | Version or Requirement |
 | --- | --- |
-| Strategies API | 2.4.17 |
+| Strategies API | 2.4.17+ |
 | Platform | NinjaTrader 8 |
 | Runtime | .NET Framework 4.8 |
 | Language | C# 7.3 |
