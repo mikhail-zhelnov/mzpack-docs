@@ -58,6 +58,7 @@ Strategy
 | `IsOpeningPositionEnabled` | `bool` | Allow opening positions (default: `true`) |
 | `OppositePatternAction` | `OppositePatternAction` | What to do when opposite signal fires |
 | `Dashboard` | `DashboardView` | Dashboard visualization |
+| `SignalProbes` | `List<SignalProbe>` | Independently observed signal sets. A probe never validates a pattern or opens a position |
 
 ## Initialization
 
@@ -76,6 +77,22 @@ strategy.Initialize(entryPattern, exitPattern, new Entry[] { entry1, entry2 });
 // Entry + exit + entries + attempt count
 strategy.Initialize(entryPattern, exitPattern, entries, attempts: 1);
 ```
+
+All `Initialize()` overloads can also take `Func<Signal>[] entryProbeSignals` and `Func<Signal>[] exitProbeSignals`. Each factory creates an independent signal for observation; do not pass a signal instance already used by the decision tree, because signals are stateful and evaluating it twice would change the trading path.
+
+```csharp
+strategy.Initialize(
+    entryPattern,
+    exitPattern,
+    new[] { entry },
+    attempts: 1,
+    entryProbeSignals: new Func<Signal>[]
+    {
+        () => new MySignal(strategy, footprint)
+    });
+```
+
+The framework builds the corresponding `SignalProbe`, exposes it through `SignalProbes`, and applies the capabilities declared by both tree and probe signals.
 
 ## Lifecycle
 
@@ -209,6 +226,8 @@ public class MyAlgoStrategy : MZpackStrategyBase
 
 - [Strategy Framework Overview](overview.md) — choosing between Custom and Algo approaches
 - [MZpackStrategyBase](mzpack-strategy-base.md) — base class reference
+- [Signal Probe](signal-probe.md) — observing independent signal outcomes
+- [Indicator Capabilities](indicator-capabilities.md) — declaring indicator data requirements
 - [Position](position.md) — position management
 - [TradingTime](trading-time.md) — time-based trading restrictions
 - [Algo Strategy — ATM + TradesCluster](../samples/algo-strategy-atm.md) — sample

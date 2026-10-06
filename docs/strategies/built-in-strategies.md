@@ -31,15 +31,17 @@ Each signal has its own category in the strategy properties, named after the sig
 
 ### Common Signal Controls
 
-Every signal category repeats the same five settings below the enable toggle. They are documented once here.
+Every signal category repeats the same filter and routing settings below the enable toggle. They are documented once here.
 
 | Setting | Default | Description |
 |---|---|---|
 | **Mandatory** | false | The signal must validate for the pattern to validate, regardless of the tree logic. In OR mode a mandatory signal is still always required |
-| **Override filters** | false | Use this signal's own bar filters instead of the global ones in the Strategy category |
-| **Min bar Volume** | 0 | Per-signal minimum bar volume. Applied when Override filters is on |
-| **Min bar Delta** | 0 | Per-signal minimum absolute bar delta. Applied when Override filters is on |
-| **Min bar Delta %** | 0 | Per-signal minimum bar delta as a percentage of bar volume. Applied when Override filters is on |
+| **Filters: mode** | Global | Choose the bar-filter source: Global uses the Strategy filters, Percentile uses this signal's percentile, and Absolute uses the per-signal values below |
+| **Filters: percentile** | 70 | Percentile used when Filters: mode is Percentile, range: 0–100 |
+| **Override filters (deprecated)** | false | Legacy alias for Filters: mode = Absolute. Existing templates continue to work; use Filters: mode for new configurations |
+| **Min bar Volume** | 0 | Per-signal minimum bar volume. Applied in Absolute mode |
+| **Min bar Delta** | 0 | Per-signal minimum absolute bar delta. Applied in Absolute mode; 0 intentionally disables the delta threshold |
+| **Min bar Delta %** | 0 | Per-signal minimum bar delta as a percentage of bar volume. Applied in Absolute mode |
 
 ### Signal-specific Parameters
 
@@ -104,13 +106,13 @@ Each signal applies bar-level filters to the bars it analyzes. The bars that fil
 - **AND** — all enabled signals must validate in the same direction
 - **OR** — at least one signal must validate. Use **Min # validated signals** to require a minimum number (e.g., 2 of 5 enabled signals)
 
-Each signal also has an **Override filters** option that lets it bypass the global bar filters when its own per-signal filters are configured.
+Each signal can select global, percentile, or absolute per-signal bar filters with **Filters: mode**. The deprecated **Override filters** option remains available for old templates and maps to Absolute mode.
 
 ### Strategy Settings
 
 | Setting | Default | Description |
 |---|---|---|
-| **Action** | Trade | What the strategy does — Trade (evaluate patterns and submit orders) or Export (evaluate patterns and write them to CSV without trading, see [Export Settings](#export-settings)) |
+| **Action** | Trade | What the strategy does — Trade submits orders; Export writes validated patterns to CSV without trading; Probe observes every signal over history without trading; TradeProbe trades and observes signals at the same time |
 | **Trading: ON** | true | Master switch for opening positions. Turn it off to keep signals calculating and drawing without entering the market |
 | **Opposite Pattern Action** | None | What to do when the pattern validates in the opposite direction while a position is open — None, Close, Reverse, or Unmanaged. See [Opposite Pattern Action](strategy-framework.md#opposite-pattern-action) |
 | **Suspend after trade** | false | Stop opening new positions once the current trade closes, until trading is switched back on from the Control Panel |
@@ -119,6 +121,43 @@ Each signal also has an **Override filters** option that lets it bypass the glob
 | **Min bar Delta** | 100 | Global minimum absolute bar delta |
 | **Min bar Delta %** | 0 | Global minimum bar delta as a percentage of bar volume |
 | **Min # validated signals** | 0 | Minimum number of validated signals for an OR tree; 0 means a single signal is enough, range: 0–∞ |
+| **Filters: auto** | false | Calibrate Min bar Volume and Min bar Delta from completed prior sessions. Min bar Delta % remains manual |
+| **Filters: percentile** | 70 | Percentile of the calibration baseline used as the global volume and delta threshold, range: 1–99 |
+| **Filters: baseline sessions** | 10 | Number of completed sessions in the calibration baseline and required warm-up, range: 3–60 |
+| **Filters: intraday buckets** | 60 minutes | Time-of-day bucket size for calibration; the grid is anchored to local midnight |
+| **Filters: session outlier, %** | 50 | Exclude a session whose median bar volume differs from the baseline median by more than this percentage, range: 10–100 |
+| **Filters: diagnostics** | true | Report calibration decisions and resulting thresholds whenever the baseline is rebuilt |
+| **Filters: dump baseline** | false | Write calibration input and results to `mzpack\strategy\...\calibration` for support analysis |
+| **Probe: horizon bars** | 40 | Number of bars after a signal over which its outcome is observed, range: 1–1000 |
+| **Probe: ladder ticks** | 0 | First-touch range recorded on each side of the entry price. 0 derives ten bar ranges on a Range chart, otherwise 100 ticks; the step is widened so that each side has no more than 100 levels |
+| **Probe: export** | false | Write the probe journal to `mzpack\strategy\...\probe` when the strategy is removed |
+
+### Signal Probe
+
+**Probe** measures individual signals without allowing them to submit orders. It does not use the pattern tree: every one of the ten signals is evaluated independently, including signals disabled for trading. Use it to establish which setups occur and how price behaves after them before choosing a trading combination.
+
+Set **Action** to one of these modes:
+
+| Mode | Trading | Probe collection | Historical behavior |
+|---|---|---|---|
+| **Trade** | Yes | No | Normal trading behavior |
+| **Export** | No | No | Replays history to export validated patterns |
+| **Probe** | No | Yes | Replays history and collects probe events |
+| **TradeProbe** | Yes | Yes | Observes live trading; does not automatically enable historical collection |
+
+`TradeProbe` deliberately does not enable historical collection. On a live chart, automatically replaying history while trading is enabled could submit historical entries. To backtest trading and collect probe events together, enable **MZpack > Backtesting** yourself. Historical probe data also needs Tick Replay; without it, the strategy reports that it can observe only realtime ticks.
+
+For each signal event, the probe records the first tick and bar that reach each favourable and adverse price level in its ladder. It also records MFE, MAE, `BarsToMFE`, `FirstTickPrice`, and the price at the observation horizon. This first-touch sequence lets you evaluate different stop and target pairs later without replaying the strategy. Observation ends at the configured horizon, at the session boundary, or at the end of available data; the event identifies which condition ended it.
+
+When **Probe: export** is on, the strategy writes a self-describing journal when it is removed. It contains one event per row, signal and market context, probe settings, warnings, calibration data, and columns such as `Fav0100_Time` and `Adv0100_Bar`. Existing files are not overwritten. The Output window also prints a Signal Report with each signal's long/short count, median MFE and MAE, and expectation using the first position's stop loss and profit target. Rows with fewer than 50 events are marked unreliable.
+
+### Auto-calibrated Filters
+
+With **Filters: auto** enabled, the strategy builds volume and absolute-delta thresholds from completed sessions before the current session. Until the configured number of baseline sessions has been collected, the manual **Min bar Volume** and **Min bar Delta** values still filter signals, but probe events are deliberately not recorded. This prevents warm-up events, admitted under a different filter, from being mixed with the calibrated sample.
+
+The calibration can use 60- or 30-minute intraday buckets, so each time of day receives its own threshold. Sessions with too little data, poor trading-window coverage, abnormal median volume, or more than twice their expected share of bar-count data are excluded. A thin or one-sided bucket falls back to the common pool. Use **Filters: diagnostics** to inspect every decision and **Filters: dump baseline** to write the baseline to disk for support.
+
+Probe journals record `VolumeRank` and `DeltaRank` for the event against the calibration distribution. A run collected at a lower percentile can be filtered offline to any higher percentile; it cannot recover events rejected by a higher percentile during collection. The ranks describe the complete signal event — the binding bar for AND conditions and the best valid alternative for OR conditions — rather than only the firing bar. The journal format changed with this behavior: reject older files that do not contain `unmarkedAlternatives` in `[params]`.
 
 ### Position Settings
 

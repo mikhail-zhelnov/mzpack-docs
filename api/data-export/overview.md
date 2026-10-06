@@ -117,11 +117,28 @@ Configuration object passed to all export constructors.
 | `IsTime` | `bool` | `false` | Include Time column |
 | `IsFile` | `bool` | `true` | Write to file |
 | `IsNinjaScriptOutput` | `bool` | `false` | Write to NinjaScript Output panel |
-| `IsExportWhileCollecting` | `bool` | `false` | Stream rows as they are added |
+| `IsExportWhileCollecting` | `bool` | `false` | Stream rows as they are collected. The file is truncated once on the first row and appended thereafter; when false, all rows are written when the export's temporality ends |
+| `FlushIntervalMs` | `int` | `0` | Streaming-writer flush period in milliseconds. `0` flushes every row; raise it for high-rate Level 2 or Update exports to trade visibility latency for throughput |
 | `IsBatch` | `bool` | `false` | Create numbered batch files |
 | `Delimiter` | `char` | `,` | Column delimiter |
 | `SignedVolume` | `bool` | `false` | Prefix volumes with sign (+buy, −sell) |
 | `Shift` | `int` | `0` | Bar shift for exported items |
+
+### Streaming a Realtime Export
+
+Set `IsExportWhileCollecting` only when the consumer needs rows before the strategy stops. The streaming writer stays open with `FileShare.ReadWrite`, so another process such as Excel can read the CSV while it is being written. `IsBatch` remains the way to retain prior runs; a normal streaming run replaces its file on the first row.
+
+```csharp
+var args = new ExportArgs
+{
+    FileName = "ES_dom.csv",
+    IsHeader = true,
+    IsExportWhileCollecting = true,
+    FlushIntervalMs = 250 // batch disk flushes for a high-rate DOM export
+};
+```
+
+For an export whose `Temporality` is `Historical`, rows are produced during the historical load. A Realtime export is the usual case for a file watched while a strategy is running.
 
 ## Constants
 

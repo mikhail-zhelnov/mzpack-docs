@@ -8,6 +8,8 @@ description: "Overview of the MZpack signal system — built-in signals, decisio
 
 Signals are the building blocks of MZpack strategy patterns. Each signal evaluates a market condition and returns a direction (`Long`, `Short`, or `None`). Signals are organized into decision trees where `AND`, `OR`, and `CONJUNCTION` logic combines them into pattern validation rules.
 
+The built-in `FootprintImbalanceSignal`, `FootprintAbsoprtionSignal`, `BigTradeSignal`, `RelativeToProfileSignal`, and `DOMImbalanceSignal` are included in the Strategies assembly and can be used directly in custom strategies. `FootprintAbsoprtionSignal` is the public class name; its existing spelling is retained for compatibility.
+
 ## Node Hierarchy
 
 ```

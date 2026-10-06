@@ -33,6 +33,7 @@ Set these in your strategy constructor or `OnStateChange(SetDefaults)` to define
 | `Strategy` | `Strategy` | The `Algo.Strategy` instance (set via `OnCreateAlgoStrategy`) |
 | `Indicators` | `ObservableCollection<TickIndicator>` | All strategy indicators |
 | `Exports` | `Exports` | Data export handler |
+| `DashboardCollapsedNodes` | `string` | Serialized pattern-dashboard legend state. It is maintained by the dashboard and normally should not be set directly |
 
 ### Data Series Configuration
 
@@ -68,6 +69,7 @@ Set these in your strategy constructor or `OnStateChange(SetDefaults)` to define
 | `GetIndicator<T>(string name)` | `TickIndicator` | Get indicator by type and name |
 | `GetIndicator(string name)` | `TickIndicator` | Get indicator by name |
 | `RemoveIndicator(TickIndicator indicator)` | `void` | Remove an indicator |
+| `ApplyRequiredCapabilities()` | `void` | Collect requirements declared by tree and probe signals, then enable the required indicator calculations. It is called by `Algo.Strategy.Initialize()`; call it again after changing the signal set |
 
 ### Data Series
 
@@ -101,6 +103,8 @@ Set these in your strategy constructor or `OnStateChange(SetDefaults)` to define
 | `CreateControlPanelElements()` | `UIElement[]` | Override to create custom UI controls |
 | `ControlPanel_AttachEventHandlers()` | `void` | Override to attach control event handlers |
 | `ControlPanel_DetachEventHandlers()` | `void` | Override to detach control event handlers |
+| `OnConfigureSignalProbe(SignalProbe)` | `void` | Override to configure a newly created probe, for example its horizon and outcome ladder |
+| `OnBeforeSignalProbePass(SignalProbe)` | `void` | Override to refresh host-owned state before each probe pass |
 
 ## Enums
 
@@ -168,3 +172,5 @@ public class MyCustomStrategy : MZpackStrategyBase
 - [Strategy Framework Overview](overview.md) — choosing between Custom and Algo approaches
 - [Algo.Strategy](algo-strategy.md) — pattern-oriented framework
 - [Advanced Template](../samples/advanced-template.md) — full strategy template sample
+- [Indicator Capabilities](indicator-capabilities.md) — request conditionally calculated data
+- [Signal Probe](signal-probe.md) — independent signal observation
